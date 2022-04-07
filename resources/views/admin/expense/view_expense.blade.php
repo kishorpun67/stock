@@ -32,38 +32,37 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Food Menu</h3>
-             <a href="{{route('admin.add.edit.food.menu')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Food Menu</a>
+              <h3 class="card-title">Expense</h3>
+             <a href="{{route('admin.add.edit.expense')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Expense</a>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Name</th>
-                  <th>Sale Price</th>
-                  <th>Ingredient Food Category</th>
-                  <th>Ingredient Item</th>
-                  <th>Description</th>
-                  <th>Image</th>
-                  {{-- <th>Ingredient Food</th> --}}
-                  <th>Code</th>  
+                  <th>Date</th>
+                  <th>Responsible Person</th>
+                  <th>Amount</th>
+                  <th>Category Name</th>
+                  <th>note</th>
                 </tr>
                 </thead>
                 <tbody>
-               @forelse($foodMenus as $data)
-                  <td>{{$data->id}}</td>
-                  <td>{{$data->name}}</td>
-                  <td>{{$data->sale_price}}</td>
-                  <td>@if(!empty($data->foodCategory->category_name)){{$data->foodCategory->category_name}} @endif</td>
-                  <td>@if(!empty($data->ingredientItem->name)){{$data->ingredientItem->name}}@endif</td>
-                  <td>{{$data->description}}</td>
-                  <td><img src="{{asset($data->image)}}" alt="" width="100" height="100" srcset=""></td>
-                  {{-- <td>@if(!empty($data->ingredientUnit->unit_name)){{$data->ingredientUnit->unit_name}}@endif</td> --}}
-                  <td>{{$data->code}}</td>
+               @forelse($expense as $data)
+               <td>{{$data->id}}</td>
+                  <td>{{$data->date}}</td>
+                  <td>@if(!empty($data->waste->responsible_person))
+                    {{$data->waste->responsible_person}}
+                  @endif</td>
+                  <td>{{$data->amount}}</td>
+                  <td>@if(!empty($data->ingredientCategory->category))
+                    {{$data->ingredientCategory->category}}
+                    @endif
+                  </td>
+                  <td>{{$data->note}}</td>
                    <td>
-                    <a href="{{route('admin.add.edit.food.menu', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="foodMenu"  rel="{{$data->id}}" style="display:inline;">
+                    <a href="{{route('admin.add.edit.expense', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:" class="delete_form" record="expense"  rel="{{$data->id}}" style="display:inline;">
                       <i class="fa fa-trash fa-" aria-hidden="true" ></i>
                     </a>
                    </td>
@@ -79,7 +78,6 @@
       </div>
     </section>
   </div>
-
 @endsection
 @section('script')
 <script>

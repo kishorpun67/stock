@@ -234,9 +234,83 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
 
 
 
-           
-
+            Route::get('expense', 'ExpenseController@Expense')->name('expense');
+            Route::match(['get', 'post'], 'add-edit-expense/{id?}', 'ExpenseController@addEditExpense')->name('add.edit.expense');
+            Route::get('delete-expense/{id?}', 'ExpenseController@deleteExpense')->name('delete.expense');
             
+            Route::get('waiter', 'WaiterController@Waiter')->name('waiter');
+            Route::match(['get', 'post'], 'add-edit-waiter/{id?}', 'WaiterController@addEditWaiter')->name('add.edit.waiter');
+            Route::get('delete-waiter/{id?}', 'WaiterController@deleteWaiter')->name('delete.waiter');
+
+            //kishor i am ending route here.
+            //kishor i am ending route here.
+
+            Route::get('order', 'OrderController@Order')->name('order');
+            Route::match(['get', 'post'], 'add-edit-order/{id?}', 'OrderController@addEditOrder')->name('add.edit.order');
+            Route::get('delete-order/{id?}', 'OrderController@deleteOrder')->name('delete.order');
+
+
+            Route::get('paymentMethod', 'PaymentMethodController@paymentMethod')->name('paymentMethod');
+            Route::match(['get', 'post'], 'add-edit-paymentMethod/{id?}', 'PaymentMethodController@addEditpaymentMethod')->name('add.edit.paymentMethod');
+            Route::get('delete-paymentMethod/{id?}', 'PaymentMethodController@deletepaymentMethod')->name('delete.paymentMethod');
+
+            //kishor i am ending route here.
+            //kishor i am ending route here.
+
+            Route::get('attendance', 'AttendanceController@Attendance')->name('attendance');
+            Route::match(['get', 'post'], 'add-edit-attendance/{id?}', 'AttendanceController@addEditAttendance')->name('add.edit.attendance');
+            Route::get('delete-attendance/{id?}', 'AttendanceController@deleteAttendance')->name('delete.attendance');
+
+            //kishor i am ending route here.
+            //kishor i am ending route here.
+
+            Route::get('task', 'TaskController@Task')->name('task');
+            Route::match(['get', 'post'], 'add-edit-task/{id?}', 'TaskController@addEditTask')->name('add.edit.task');
+            Route::get('delete-task/{id?}', 'TaskController@deleteTask')->name('delete.task');
+
+            //kishor i am ending route here.
+            //kishor i am ending route here.
+
+            Route::get('leave', 'LeaveController@Leave')->name('leave');
+            Route::match(['get', 'post'], 'add-edit-leave/{id?}', 'LeaveController@addEditLeave')->name('add.edit.leave');
+            Route::get('delete-leave/{id?}', 'LeaveController@deleteLeave')->name('delete.leave');
+            
+            //kishor i am ending route here.
+
+            Route::get('miscellaneous', 'MiscellaneousController@Miscellaneous')->name('miscellaneous');
+            Route::match(['get', 'post'], 'add-edit-miscellaneous/{id?}', 'MiscellaneousController@addEditMiscellaneous')->name('add.edit.miscellaneous');
+            Route::get('delete-miscellaneous/{id?}', 'MiscellaneousController@deleteMiscellaneous')->name('delete.miscellaneous');
+
+
+            Route::get('view-salary','AttendanceController@viewSalary')->name('view.salary');
+            Route::get('view-supplier-deu-payment','SupplierController@viewSupplierDeuPayment')->name('view.supplier.deu.payments');
+            Route::get('view-customer-deu-receive','CustomerController@viewCustomerDeuReceives')->name('view.customer.deu.receives');
+
+            //kishor i am ending route here.
+
+            //ROUTES FOR REPORTS 
+
+            Route::get('waste-report','WasteController@wasteReport')->name('waste.report');
+            Route::get('purchase-report','PurchaseController@purchaseReport')->name('purchase.report');
+            Route::get('attendance-report','AttendanceController@attendanceReport')->name('attendance.report');
+            Route::get('customer-report','CustomerController@customerReport')->name('customer.report');
+
+            //Route for stock reports
+            Route::get('stock-report','IngredientItemsController@stockReport')->name('stock.report');
+
+
+
+            //ajax purchase routes
+            Route::post('delete-purchase-table','PurchaseController@deletePurchaseCart')->name('delete.purchase.table');
+            Route::post('ajax-purchase-table', 'PurchaseController@ajaxPurchaseTable');
+            Route::post('check-current-amount','PurchaseController@chkCurrentAmount');
+
+            //ajax food menu routes
+            Route::post('delete-foodMenu-table','FoodMenuController@deletefoodMenuTable')->name('delete.foodMenu.table');
+            Route::post('ajax-foodMenu-table', 'FoodMenuController@ajaxfoodMenuTable');
+
+
+                        
             
             // Route::get('sale-innovice/{id}', 'SaleController@saleInnovice')->name('sale.innovice');
 

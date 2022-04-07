@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\IngredientItem;
 use App\IngredientUnit;
 use App\IngredientCategory;
+// use App\Purchase;
 use Session;
 
 class IngredientItemsController extends Controller
@@ -79,8 +80,15 @@ class IngredientItemsController extends Controller
         }
         $ingredientCategory = IngredientCategory::get();
         $ingredientUnit = IngredientUnit::get();
+        // $purchase = Purchase::get();
         Session::flash('page', 'ingredientItem');
         return view('admin.ingredientItems.add_edit_ingredient_items', compact('title','button','ingredientItemsData','ingredientCategory','ingredientUnit'));
+    }
+
+    public function stockReport()
+    {
+        $ingredientItem = IngredientItem::get();
+        return view('admin.stock.stock_report',compact('ingredientItem'));
     }
 
     public function deleteIngredientItem($id)

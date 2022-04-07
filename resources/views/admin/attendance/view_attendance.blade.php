@@ -32,38 +32,36 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Food Menu</h3>
-             <a href="{{route('admin.add.edit.food.menu')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Food Menu</a>
+              <h3 class="card-title">Attendance </h3>
+             <a href="{{route('admin.add.edit.attendance')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Attendance</a>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Name</th>
-                  <th>Sale Price</th>
-                  <th>Ingredient Food Category</th>
-                  <th>Ingredient Item</th>
-                  <th>Description</th>
-                  <th>Image</th>
-                  {{-- <th>Ingredient Food</th> --}}
-                  <th>Code</th>  
+                  <th>In Date</th>
+                  <th>In Time</th>
+                  <th>Out Date</th>
+                  <th>Out Time</th>
+                  <th>Total Work Hour</th>
                 </tr>
                 </thead>
                 <tbody>
-               @forelse($foodMenus as $data)
+               @forelse($attendance as $data)
                   <td>{{$data->id}}</td>
-                  <td>{{$data->name}}</td>
-                  <td>{{$data->sale_price}}</td>
-                  <td>@if(!empty($data->foodCategory->category_name)){{$data->foodCategory->category_name}} @endif</td>
-                  <td>@if(!empty($data->ingredientItem->name)){{$data->ingredientItem->name}}@endif</td>
-                  <td>{{$data->description}}</td>
-                  <td><img src="{{asset($data->image)}}" alt="" width="100" height="100" srcset=""></td>
-                  {{-- <td>@if(!empty($data->ingredientUnit->unit_name)){{$data->ingredientUnit->unit_name}}@endif</td> --}}
-                  <td>{{$data->code}}</td>
+                  <td>{{$data->in_date}}</td>
+                   <td>{{$data->in_time}}</td>
+                    <td>{{$data->out_date}}</td>
+                     <td>{{$data->out_time}}</td>
+                     <td><?php 
+                          $intime = (int)$data->out_time -(int)$data->in_time;
+                          $string = abs($intime);
+                          echo strval($string);
+                     ?>: hour</td>
                    <td>
-                    <a href="{{route('admin.add.edit.food.menu', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="foodMenu"  rel="{{$data->id}}" style="display:inline;">
+                    <a href="{{route('admin.add.edit.attendance', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:" class="delete_form" record="attendance"  rel="{{$data->id}}" style="display:inline;">
                       <i class="fa fa-trash fa-" aria-hidden="true" ></i>
                     </a>
                    </td>

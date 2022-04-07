@@ -353,7 +353,286 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="testimonial")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.order')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Order</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="testimonial")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.paymentMethod')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Payment Methods</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="testimonial")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.stock.report')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stock</p>
+                </a>
+              </li>
+            </ul>
+            
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="testimonial")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.expense')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Expense</p>
+                </a>
+              </li>
+            </ul>
         </li>
+        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
+        <?php $active = "active";
+        $menuOpen="menu-open"; ?>
+         @else
+         <?php $active = "";
+         $menuOpen=""; ?>
+       @endif
+       <li class="nav-item has-treeview {{$menuOpen ??''}} ">
+         <a href="#" class="nav-link {{$active}}">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+           <p>
+            Employe Management
+             <i class="fas fa-angle-left right"></i>
+             <span class="right badge badge-danger"></span>
+           </p>
+         </a>
+
+         @if(Session::get('page')=="setting")
+        <?php $active = "active"; ?>
+         @else
+         <?php $active = ""; ?>
+         @endif
+         <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.attendance')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Attendance</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.task')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Task</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.leave')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>leave</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.view.salary')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>salary</p>
+            </a>
+          </li>
+        </ul>
+   
+
+        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
+        <?php $active = "active";
+        $menuOpen="menu-open"; ?>
+         @else
+         <?php $active = "";
+         $menuOpen=""; ?>
+       @endif
+       <li class="nav-item has-treeview {{$menuOpen ??''}} ">
+         <a href="#" class="nav-link {{$active}}">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+           <p>
+            Accounts
+             <i class="fas fa-angle-left right"></i>
+             <span class="right badge badge-danger"></span>
+           </p>
+         </a>
+
+         @if(Session::get('page')=="setting")
+        <?php $active = "active"; ?>
+         @else
+         <?php $active = ""; ?>
+         @endif
+     
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.view.supplier.deu.payments')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Supplier Deu Payments</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.view.customer.deu.receives')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Customer Deu Receives</p>
+            </a>
+          </li>
+        </ul>
+
+        
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.miscellaneous')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Miscellaneous</p>
+            </a>
+          </li>
+        </ul>
+
+
+        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
+        <?php $active = "active";
+        $menuOpen="menu-open"; ?>
+         @else
+         <?php $active = "";
+         $menuOpen=""; ?>
+       @endif
+       <li class="nav-item has-treeview {{$menuOpen ??''}} ">
+         <a href="#" class="nav-link {{$active}}">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+           <p>
+            Reports
+             <i class="fas fa-angle-left right"></i>
+             <span class="right badge badge-danger"></span>
+           </p>
+         </a>
+
+         @if(Session::get('page')=="setting")
+        <?php $active = "active"; ?>
+         @else
+         <?php $active = ""; ?>
+         @endif
+     
+         <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.waste.report')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Waste Report</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.purchase.report')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Purchase Report</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.attendance.report')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Attendance Report</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="testimonial")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.customer.report')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Customer Report</p>
+            </a>
+          </li>
+        </ul>
+
+       </li>
 
         </ul>
       </nav>
