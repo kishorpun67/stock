@@ -25,6 +25,12 @@ class VerifyCsrfToken extends Middleware
         '/admin/ajax-search-food',
         'admin/update-cart-item-quantity',
         '/admin/delete-cart-item',
+        'admin/ajax-food-table',
+        'admin/ajax-purchase-table',
+        'admin/delete-purchase-table',
+        '/admin/check-current-amount',
+        '/admin/ajax-foodMenu-table',
+        '/admin/delete-foodMenu-table',
 
         
     ];

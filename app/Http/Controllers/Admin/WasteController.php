@@ -88,6 +88,14 @@ class WasteController extends Controller
         return view('admin.waste.add_edit_waste', compact('title','button','wastedata','ingredientCategory','foodMenu'));
     }
 
+    public function wasteReport()
+    {
+        $waste = Waste::get();
+        return view('admin.waste.waste_report',compact('waste'));
+    }
+
+
+
     public function deleteWaste($id)
     {
       $id =Waste::find($id);

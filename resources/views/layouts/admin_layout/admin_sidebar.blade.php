@@ -342,20 +342,6 @@
                 </a>
               </li>
             </ul>
-            
-            <ul class="nav nav-treeview">
-              @if(Session::get('page')=="order")
-              <?php $active = "active"; ?>
-              @else
-              <?php $active = ""; ?>
-              @endif
-              <li class="nav-item">
-                <a href="{{route('admin.order')}}" class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Order</p>
-                </a>
-              </li>
-            </ul>
             <ul class="nav nav-treeview">
               @if(Session::get('page')=="paymentMethod")
               <?php $active = "active"; ?>

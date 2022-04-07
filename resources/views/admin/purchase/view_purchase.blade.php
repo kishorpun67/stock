@@ -42,8 +42,9 @@
                   <th>ID</th>
                   <th>Supplier Name</th>
                   <th>Date</th>
-                  <th>Ingredient Category</th>
-                  <th>Ingredient Unit</th>
+                  {{-- <th>Ingredient Category</th> --}}
+                  <th>Ingredient Item</th>
+                  {{-- <th>Ingredient Unit</th> --}}
                   <th>Code</th> 
                   <th>Amount</th> 
                 </tr>
@@ -57,17 +58,22 @@
                     @endif
                   </td>
                   <td>{{$data->date}}</td>
-                  <td>
+                  {{-- <td>
                     @if (!empty($data->ingredientCategory->category))
                     {{$data->ingredientCategory->category}}
                         
                     @endif
-                  </td>
+                  </td> --}}
                   <td>
+                    @if (!empty($data->ingredientItem->name))
+                    {{$data->ingredientItem->name}}                        
+                    @endif
+                  </td>
+                  {{-- <td>
                     @if (!empty($data->ingredientUnit->unit_name))
                     {{$data->ingredientUnit->unit_name}}                        
                     @endif
-                  </td>
+                  </td> --}}
                   <td>{{$data->code}}</td>
                   <td>{{$data->amount}}</td>
                    <td>

@@ -51,7 +51,10 @@
                @forelse($order as $data)
                   <td>{{$data->id}}</td>
                   <td>{{$data->waiter->name}}</td>
-                  <td>{{$data->customer->customer_name}}</td>
+                  <td>
+                    @if (!empty($data->customer->customer_name))
+                    {{$data->customer->customer_name}}
+                    @endif</td>
                   <td>{{$data->order_detail_id}}</td>
                   <td>{{$data->table->table_name}}</td>
                   <td>{{$data->number_of_customer}}</td>

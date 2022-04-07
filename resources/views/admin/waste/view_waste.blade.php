@@ -53,8 +53,13 @@
                @forelse($waste as $data)
                <td>{{$data->id}}</td>
                   <td>{{$data->ref_no}}</td>
-                  <td>{{$data->ingredientCategory->category}}</td>
-                  <td>{{$data->foodMenu->name}}</td>
+                  <td>@if(!empty($data->ingredientCategory->category))
+                    {{$data->ingredientCategory->category}}
+                    @endif
+                  </td>
+                  <td>@if(!empty($data->foodMenu->name))
+                    {{$data->foodMenu->name}}
+                  @endif</td>
                   <td>{{$data->date}}</td>
                   <td>{{$data->responsible_person}}</td>
                   <td>{{$data->total_loss}}</td>

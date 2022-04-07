@@ -82,6 +82,13 @@ class SupplierController extends Controller
         return view('admin.supplier.add_edit_supplier', compact('title','button','supplierdata'));
     }
 
+    public function viewSupplierDeuPayment()
+    {
+        $supplier = Supplier::get();
+        return view('admin.supplierDeuPayments.view_supplierDeuPayments',compact('supplier'));
+    }
+
+
     public function deleteSupplier($id)
     {
       $id =Supplier::find($id);

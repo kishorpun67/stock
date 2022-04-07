@@ -61,6 +61,14 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
+                  <label for="code">Code</label>
+                    <input type="text" class="form-control" name="code" id="code" placeholder="Enter purchase code"
+                    @if(!empty($purchasedata['code']))
+                    value= "{{$purchasedata['code']}}"
+                    @else value="{{old('code')}}"
+                    @endif>
+                  </div>  
+                <div class="form-group">
  
                   <label for="supplier_id">Supplier Name</label>
                   <select name="supplier_id" id="supplier_id" class="form-control" >
@@ -80,10 +88,8 @@
 
                   
                 </div>
-
-
                 <div class="form-group">
-                <label for="date">Date</label>
+                  <label for="date">Date</label>
                   <input type="date" class="form-control" name="date" id="date"
                   @if(!empty($purchasedata['date']))
                   value= "{{$purchasedata['date']}}"
@@ -91,66 +97,63 @@
                   @endif>
                 </div>
 
-              
+                {{-- <div class="form-group">
+                  <label for="unit_id">Ingredient Unit</label>
+                  <select name="unit_id" class="form-control form-control-sm ">
+                      <option value="" >Select</option>
+                      @forelse($ingredientUnit as $data)
+                              <option value="{{$data->id}}"
+                                @if (!empty($purchasedata['unit_id']) && $purchasedata['unit_id'] == $data->id)
+                                selected=""
+                            @endif
+                                  >&nbsp;&raquo;&nbsp; {{$data->name}}
+                              </option>
+                      @empty
+                      @endforelse
+                  </select>
+                </div> --}}
                 <div class="form-group">
-                    <label for="ingredient_id">Ingredient Category</label>
-                    <select name="ingredient_id" id="ingredient_id" class="form-control " >
-                        <option value="" >Select</option>
-                        @forelse($ingredientCategory as $data)
-                                <option value="{{$data->id}}"
-                                  @if (!empty($purchasedata['ingredient_id']) && $purchasedata['ingredient_id'] == $data->id)
-                                      selected=""
-                                  @endif
-                                    >&nbsp;&raquo;&nbsp; {{$data->category}}
-                                </option>
-                                
-                        @empty
-                        @endforelse
-                    </select>
-
-                  </div>
-
-                  <div class="form-group">
-                    <label for="unit_id">Ingredient Unit</label>
-                    <select name="unit_id" id="unit_id" class="form-control form-control-sm " >
-                        <option value="" >Select</option>
-                        @forelse($ingredientUnit as $data)
-                                <option value="{{$data->id}}"
-                                  @if (!empty($purchasedata['unit_id']) && $purchasedata['unit_id'] == $data->id)
-                                  selected=""
-                              @endif
-                                    >&nbsp;&raquo;&nbsp; {{$data->unit_name}}
-                                </option>
-                                
-                        @empty
-                        @endforelse
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="code">Code</label>
-                      <input type="text" class="form-control" name="code" id="code" placeholder="Enter purchase code"
-                      @if(!empty($purchasedata['code']))
-                      value= "{{$purchasedata['code']}}"
-                      @else value="{{old('code')}}"
-                      @endif>
-                    </div>  
-            
-
-                    <div class="form-group">
-                        <label for="amount">Amount</label>
-                          <input type="text" class="form-control" name="amount" id="amount" placeholder="Enter amount"
-                          @if(!empty($purchasedata['amount']))
-                          value= "{{$purchasedata['amount']}}"
-                          @else value="{{old('amount')}}"
-                          @endif>
-                    </div>
-               
+                  <label for="item_id">Ingredient Item</label>
+                  <select name="item_id" id="purchase_id" class="form-control form-control-sm ">
+                      <option value="" >Select</option>
+                      @forelse($ingredientItem as $data)
+                              <option value="{{$data->id}}"
+                                @if (!empty($purchasedata['item_id']) && $purchasedata['item_id'] == $data->id)
+                                selected=""
+                            @endif
+                                  >&nbsp;&raquo;&nbsp; {{$data->name}}
+                              </option>
+                      @empty
+                      @endforelse
+                  </select>
                 </div>
+
+           
+
+                <div class="form-group">
+                  <label for="amount">Amount</label>
+                  <input type="text" class="form-control" name="amount" id="amount"
+                  @if(!empty($purchasedata['amount']))
+                  value= "{{$purchasedata['amount']}}"
+                  @else value="{{old('amount')}}"
+                  @endif>
+                </div>
+
+              </div>
+              
+    
+
                 <div class="col-md-6 ">
                   <a href="" data-toggle="modal" data-target="#myModal"style="max-width: 150px; margin-top:30px; float:left; display:inline-block;"  class="btn btn-primary ">Add</a>
-  
-                    </div>
-          </div>
+                </div>
+
+                <div id="ajaxPurchase">
+                  @include('admin.purchase.ajax_purchase_table')
+                </div>
+               
+                
+            </div>
+                  
           </div>
           <div class="card-footer">
             <button type="submit" class="btn btn-primary ">{{$button}}</button>
@@ -196,5 +199,6 @@
     </div>
   </div>
 </div>
+
 @endsection
 

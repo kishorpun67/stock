@@ -319,3 +319,167 @@ $(document).ready(function() {
 
 
 });
+
+$(document).ready(function() {
+    $("#purchase_id").change(function() {
+        var purchase_id = $("#purchase_id").val();
+        // alert(purchase_id)
+        $.ajax({
+            type: 'post',
+            url: '/admin/ajax-purchase-table',
+            data: {
+                purchase_id: purchase_id
+            },
+            success: function(response) {
+                console.log(response)
+                $("#ajaxPurchase").html(response);
+               
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
+});
+
+//Delete Cart Table through ajax
+$(document).ready(function() {
+    $(".delete_cart_table").click(function() {
+        var ingredient_id=$(this).attr("ingredient_id");
+   // alert(ingredient_id)
+        $.ajax({
+            type: 'post',
+            url: '/admin/delete-purchase-table',
+            data: {
+                ingredient_id: ingredient_id
+            },
+            success: function(response) {
+                console.log(response)
+                $("#ajaxPurchase").html(response);
+               
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
+});
+
+
+
+//ajx check current amount in ajx purchase table  
+$(document).ready(function(){
+    //check current amount
+    $(".ingredientCart_id").change(function(){
+        var ingredientCart_id = $(this).attr('ingredientCart_id');
+        var quantity = $(this).val();
+    // alert(ingredientCart_id);
+    //console.log(chkCurrentAmount);
+
+        $.ajax({
+            type: 'post',
+            url: '/admin/check-current-amount',
+            data: {
+                ingredientCart_id: ingredientCart_id,
+                quantity:quantity
+            },
+            success: function(response) {
+                console.log(response)
+                $("#ajaxPurchase").html(response);
+            
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+    $(".ingredientCart_id").keyup(function(){
+        var ingredientCart_id = $(this).attr('ingredientCart_id');
+        var quantity = $(this).val();
+    // alert(ingredientCart_id);
+    //console.log(chkCurrentAmount);
+
+        $.ajax({
+            type: 'post',
+            url: '/admin/check-current-amount',
+            data: {
+                ingredientCart_id: ingredientCart_id,
+                quantity:quantity
+            },
+            success: function(response) {
+                console.log(response)
+                $("#ajaxPurchase").html(response);
+            
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
+  //ajax for paid amount
+    $(".paid").keyup(function(){
+        var paid = $(".paid").val();
+        var total = $(".total").val();
+     //alert(total);
+       //console.log(paid,total);
+       var paidamount = total-paid;
+       console.log(paidamount)
+        $("#deu_amount").val(paidamount)
+      // console.log(paidamount);
+    });
+});
+
+
+//ajax food table
+
+$(document).ready(function() {
+    $("#foodTable_id").change(function() {
+        var foodTable_id = $("#foodTable_id").val();
+        //_var consumption= $(this).attr("consumption");
+       // alert(foodTable_id)
+        $.ajax({
+            type: 'post',
+            url: '/admin/ajax-foodMenu-table',
+            data: {
+                foodTable_id: foodTable_id,
+                //consumption : consumption,
+            },
+            success: function(response) {
+                console.log(response)
+                $("#ajaxFoodTable").html(response);
+               
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
+});
+
+//ajax delete food
+$(document).ready(function() {
+    $(".delete_foodMenu_table").click(function() {
+        var ingredient_id=$(this).attr("ingredient_id");
+   // alert(ingredient_id)
+        $.ajax({
+            type: 'post',
+            url: '/admin/delete-foodMenu-table',
+            data: {
+                ingredient_id: ingredient_id
+            },
+            success: function(response) {
+                console.log(response)
+                $("#ajaxFoodTable").html(response);
+               
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
+});

@@ -11,10 +11,20 @@ class FoodMenu extends Model
         return $this->belongsTo('App\FoodCategory', 'category_id');
     }
 
+    public function ingredientItem()
+    {
+        return $this->belongsTo('App\ingredientItem', 'item_id');
+    }
+
     public function ingredientUnit()
     {
         return $this->belongsTo('App\IngredientUnit', 'ingredient_id');
     }
+    public function consumption()
+    {
+        return $this->hasMany('App\Consumption', 'foodMenu_id');
+    }
+    
    
 }
 

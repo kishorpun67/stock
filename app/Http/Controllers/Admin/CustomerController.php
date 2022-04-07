@@ -33,7 +33,7 @@ class CustomerController extends Controller
             $message = "customer has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-            return$data = $request->all();
+            $data = $request->all();
         //dd($data);
             if(empty($data['customer_name'])){
                 return redirect()->back()->with('error_message', 'Customer name is required !');
@@ -64,6 +64,10 @@ class CustomerController extends Controller
             {
                 $data['gst_number'] = "";
             }
+            if(empty($data['description']))
+            {
+                $data['description'] = "";
+            }
             // if(empty($data['user_id']))
             // {
             //     $data['user_id'] = "";
@@ -80,12 +84,25 @@ class CustomerController extends Controller
             $customer->date_of_aniversary = $data['date_of_aniversary'];
             $customer->address = $data['address'];
             $customer->gst_number = $data['gst_number'];
+            $customer->description = $data['description'];
             $customer->save();
             Session::flash('success_message', $message);
             return redirect('admin/customer');
         }
         Session::flash('page', 'customer');
         return view('admin.customer.add_edit_customer', compact('title','button','customerdata'));
+    }
+
+    public function viewCustomerDeuReceives()
+    {
+        $customer = Customer::get();
+        return view('admin.customerDeuReceives.view_customerDeuReceives',compact('customer'));
+    }
+
+    public function customerReport()
+    {
+        $customer = Customer::get();
+        return view('admin.customer.customer_report',compact('customer'));
     }
 
     public function deleteCustomer($id)

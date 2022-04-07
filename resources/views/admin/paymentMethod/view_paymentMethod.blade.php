@@ -32,38 +32,26 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Customers </h3>
-             <a href="{{route('admin.add.edit.customer')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Customer</a>
+              <h3 class="card-title">Payment Methods </h3>
+             <a href="{{route('admin.add.edit.paymentMethod')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Payment Method</a>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Customer Name</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                  <th>Date of Birth</th>
-                  <th>Date of Anniversary</th> 
-                  <th>Address</th> 
-                  <th>Pan Number</th> 
-                  <th>Note</th> 
+                  <th>Payment Method Name</th>
+                  <th>Description</th> 
                 </tr>
                 </thead>
                 <tbody>
-               @forelse($customer as $data)
+               @forelse($paymentMethod as $data)
                   <td>{{$data->id}}</td>
-                  <td>{{$data->customer_name}}</td>
-                  <td>{{$data->phone}}</td>
-                  <td>{{$data->email}}</td>
-                  <td>{{$data->dob}}</td>
-                  <td>{{$data->date_of_aniversary}}</td>
-                  <td>{{$data->address}}</td>
-                  <td>{{$data->gst_number}}</td>
+                  <td>{{$data->name}}</td>
                   <td>{{$data->description}}</td>
                    <td>
-                    <a href="{{route('admin.add.edit.customer', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="customer"  rel="{{$data->id}}" style="display:inline;">
+                    <a href="{{route('admin.add.edit.paymentMethod', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:" class="delete_form" record="paymentMethod"  rel="{{$data->id}}" style="display:inline;">
                       <i class="fa fa-trash fa-" aria-hidden="true" ></i>
                     </a>
                    </td>

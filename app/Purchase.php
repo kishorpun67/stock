@@ -11,6 +11,11 @@ class Purchase extends Model
         return $this->belongsTo('App\IngredientCategory', 'ingredient_id');
     }
 
+    public function ingredientItem()
+    {
+        return $this->belongsTo('App\IngredientItem', 'item_id');
+    }
+
     public function ingredientUnit()
     {
         return $this->belongsTo('App\IngredientUnit', 'unit_id');

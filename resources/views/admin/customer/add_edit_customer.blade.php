@@ -120,6 +120,13 @@
                               @else value="{{old('gst_number')}}"
                               @endif>
                             </div>
+                            <div class="form-group">
+                              <label for="description">description</label>
+                              <textarea name="description" id="description" cols="20" class="form-control" rows="4"> @if(!empty($customerdata['description']))
+                                {{$customerdata['description']}}
+                                @else {{old('description')}}
+                                @endif</textarea>
+                            </div>
             </div>
           </div>
           </div>
