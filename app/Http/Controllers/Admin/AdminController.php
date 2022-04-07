@@ -8,7 +8,6 @@ use Session;
 use Auth;
 use App\Admin\Admin;
 use App\Admin\Post;
-use App\Http\Middleware\Admin\Admin as AdminAdmin;
 use Image;
 use DB;
 use Hash;
