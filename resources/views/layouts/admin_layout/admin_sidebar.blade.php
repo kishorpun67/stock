@@ -168,7 +168,7 @@
               </li>
             </ul>
           </li>
-          @if(Session::get('page')=="banner" || Session::get('page')=="category" || Session::get('page')=="post" || Session::get('page')=="testimonial" || Session::get('page')=="order" || Session::get('page')=="daily" || Session::get('page')=="monthly")
+          @if(Session::get('page')=="ingredientCategory" || Session::get('page')=="ingredientUnit" || Session::get('page')=="ingredientItem" || Session::get('page')=="testimonial" || Session::get('page')=="order" || Session::get('page')=="daily" || Session::get('page')=="monthly")
           <?php $active = "active";
           $menuOpen="menu-open"; ?>
            @else
@@ -187,7 +187,7 @@
         
             {{-- here i added new haha --}}
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="post")
+              @if(Session::get('page')=="ingredientCategory")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -199,27 +199,23 @@
                 </a>
               </li>
             </ul>
-            @if(Session::get('page')=="testimonial")
+            
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="ingredientUnit")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
               @endif
+              <li class="nav-item">
+                <a href="{{route('admin.ingredientUnit')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> Ingredient Units </p>
+                </a>
+              </li>
+            </ul>
+  
                 <ul class="nav nav-treeview">
-                  @if(Session::get('page')=="post")
-                  <?php $active = "active"; ?>
-                  @else
-                  <?php $active = ""; ?>
-                  @endif
-                  <li class="nav-item">
-                    <a href="{{route('admin.ingredientUnit')}}" class="nav-link {{$active}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p> Ingredient Units </p>
-                    </a>
-                  </li>
-                </ul>
-      
-                <ul class="nav nav-treeview">
-                  @if(Session::get('page')=="testimonial")
+                  @if(Session::get('page')=="ingredientItem")
                   <?php $active = "active"; ?>
                   @else
                   <?php $active = ""; ?>
@@ -340,19 +336,6 @@
               </li>
             </ul>
             
-            <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
-              <?php $active = "active"; ?>
-              @else
-              <?php $active = ""; ?>
-              @endif
-              <li class="nav-item">
-                <a href="{{route('admin.waiter')}}" class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Waiter</p>
-                </a>
-              </li>
-            </ul>
             <ul class="nav nav-treeview">
               @if(Session::get('page')=="testimonial")
               <?php $active = "active"; ?>

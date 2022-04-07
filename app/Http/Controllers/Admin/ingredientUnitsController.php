@@ -12,7 +12,7 @@ class ingredientUnitsController extends Controller
     public function ingredientUnits()
     {
         $ingredientUnits = IngredientUnit::get();
-        Session::flash('page', 'ingredientCategory');
+        Session::flash('page', 'ingredientUnit');
         return view('admin.ingredientUnits.view_ingredient_units', compact('ingredientUnits'));
     }
 
