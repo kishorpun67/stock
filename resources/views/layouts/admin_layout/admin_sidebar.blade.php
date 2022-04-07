@@ -117,7 +117,7 @@
             @endif
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.sale')}}" class="nav-link {{$active}}">
+                <a href="{{route('admin.add.edit.sale')}}" class="nav-link {{$active}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>POS</p>
                 </a>
@@ -168,7 +168,14 @@
               </li>
             </ul>
           </li>
-          @if(Session::get('page')=="ingredientCategory" || Session::get('page')=="ingredientUnit" || Session::get('page')=="ingredientItem" || Session::get('page')=="testimonial" || Session::get('page')=="order" || Session::get('page')=="daily" || Session::get('page')=="monthly")
+          @if(Session::get('page')=="ingredientCategory" || Session::get('page')=="ingredientUnit" || 
+          Session::get('page')=="ingredientItem" || Session::get('page')=="foodCategory" || Session::get('page')=="foodMenu" 
+          || Session::get('page')=="purchase" || Session::get('page')=="customer" || Session::get('page')=="supplier" || Session::get('page')=="waste"
+          || Session::get('page')=="table" || Session::get('page')=="stock" || Session::get('page')=="paymentMethod" || Session::get('page')=="expense"
+          || Session::get('page')=="sale" || Session::get('page')=="stock" || Session::get('page')=="paymentMethod" || Session::get('page')=="expense"
+         
+          
+          )
           <?php $active = "active";
           $menuOpen="menu-open"; ?>
            @else
@@ -214,21 +221,21 @@
               </li>
             </ul>
   
-                <ul class="nav nav-treeview">
-                  @if(Session::get('page')=="ingredientItem")
-                  <?php $active = "active"; ?>
-                  @else
-                  <?php $active = ""; ?>
-                  @endif
-                  <li class="nav-item">
-                    <a href="{{route('admin.ingredientItem')}}" class="nav-link {{$active}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p> Ingredient Items</p>
-                    </a>
-                  </li>
+          <ul class="nav nav-treeview">
+            @if(Session::get('page')=="ingredientItem")
+            <?php $active = "active"; ?>
+            @else
+            <?php $active = ""; ?>
+            @endif
+            <li class="nav-item">
+              <a href="{{route('admin.ingredientItem')}}" class="nav-link {{$active}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p> Ingredient Items</p>
+              </a>
+            </li>
           </ul>
           <ul class="nav nav-treeview">
-            @if(Session::get('page')=="testimonial")
+            @if(Session::get('page')=="foodCategory")
             <?php $active = "active"; ?>
             @else
             <?php $active = ""; ?>
@@ -239,24 +246,24 @@
                 <p> Food Menu Category</p>
               </a>
             </li>
-    </ul>
+          </ul>
 
-    <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
-              <?php $active = "active"; ?>
-              @else
-              <?php $active = ""; ?>
-              @endif
-              <li class="nav-item">
-                <a href="{{route('admin.foodMenu')}}" class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p> Food Menu</p>
-                </a>
-              </li>
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="foodMenu")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.foodMenu')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p> Food Menu</p>
+            </a>
+          </li>
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="purchase")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -270,7 +277,7 @@
         </ul>
 
           <ul class="nav nav-treeview">
-            @if(Session::get('page')=="testimonial")
+            @if(Session::get('page')=="customer")
             <?php $active = "active"; ?>
             @else
             <?php $active = ""; ?>
@@ -284,7 +291,7 @@
           </ul>
 
           <ul class="nav nav-treeview">
-            @if(Session::get('page')=="testimonial")
+            @if(Session::get('page')=="supplier")
             <?php $active = "active"; ?>
             @else
             <?php $active = ""; ?>
@@ -297,7 +304,7 @@
             </li>
           </ul>
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
+              @if(Session::get('page')=="waste")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -310,7 +317,7 @@
               </li>
             </ul>
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
+              @if(Session::get('page')=="table")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -323,7 +330,7 @@
               </li>
             </ul>
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
+              @if(Session::get('page')=="sale")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -337,7 +344,7 @@
             </ul>
             
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
+              @if(Session::get('page')=="order")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -350,7 +357,7 @@
               </li>
             </ul>
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
+              @if(Session::get('page')=="paymentMethod")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -363,7 +370,7 @@
               </li>
             </ul>
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
+              @if(Session::get('page')=="stock")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -377,7 +384,7 @@
             </ul>
             
             <ul class="nav nav-treeview">
-              @if(Session::get('page')=="testimonial")
+              @if(Session::get('page')=="expense")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
@@ -390,7 +397,8 @@
               </li>
             </ul>
         </li>
-        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
+        @if(Session::get('page')=="attendance" || Session::get('page')=="task" || Session::get('page')=="leave" 
+        || Session::get('page')=="salary" || Session::get('page')=="leave")
         <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
@@ -407,13 +415,13 @@
            </p>
          </a>
 
-         @if(Session::get('page')=="setting")
+         @if(Session::get('page')=="attendance")
         <?php $active = "active"; ?>
          @else
          <?php $active = ""; ?>
          @endif
          <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="attendance")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -427,7 +435,7 @@
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="task")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -441,7 +449,7 @@
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="leave")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -455,7 +463,7 @@
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="salary")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
