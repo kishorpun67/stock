@@ -93,7 +93,7 @@
               {{-- @endif --}}
             </ul>
           </li>
-          @if(Session::get('page')=="" || Session::get('page')=="kitchen" || Session::get('page')=="caffe" || Session::get('page')=="bar" || Session::get('page')=="waiter" )
+          @if(Session::get('page')=="dfd" || Session::get('page')=="kitchen" || Session::get('page')=="caffe" || Session::get('page')=="bar" || Session::get('page')=="waiter" )
            <?php $active = "active";
            $menuOpen="menu-open"; ?>
             @else
@@ -110,7 +110,7 @@
               </p>
             </a>
 
-            @if(Session::get('page')=="")
+            @if(Session::get('page')=="dfdf")
            <?php $active = "active"; ?>
             @else
             <?php $active = ""; ?>
@@ -398,7 +398,7 @@
             </ul>
         </li>
         @if(Session::get('page')=="attendance" || Session::get('page')=="task" || Session::get('page')=="leave" 
-        || Session::get('page')=="salary" || Session::get('page')=="leave")
+        || Session::get('page')=="salary" || Session::get('page')=="dfd")
         <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
@@ -414,12 +414,6 @@
              <span class="right badge badge-danger"></span>
            </p>
          </a>
-
-         @if(Session::get('page')=="attendance")
-        <?php $active = "active"; ?>
-         @else
-         <?php $active = ""; ?>
-         @endif
          <ul class="nav nav-treeview">
           @if(Session::get('page')=="attendance")
           <?php $active = "active"; ?>
@@ -476,7 +470,7 @@
           </li>
         </ul>
    
-
+       </li>
         @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
         <?php $active = "active";
         $menuOpen="menu-open"; ?>

@@ -90,6 +90,8 @@ class AttendanceController extends Controller
     public function viewSalary()
     {
         $attendance = Attendance::get();
+        Session::flash('page', 'salary');
+
         return view('admin.salary.view_salary',compact('attendance'));
     }
 
@@ -97,6 +99,7 @@ class AttendanceController extends Controller
     public function attendanceReport()
     {
         $attendance = Attendance::get();
+        Session::flash('page', 'salary');
         return view('admin.attendance.attendance_report',compact('attendance'));
     }
 

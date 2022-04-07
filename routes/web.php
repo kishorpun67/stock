@@ -256,7 +256,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
 
             //kishor i am ending route here.
             //kishor i am ending route here.
-
             Route::get('attendance', 'AttendanceController@Attendance')->name('attendance');
             Route::match(['get', 'post'], 'add-edit-attendance/{id?}', 'AttendanceController@addEditAttendance')->name('add.edit.attendance');
             Route::get('delete-attendance/{id?}', 'AttendanceController@deleteAttendance')->name('delete.attendance');
