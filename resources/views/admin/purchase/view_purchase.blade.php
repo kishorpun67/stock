@@ -47,6 +47,7 @@
                   {{-- <th>Ingredient Unit</th> --}}
                   <th>Code</th> 
                   <th>Amount</th> 
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

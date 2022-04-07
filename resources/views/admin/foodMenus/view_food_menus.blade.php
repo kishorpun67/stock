@@ -48,6 +48,7 @@
                   <th>Image</th>
                   {{-- <th>Ingredient Food</th> --}}
                   <th>Code</th>  
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

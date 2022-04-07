@@ -42,6 +42,7 @@
                   <th>ID</th>
                   <th>Table Name</th>
                   <th>Seat Capacity</th>
+                  <th>Action</th>
             
                 </tr>
                 </thead>

@@ -45,6 +45,7 @@
                   <th>Amount</th>
                   <th>Category Name</th>
                   <th>note</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

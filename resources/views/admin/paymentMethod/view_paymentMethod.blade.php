@@ -42,6 +42,7 @@
                   <th>ID</th>
                   <th>Payment Method Name</th>
                   <th>Description</th> 
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

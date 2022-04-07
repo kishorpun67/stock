@@ -42,7 +42,8 @@
                   <th>ID</th>
                   <th>Started Date</th>
                   <th>Task</th>   
-                  <th>Status</th>     
+                  <th>Status</th> 
+                  <th>Action</th>    
                 </tr>
                 </thead>
                 <tbody>

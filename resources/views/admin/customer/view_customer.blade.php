@@ -47,7 +47,8 @@
                   <th>Date of Anniversary</th> 
                   <th>Address</th> 
                   <th>Pan Number</th> 
-                  <th>Note</th> 
+                  <th>Note</th>
+                  <th>Action</th> 
                 </tr>
                 </thead>
                 <tbody>

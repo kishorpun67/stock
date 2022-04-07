@@ -46,6 +46,7 @@
                   <th>Alert Quantity</th>
                   <th>Ingredient Unit</th>
                   <th>Code</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

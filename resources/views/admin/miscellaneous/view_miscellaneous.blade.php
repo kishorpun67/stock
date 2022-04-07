@@ -45,6 +45,7 @@
                   <th>Water Amount</th> 
                   <th>Water Uses</th> 
                   <th>Consumption Bill</th> 
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

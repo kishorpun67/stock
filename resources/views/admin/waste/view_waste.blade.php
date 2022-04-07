@@ -47,6 +47,7 @@
                   <th>Responsible Person</th>
                   <th>Total loss</th>
                   <th>Discription</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

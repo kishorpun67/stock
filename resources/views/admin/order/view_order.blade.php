@@ -45,6 +45,7 @@
                   <th>Order Detail</th>
                   <th>Table</th>
                   <th>Number of Customer</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

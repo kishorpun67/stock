@@ -45,6 +45,7 @@
                   <th>Out Date</th>
                   <th>Out Time</th>
                   <th>Total Work Hour</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
