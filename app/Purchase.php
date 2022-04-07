@@ -25,4 +25,9 @@ class Purchase extends Model
     {
         return $this->belongsTo('App\Supplier', 'supplier_id');
     }
+
+    public function purchase_item()
+    {
+        return $this->hasMany('App\PurchaseItem','purchase_id');
+    }
 }

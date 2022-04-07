@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Supplier;
+use App\Purchase;
 use Session;
 
 class SupplierController extends Controller
@@ -84,7 +85,7 @@ class SupplierController extends Controller
 
     public function viewSupplierDeuPayment()
     {
-        $supplier = Supplier::get();
+        return$supplier = Purchase::get();
         return view('admin.supplierDeuPayments.view_supplierDeuPayments',compact('supplier'));
     }
 

@@ -96,22 +96,6 @@
                   @else value="{{old('date')}}"
                   @endif>
                 </div>
-
-                {{-- <div class="form-group">
-                  <label for="unit_id">Ingredient Unit</label>
-                  <select name="unit_id" class="form-control form-control-sm ">
-                      <option value="" >Select</option>
-                      @forelse($ingredientUnit as $data)
-                              <option value="{{$data->id}}"
-                                @if (!empty($purchasedata['unit_id']) && $purchasedata['unit_id'] == $data->id)
-                                selected=""
-                            @endif
-                                  >&nbsp;&raquo;&nbsp; {{$data->name}}
-                              </option>
-                      @empty
-                      @endforelse
-                  </select>
-                </div> --}}
                 <div class="form-group">
                   <label for="item_id">Ingredient Item</label>
                   <select name="item_id" id="purchase_id" class="form-control form-control-sm ">
@@ -128,17 +112,6 @@
                   </select>
                 </div>
 
-           
-
-                <div class="form-group">
-                  <label for="amount">Amount</label>
-                  <input type="text" class="form-control" name="amount" id="amount"
-                  @if(!empty($purchasedata['amount']))
-                  value= "{{$purchasedata['amount']}}"
-                  @else value="{{old('amount')}}"
-                  @endif>
-                </div>
-
               </div>
               
     
@@ -146,10 +119,86 @@
                 <div class="col-md-6 ">
                   <a href="" data-toggle="modal" data-target="#myModal"style="max-width: 150px; margin-top:30px; float:left; display:inline-block;"  class="btn btn-primary ">Add</a>
                 </div>
+                @if(!empty($purchasedata['id']))
+                <div class="col-md-12">
+                  <table class="table table-bordered table-striped  text-center">
+                    <thead>
+                    <tr>
+                      <th>SN</th>
+                      <th>Ingredient(code)</th>
+                      <th>Unit Price</th>
+                      <th>Quantity/Amount</th>
+                      <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <?php 
+                      $total = 0
+                        ?>
+                      @if (!empty($purchasedata['purchase_item'] ))
 
+                        @forelse($purchasedata['purchase_item']  as $data)
+
+                        <input type="hidden" name="id[]" value="{{ $data['id'] }}">
+                        <input type="hidden" name="ingredient_id[]" value="{{ $data['ingredient_id'] }}">
+                        <input type="hidden" name="ingredient[]" value="{{ $data['ingredient'] }}">
+                        <input type="hidden" name="price[]" value="{{ $data['price'] }}">
+                        <tr>
+                        <td>{{ $data['ingredient_id'] }}</td>
+                        <td>{{ $data['ingredient']}}oiwetopewteiop</td>
+                        <td>{{ $data['price']}}</td>
+                        <td><input class="ingredientCart_id" type="number" name="quantity[]" value="{{ $data['quantity']}}">
+                        </td>
+                        <td>{{ $data['quantity'] * $data['price']}}</td>
+                       
+                        <td>
+                          {{-- <a href="{{route('admin.add.edit', $data->id)}}"><i class="fa fa-edit">Edit</i></a>&nbsp;&nbsp; --}}
+                          <a href="javascript:" class="delete_cart_table" ingredient_id="{{$data['id']}}" style="display:inline;">
+                            <i class="fa fa-trash fa-" aria-hidden="true" ></i>
+                          </a></td>
+                        </tr>
+                        <?php $total = $total +($data['quantity']*$data['price'])?>
+                       
+                        @empty
+                        <p>No Data</p>
+                        @endforelse
+                      @endif
+                      
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-6">
+                                  
+                </div>
+                <!-- /.col -->
+                <div class="col-6">
+                  <p class="lead"></p>
+                
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tr>
+                        <th style="width:50%">G.Total</th>
+                        <td> <input type="text" class="total" value="{{ $total }}" readonly></td>
+                      </tr>
+                      <tr>
+                        <th>Paid</th>
+                        <td><input class="paid" type="number" name="paid" value="{{$purchasedata['paid']}}" ingredientCart_id="" ></td>
+                      </tr>
+                      <tr>
+                        <th>Due:</th>
+                        <td><input id="deu_amount" type="number" name="due" value="{{$purchasedata['due']}}" readonly></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                </div>
+                
+                @else
                 <div id="ajaxPurchase">
                   @include('admin.purchase.ajax_purchase_table')
-                </div>
+                </div> 
+                @endif
+                
                
                 
             </div>

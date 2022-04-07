@@ -37,62 +37,7 @@
               </p>
             </a>
           </li>
-          @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
-           <?php $active = "active";
-           $menuOpen="menu-open"; ?>
-            @else
-            <?php $active = "";
-            $menuOpen=""; ?>
-          @endif
-          <li class="nav-item has-treeview {{$menuOpen ??''}} ">
-            <a href="#" class="nav-link {{$active}}">
-              <i class="fas fa-cogs"></i>
-              <p>
-                Settings
-                <i class="fas fa-angle-left right"></i>
-                <span class="right badge badge-danger"></span>
-              </p>
-            </a>
-
-            @if(Session::get('page')=="setting")
-           <?php $active = "active"; ?>
-            @else
-            <?php $active = ""; ?>
-            @endif
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.settings')}}" class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Update Admin Password</p>
-                </a>
-              </li>
-              @if(Session::get('page')=="updateAdminDetail")
-              <?php $active = "active"; ?>
-              @else
-              <?php $active = ""; ?>
-              @endif
-              <li class="nav-item">
-                <a href="{{route('admin.update.admin.details')}}" class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Update Admin Details</p>
-                </a>
-              </li>
-              {{-- @if (in_array(auth('admin')->user()->role_id, [2] )) --}}
-
-               @if(Session::get('page')=="admin_roles")
-              <?php $active = "active"; ?>
-              @else
-              <?php $active = ""; ?>
-              @endif
-              <li class="nav-item">
-                <a href="{{route('admin.user')}}" class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>User</p>
-                </a>
-              </li>
-              {{-- @endif --}}
-            </ul>
-          </li>
+          
           @if(Session::get('page')=="dfd" || Session::get('page')=="kitchen" || Session::get('page')=="caffe" || Session::get('page')=="bar" || Session::get('page')=="waiter" )
            <?php $active = "active";
            $menuOpen="menu-open"; ?>
@@ -342,6 +287,20 @@
                 </a>
               </li>
             </ul>
+            
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="order")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.order')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Order</p>
+                </a>
+              </li>
+            </ul>
             <ul class="nav nav-treeview">
               @if(Session::get('page')=="paymentMethod")
               <?php $active = "active"; ?>
@@ -393,8 +352,7 @@
        @endif
        <li class="nav-item has-treeview {{$menuOpen ??''}} ">
          <a href="#" class="nav-link {{$active}}">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-           <p>
+          <i class="fas fa-user-plus"></i><p>
             Employe Management
              <i class="fas fa-angle-left right"></i>
              <span class="right badge badge-danger"></span>
@@ -455,9 +413,9 @@
             </a>
           </li>
         </ul>
-   
        </li>
-        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
+       
+        @if(Session::get('page')=="report" || Session::get('page')=="purchase_report" || Session::get('page')=="attendance_report" )
         <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
@@ -466,75 +424,7 @@
        @endif
        <li class="nav-item has-treeview {{$menuOpen ??''}} ">
          <a href="#" class="nav-link {{$active}}">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-           <p>
-            Accounts
-             <i class="fas fa-angle-left right"></i>
-             <span class="right badge badge-danger"></span>
-           </p>
-         </a>
-
-         @if(Session::get('page')=="setting")
-        <?php $active = "active"; ?>
-         @else
-         <?php $active = ""; ?>
-         @endif
-     
-        <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
-          <?php $active = "active"; ?>
-          @else
-          <?php $active = ""; ?>
-          @endif
-          <li class="nav-item">
-            <a href="{{route('admin.view.supplier.deu.payments')}}" class="nav-link {{$active}}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Supplier Deu Payments</p>
-            </a>
-          </li>
-        </ul>
-
-        <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
-          <?php $active = "active"; ?>
-          @else
-          <?php $active = ""; ?>
-          @endif
-          <li class="nav-item">
-            <a href="{{route('admin.view.customer.deu.receives')}}" class="nav-link {{$active}}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Customer Deu Receives</p>
-            </a>
-          </li>
-        </ul>
-
-        
-        <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
-          <?php $active = "active"; ?>
-          @else
-          <?php $active = ""; ?>
-          @endif
-          <li class="nav-item">
-            <a href="{{route('admin.miscellaneous')}}" class="nav-link {{$active}}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Miscellaneous</p>
-            </a>
-          </li>
-        </ul>
-
-
-        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
-        <?php $active = "active";
-        $menuOpen="menu-open"; ?>
-         @else
-         <?php $active = "";
-         $menuOpen=""; ?>
-       @endif
-       <li class="nav-item has-treeview {{$menuOpen ??''}} ">
-         <a href="#" class="nav-link {{$active}}">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-           <p>
+          <i class="fa fas-analytics"></i>          <p>
             Reports
              <i class="fas fa-angle-left right"></i>
              <span class="right badge badge-danger"></span>
@@ -548,7 +438,7 @@
          @endif
      
          <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="report")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -562,7 +452,7 @@
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="purchase_report")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -576,7 +466,7 @@
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="attendance_report")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -604,7 +494,129 @@
         </ul>
 
        </li>
+       @if(Session::get('page')=="payments" || Session::get('page')=="receives" || Session::get('page')=="miscellaneous" )
+       <?php $active = "active";
+       $menuOpen="menu-open"; ?>
+        @else
+        <?php $active = "";
+        $menuOpen=""; ?>
+      @endif
+      <li class="nav-item has-treeview {{$menuOpen ??''}} ">
+        <a href="#" class="nav-link {{$active}}">
+         <i class="fa fa-solid fa-user" aria-hidden="true"></i>
+          <p>
+           Accounts
+            <i class="fas fa-angle-left right"></i>
+            <span class="right badge badge-danger"></span>
+          </p>
+        </a>
 
+        @if(Session::get('page')=="payments")
+       <?php $active = "active"; ?>
+        @else
+        <?php $active = ""; ?>
+        @endif
+    
+       <ul class="nav nav-treeview">
+         @if(Session::get('page')=="payments")
+         <?php $active = "active"; ?>
+         @else
+         <?php $active = ""; ?>
+         @endif
+         <li class="nav-item">
+           <a href="{{route('admin.view.supplier.deu.payments')}}" class="nav-link {{$active}}">
+             <i class="far fa-circle nav-icon"></i>
+             <p>Supplier Deu Payments</p>
+           </a>
+         </li>
+       </ul>
+
+       <ul class="nav nav-treeview">
+         @if(Session::get('page')=="receives")
+         <?php $active = "active"; ?>
+         @else
+         <?php $active = ""; ?>
+         @endif
+         <li class="nav-item">
+           <a href="{{route('admin.view.customer.deu.receives')}}" class="nav-link {{$active}}">
+             <i class="far fa-circle nav-icon"></i>
+             <p>Customer Deu Receives</p>
+           </a>
+         </li>
+       </ul>
+
+       
+       <ul class="nav nav-treeview">
+         @if(Session::get('page')=="miscellaneous")
+         <?php $active = "active"; ?>
+         @else
+         <?php $active = ""; ?>
+         @endif
+         <li class="nav-item">
+           <a href="{{route('admin.miscellaneous')}}" class="nav-link {{$active}}">
+             <i class="far fa-circle nav-icon"></i>
+             <p>Miscellaneous</p>
+           </a>
+         </li>
+       </ul>
+
+      </li>
+       @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
+       <?php $active = "active";
+       $menuOpen="menu-open"; ?>
+        @else
+        <?php $active = "";
+        $menuOpen=""; ?>
+      @endif
+      <li class="nav-item has-treeview {{$menuOpen ??''}} ">
+        <a href="#" class="nav-link {{$active}}">
+          <i class="fas fa-cogs"></i>
+          <p>
+            Settings
+            <i class="fas fa-angle-left right"></i>
+            <span class="right badge badge-danger"></span>
+          </p>
+        </a>
+
+        @if(Session::get('page')=="setting")
+       <?php $active = "active"; ?>
+        @else
+        <?php $active = ""; ?>
+        @endif
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{route('admin.settings')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Update Admin Password</p>
+            </a>
+          </li>
+          @if(Session::get('page')=="updateAdminDetail")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.update.admin.details')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Update Admin Details</p>
+            </a>
+          </li>
+          {{-- @if (in_array(auth('admin')->user()->role_id, [2] )) --}}
+
+           @if(Session::get('page')=="admin_roles")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.user')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>User</p>
+            </a>
+          </li>
+          {{-- @endif --}}
+        </ul>
+      </li>
         </ul>
       </nav>
     </div>

@@ -369,51 +369,6 @@ Route::get('/', function(){
     return redirect()->route('admin.dashboard');
 })->name('home');
 
-// Route::post('search-post', 'HomeController@searchPost')->name('post.search');
-// Route::get('category/{url?}', 'PostController@postList')->name('post.list');
-// Route::post('search-post-area' , 'PostController@searhPostArea')->name('search.post.area');
-// Route::get('detail/{url}', 'PostController@postDetails')->name('post.detail');
-// Route::post('/comment', 'PostController@addComment')->name('comment');
-
-
-// Route::group(['middleware' => ['auth']], function() {
-//     Route::post('/call-waiter', 'HomeController@callWaiter');
-//     Route::get('/logout','UserController@logout')->name('logout');
-//     Route::get('/cart', 'CartController@cart')->name('cart');
-//     Route::post('/cart-delete/{id?}', 'CartController@cartDelete')->name('cart-delete');
-//     Route::post('update-cart-item-quantity', 'CartController@updateCart');
-//     Route::post('add-cart', 'CartController@addCart')->name('add.cart');
-//     // Route::post('add-order', 'OrderController@addOrder')->name('add.order');
-//     // Route::post('payment', 'OrderController@payment')->name('payment');
-
-//     // Route::get('order-details', 'OrderController@orderDetails')->name('order.details');
-//     Route::get('read-all-notification', function(){
-//         auth()->user()->unreadNotifications->markAsRead(); 
-//         return redirect()->back();
-//     })->name('read.all.notification');
-// });
-
-// Route::match(['get', 'post'],'/login-register','UserController@login')->name('login');
-// Route::match(['get', 'post'],'register','UserController@register')->name('register');
-// Route::group(['middleware' => ['auth']], function() {
-//     Route::get('/', 'HomeController@home')->name('home');
-//     Route::get('/price', 'HomeController@price');
-//     Route::get('/calculate', 'HomeController@calculate');
-//     Route::post('add-cart', 'CartController@addCart')->name('add.cart');
-//     Route::post('update-quantity/{id}', 'CartController@updateQuantity')->name('update.quantity');
-//     Route::get('delete-cart/{id}', 'CartController@delete');
-//     Route::post('add-order', 'OrderController@addOrder')->name('add.order');
-//     Route::get('order-cancel/{id}', 'OrderController@cancelOrder')->name('order.cancel');
-//     Route::get('logout', 'UserController@logout')->name('logout');
-
-// });
-// Route::match(['get', 'post'],'login', 'UserController@login')->name('login');
-
-
-// Route::get('verify', 'UserController@register');
-
-
-// Route for front end 
 
 Route::get('qr-code-g', function () {
   
