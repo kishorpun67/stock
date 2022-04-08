@@ -150,87 +150,73 @@
                   @endif
                   
 
-                <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea name="description" id="description" cols="20" class="form-control" rows="4"> @if(!empty($foodMenusData['description']))
-                    {{$foodMenusData['description']}}
-                    @else {{old('description')}}
-                    @endif</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="file" class="form-control" id="image" name="image" @if(!empty($foodMenusData['image']))
-                  value= "{{$foodMenusData['image']}}"
-                  @else value="{{old('image')}}"
-                  @endif><br>
-                  @if(!empty($foodMenusData['image']))
-                    <img src="{{asset($foodMenusData['image'])}}" width="100" height="100" alt="" srcset="">
-                  @endif
-                </div>
                 
-
-{{--                   
-                <div class="form-group">
-                    <label for="ingredient_id">Ingredient Food</label>
-                    <select name="ingredient_id" id="ingredient_id" class="form-control form-control-sm " >
-                        <option value="" >Select</option>
-                        @forelse($ingredientUnit as $data)
-                                <option value="{{$data->id}}"
-                                  @if (!empty($foodMenusData['ingredient_id']) && $foodMenusData['ingredient_id'] == $data->id)
-                                  selected=""
-                              @endif
-                                    >&nbsp;&raquo;&nbsp; {{$data->unit_name}}
-                                </option>
-                                
-                        @empty
-                        @endforelse
-                    </select>
-                  </div> --}}
-
-                    <div class="form-group">
-                        <label for="code">Code</label>
-                          <input type="text" class="form-control" name="code" id="code" placeholder="Enter sale price"
-                          @if(!empty($foodMenusData['code']))
-                          value= "{{$foodMenusData['code']}}"
-                          @else value="{{old('code')}}"
-                          @endif>
-                        </div>
-                        <div class="form-group" >
-                          <label for="">Is it Kitchen Item?</label>
-                          <select name="is_kitchen" class="form-control">
-                            <option value="No"@if (!empty($foodMenusData['is_kitchen']) && $foodMenusData['is_kitchen'] == "No")
-                              selected=""
-                          @endif>No</option>
-                            <option value="Yes"@if (!empty($foodMenusData['is_kitchen']) && $foodMenusData['is_kitchen'] == "Yes")
-                            selected=""
-                        @endif>Yes</option>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <label for="">Is it Bar Item?</label>
-                          <select class="form-control" name="is_bar">
-                            <option value="No"@if (!empty($foodMenusData['is_bar']) && $foodMenusData['is_bar'] == "No")
-                              selected=""
-                          @endif>No</option>
-                            <option value="Yes"@if (!empty($foodMenusData['is_bar']) && $foodMenusData['is_bar'] == "Yes")
-                            selected=""
-                        @endif>Yes</option>
-                          </select>
-                        </div>
-            <div class="form-group">
-              <label for="">Is it Caffe Item?</label>
-              <select class="form-control" name="is_caffe">
-                <option value="No" @if (!empty($foodMenusData['is_caffe']) && $foodMenusData['is_caffe'] == "No")
-                  selected=""
-              @endif>No</option>
-                <option value="Yes"@if (!empty($foodMenusData['is_caffe']) && $foodMenusData['is_caffe'] == "Yes")
-                selected=""
-            @endif>Yes</option>
-              </select>
-            </div>
       
         
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="20" class="form-control" rows="4"> @if(!empty($foodMenusData['description']))
+                  {{$foodMenusData['description']}}
+                  @else {{old('description')}}
+                  @endif</textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="image">Image</label>
+                  <input type="file" class="form-control" id="image" name="image" @if(!empty($foodMenusData['image']))
+                value= "{{$foodMenusData['image']}}"
+                @else value="{{old('image')}}"
+                @endif><br>
+                @if(!empty($foodMenusData['image']))
+                  <img src="{{asset($foodMenusData['image'])}}" width="100" height="100" alt="" srcset="">
+                @endif
+              </div>
+              
+
+
+                  <div class="form-group">
+                      <label for="code">Code</label>
+                        <input type="text" class="form-control" name="code" id="code" placeholder="Enter sale price"
+                        @if(!empty($foodMenusData['code']))
+                        value= "{{$foodMenusData['code']}}"
+                        @else value="{{old('code')}}"
+                        @endif>
+                      </div>
+                      <div class="form-group" >
+                        <label for="">Is it Kitchen Item?</label>
+                        <select name="is_kitchen" class="form-control">
+                          <option value="No"@if (!empty($foodMenusData['is_kitchen']) && $foodMenusData['is_kitchen'] == "No")
+                            selected=""
+                        @endif>No</option>
+                          <option value="Yes"@if (!empty($foodMenusData['is_kitchen']) && $foodMenusData['is_kitchen'] == "Yes")
+                          selected=""
+                      @endif>Yes</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Is it Bar Item?</label>
+                        <select class="form-control" name="is_bar">
+                          <option value="No"@if (!empty($foodMenusData['is_bar']) && $foodMenusData['is_bar'] == "No")
+                            selected=""
+                        @endif>No</option>
+                          <option value="Yes"@if (!empty($foodMenusData['is_bar']) && $foodMenusData['is_bar'] == "Yes")
+                          selected=""
+                      @endif>Yes</option>
+                        </select>
+                      </div>
+          <div class="form-group">
+            <label for="">Is it Caffe Item?</label>
+            <select class="form-control" name="is_caffe">
+              <option value="No" @if (!empty($foodMenusData['is_caffe']) && $foodMenusData['is_caffe'] == "No")
+                selected=""
+            @endif>No</option>
+              <option value="Yes"@if (!empty($foodMenusData['is_caffe']) && $foodMenusData['is_caffe'] == "Yes")
+              selected=""
+          @endif>Yes</option>
+            </select>
+          </div>
             </div>
           </div>
           </div>

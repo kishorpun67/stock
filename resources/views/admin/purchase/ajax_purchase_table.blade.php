@@ -15,10 +15,16 @@
         ?>
       
         @forelse($ingredientcart  as $data)
+        <input type="hidden" name="id[]" value="{{ $data->id }}">
+        <input type="hidden" name="ingredient_id[]" value="{{ $data->ingredient_id }}">
+        <input type="hidden" name="ingredient[]" value="{{ $data->name }}">
+        <input type="hidden" name="price[]" value="{{ $data->price }}">
+
+
         <td>{{ $data->ingredient_id }}</td>
         <td>{{ $data->name}}</td>
         <td>{{ $data->price}}</td>
-        <td><input class="ingredientCart_id" type="number" value="{{ $data->quantity}}" ingredientCart_id="{{ $data->id }}">
+        <td><input class="ingredientCart_id" type="number" name="quantity[]" value="{{ $data->quantity}}" ingredientCart_id="{{ $data->id }}">
         </td>
         <td>{{ $data->quantity * $data->price}}</td>
        
@@ -51,13 +57,12 @@
       </tr>
       <tr>
         <th>Paid</th>
-        <td><input class="paid" type="number" value="" ingredientCart_id="" ></td>
+        <td><input class="paid" type="number" name="paid" value="" ingredientCart_id="" ></td>
       </tr>
       <tr>
         <th>Due:</th>
-        <td><input id="deu_amount" type="number" value="" readonly></td>
+        <td><input id="deu_amount" type="number" name="due" value="" readonly></td>
       </tr>
-
     </table>
   </div>
 </div>

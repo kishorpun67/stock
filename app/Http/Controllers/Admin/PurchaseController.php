@@ -11,7 +11,8 @@ use App\IngredientItem;
 use App\IngredientCart;
 use App\IngredientCategory;
 use Session;
-
+use App\PurchaseItem;
+use DB;
 class PurchaseController extends Controller
 {
     public function purchase()
@@ -32,8 +33,10 @@ class PurchaseController extends Controller
         }else{
             $title = "Edit Purchase";
             $button ="Update";
-            $purchasedata = Purchase::where('admin_id',auth('admin')->user()->id)->where('id',$id)->first();
+            $purchasedata = Purchase::with('purchase_item')->where('id',$id)->first();
+            
             $purchasedata= json_decode(json_encode($purchasedata),true);
+            // return $purchasedata['purchase_item'];
             $purchase = Purchase::find($id);
             $message = "purchase has been updated sucessfully";
         }
@@ -50,43 +53,61 @@ class PurchaseController extends Controller
                 $data['date'] = "";
             }
 
-            if(empty($data['ingredient_id']))
+            if(empty($data['total']))
             {
-                $data['ingredient_id'] = "";
+                $data['total'] = "";
             }
-            if(empty($data['item_id']))
+            if(empty($data['paid']))
             {
-                $data['item_id'] = "";
+                $data['paid'] = "";
             }
-            if(empty($data['unit_id']))
+            if(empty($data['due']))
             {
-                $data['unit_id'] = "";
+                $data['due'] = "";
             }
             if(empty($data['code']))
             {
                 $data['code'] = "";
             }
-            if(empty($data['amount']))
-            {
-                $data['amount'] = "";
-            }
-            // if(empty($data['user_id']))
-            // {
-            //     $data['user_id'] = "";
-            // }
-            // if(empty($data['parent_id']))
-            // {
-            //     $data['parent_id'] = "";
-            // }
+           
             $purchase->admin_id = auth('admin')->user()->id;
             $purchase->supplier_id = $data['supplier_id'];
             $purchase->date = $data['date'];
-            $purchase->ingredient_id = $data['ingredient_id'];
-            $purchase->item_id = $data['item_id'];
-            $purchase->unit_id = $data['unit_id'];
             $purchase->code = $data['code'];
-            $purchase->amount = $data['amount'];
+            $purchase->total = $data['total'];
+            $purchase->paid = $data['paid'];
+            $purchase->due = $data['due'];
+
             $purchase->save();
+            if(empty($id)){
+                $id = DB::getPdo()->lastInsertId();
+                foreach($data['id'] as $key=> $val)
+                {
+                    $newPurchaseItem = new PurchaseItem;
+                    $newPurchaseItem->ingredient_id = $data['ingredient_id'][$key];
+                    $newPurchaseItem->purchase_id = $id;
+                    $newPurchaseItem->ingredient= $data['ingredient'][$key];
+                    $newPurchaseItem->quantity = $data['quantity'][$key];
+                    $newPurchaseItem->price = $data['price'][$key];
+                    $newPurchaseItem->total = $data['price'][$key] *$data['quantity'][$key];
+                    $newPurchaseItem->save();
+                    IngredientCart::where('id', $val)->delete();
+                }
+                
+            }else{
+                foreach($data['id'] as $key=> $val)
+                {
+                    $newPurchaseItem =  PurchaseItem::find($val);
+                    $newPurchaseItem->ingredient_id = $data['ingredient_id'][$key];
+                    $newPurchaseItem->purchase_id = $id;
+                    $newPurchaseItem->ingredient= $data['ingredient'][$key];
+                    $newPurchaseItem->quantity = $data['quantity'][$key];
+                    $newPurchaseItem->price = $data['price'][$key];
+                    $newPurchaseItem->total = $data['price'][$key] *$data['quantity'][$key];
+                    $newPurchaseItem->save();
+                }
+
+            }
             Session::flash('success_message', $message);
             return redirect('admin/purchase');
         }
