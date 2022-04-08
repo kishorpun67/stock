@@ -453,8 +453,10 @@
         </ul>
    
        </li>
-        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
-        <?php $active = "active";
+
+       
+       @if(Session::get('page')=="supplierDeuPayment" || Session::get('page')=="customerDeuReceives" || Session::get('page')=="miscellaneous")
+       <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
          <?php $active = "";
@@ -475,9 +477,9 @@
          @else
          <?php $active = ""; ?>
          @endif
-     
+
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="supplierDeuPayment")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -491,7 +493,7 @@
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="customerDeuReceives")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -504,9 +506,8 @@
           </li>
         </ul>
 
-        
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="miscellaneous")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -519,7 +520,37 @@
           </li>
         </ul>
 
+         
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="taxVat")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.taxVat')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Tax And Vat</p>
+            </a>
+          </li>
+        </ul>
 
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="bankDeposit")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.bankDeposit')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Deposit Into Bank</p>
+            </a>
+          </li>
+        </ul>
+
+       
+       
         @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
         <?php $active = "active";
         $menuOpen="menu-open"; ?>

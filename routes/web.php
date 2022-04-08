@@ -107,21 +107,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get','post'],'add-edit-user/{id?}', 'AdminController@addEditUser')->name('add.edit.user');
             Route::get('delete-user/{id}', 'AdminController@deleteUser');
     
-    
+                  //routes for admin
             Route::get('all-admins', 'AdminController@admin')->name('details');
             Route::post('add-edit-admin/{id?}', 'AdminController@addEditAdmin')->name('add.edit.admin');
             Route::get('delete-admin/{id?}', 'AdminController@delete');
 
             Route::post('add-edit-access/{id?}', 'AdminController@access')->name('add.edit.access');
     
-            // banner 
+               //routes for banner
             Route::get('banner', 'BannerController@banner')->name('banner');
             Route::post('update-banner-status', 'BannerController@updateBannerStatus');
             Route::post('add-banner', 'BannerController@add')->name('add.banner');
             Route::post('edit-banner/{id}', 'BannerController@edit')->name('edit.banner');
             Route::get('delete-banner/{id}', 'BannerController@delete')->name('delete.banner');
     
-            // category
+             //routes for category
             Route::get('categories', 'CategoryController@categories')->name('categories');
             Route::post('update-category-status', 'CategoryController@updateCategoryStatus');
             Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory')->name('add.edit.category');
@@ -129,68 +129,57 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('delete-category/{id?}', 'CategoryController@deleteCategory')->name('delete-category');
             Route::get('add-edit-category/delete-category-image/{id?}', 'CategoryController@deleteCategoryImage');
 
-            // testimonial 
+             //routes for testimonial
             Route::get('tesimonial', 'TestimonialController@testimonial')->name('testimonial');
             Route::match(['get', 'post'], 'add-edit-testimonial/{id?}', 'TestimonialController@addEditTestimonail')->name('add.edit.testimonial');
             Route::get('delete-testimonial/{id?}', 'TestimonialController@deleteTestimonail')->name('delete.testimonial');
     
-
-            // Route::get('post', 'PostController@item')->name('post');
-            // Route::post('update-item-status', 'PostController@updatePostStatus');
-            // Route::post('add-post', 'PostController@add')->name('add.post');
-            // Route::post('edit-post/{id}', 'PostController@edit')->name('edit.post');
-            // Route::get('delete-post/{id}', 'PostController@delete')->name('delete.post');
-            //kishr i am adding route here
-
+                 //routes for ingredientCategory
              Route::get('ingredient-categories', 'ingredientCategoryController@ingredientCategories')->name('ingredientCategory');
              Route::match(['get', 'post'], 'add-edit-ingredientCategory/{id?}', 'ingredientCategoryController@addEditIngredientCategory')->name('add.edit.ingredient.category');
              Route::get('delete-ingredientCategory/{id?}', 'ingredientCategoryController@deleteIngredientCategory')->name('delete.ingredient.category');
     
-            //kishor i am ending route here.
+               //routes for ingredientUnit
             Route::get('ingredient-units', 'ingredientUnitsController@ingredientUnits')->name('ingredientUnit');
             Route::match(['get', 'post'], 'add-edit-ingredientUnit/{id?}', 'ingredientUnitsController@addEditIngredientUnit')->name('add.edit.ingredient.unit');
             Route::get('delete-ingredientUnit/{id?}', 'ingredientUnitsController@deleteIngredientUnit')->name('delete.ingredient.unit');
 
-            //kishor i am ending route here.
+               //routes for ingredientItem
             Route::get('ingredient-items', 'IngredientItemsController@ingredientItems')->name('ingredientItem');
             Route::match(['get', 'post'], 'add-edit-ingredientItem/{id?}', 'IngredientItemsController@addEditIngredientItem')->name('add.edit.ingredient.item');
             Route::get('delete-ingredientItem/{id?}', 'IngredientItemsController@deleteIngredientItem')->name('delete.ingredient.item');
 
-            //kishor i am ending route here.
-            //kishr i am adding route here
-
+                    //routes for foodCategory
             Route::get('food-categories', 'FoodCategoryController@foodCategories')->name('foodCategory');
             Route::match(['get', 'post'], 'add-edit-foodCategory/{id?}', 'FoodCategoryController@addEditFoodCategory')->name('add.edit.food.category');
             Route::get('delete-foodCategory/{id?}', 'FoodCategoryController@deleteFoodCategory')->name('delete.food.category');
 
-            //kishor i am ending route here.
-            //kishr i am adding route here
-
+                //routes for foodMenu
             Route::get('food-menus', 'FoodMenuController@foodMenus')->name('foodMenu');
             Route::match(['get', 'post'], 'add-edit-foodMenu/{id?}', 'FoodMenuController@addEditFoodMenu')->name('add.edit.food.menu');
             Route::get('delete-foodMenu/{id?}', 'FoodMenuController@deleteFoodMenu')->name('delete.food.menu');
 
-            //kishor i am ending route here.
+               //routes for purchase
             Route::get('purchase', 'PurchaseController@purchase')->name('purchase');
             Route::match(['get', 'post'], 'add-edit-purchase/{id?}', 'PurchaseController@addEditPurchase')->name('add.edit.purchase');
             Route::get('delete-purchase/{id?}', 'PurchaseController@deletePurchase')->name('delete.purchase');
 
-            //kishor i am ending route here.
+              //routes for customer
             Route::get('customer', 'CustomerController@customer')->name('customer');
             Route::match(['get', 'post'], 'add-edit-customer/{id?}', 'CustomerController@addEditCustomer')->name('add.edit.customer');
             Route::get('delete-customer/{id?}', 'CustomerController@deleteCustomer')->name('delete.customer');
 
-            //kishor i am ending route here.
+              //routes for supplier
             Route::get('supplier', 'SupplierController@Supplier')->name('supplier');
             Route::match(['get', 'post'], 'add-edit-supplier/{id?}', 'SupplierController@addEditSupplier')->name('add.edit.supplier');
             Route::get('delete-supplier/{id?}', 'SupplierController@deleteSupplier')->name('delete.supplier');
 
-            //kishor i am ending route here.
+               //routes for waste
             Route::get('waste', 'WasteController@Waste')->name('waste');
             Route::match(['get', 'post'], 'add-edit-waste/{id?}', 'WasteController@addEditWaste')->name('add.edit.waste');
             Route::get('delete-waste/{id?}', 'WasteController@deleteWaste')->name('delete.waste');
 
-            //kishor i am ending route here.
+               //routes for table.
             Route::get('table', 'TableController@table')->name('table');
             Route::match(['get', 'post'], 'add-edit-table/{id?}', 'TableController@addEditTable')->name('add.edit.table');
             Route::get('delete-table/{id?}', 'TableController@deleteTable')->name('delete.table');
@@ -203,11 +192,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('waiter-collect-food', 'AllScreenController@waiterCollectFood')->name('waiter.collect.food');
             Route::post('collect-food', 'AllScreenController@collectFood')->name('collect.food');
 
-
-
-            // Route::get('admin-kitchen', 'SaleController@kitchen')->name('admin.kitchen');
-
-            //kishor i am ending route here.
+            //routes for sale and  ajax used in sale
             Route::get('sale', 'SaleController@Sale')->name('sale');
             Route::match(['get', 'post'], 'sale-food/{id?}', 'SaleController@addEditSale')->name('add.edit.sale');
             Route::get('food/{url}', 'SaleController@table')->name('food');
@@ -230,57 +215,57 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('kitchen-status', 'SaleController@kitchenStatus');
             Route::post('bill-print', 'SaleController@billPrint')->name('bill.print');
 
-
-
-
-
+                  //routes for expense
             Route::get('expense', 'ExpenseController@Expense')->name('expense');
             Route::match(['get', 'post'], 'add-edit-expense/{id?}', 'ExpenseController@addEditExpense')->name('add.edit.expense');
             Route::get('delete-expense/{id?}', 'ExpenseController@deleteExpense')->name('delete.expense');
             
+               //routes for waiter
             Route::get('waiter', 'WaiterController@Waiter')->name('waiter');
             Route::match(['get', 'post'], 'add-edit-waiter/{id?}', 'WaiterController@addEditWaiter')->name('add.edit.waiter');
             Route::get('delete-waiter/{id?}', 'WaiterController@deleteWaiter')->name('delete.waiter');
 
-            //kishor i am ending route here.
-            //kishor i am ending route here.
-
+              //routes for order
             Route::get('order', 'OrderController@Order')->name('order');
             Route::match(['get', 'post'], 'add-edit-order/{id?}', 'OrderController@addEditOrder')->name('add.edit.order');
             Route::get('delete-order/{id?}', 'OrderController@deleteOrder')->name('delete.order');
 
-
+               //routes for paymentMethod
             Route::get('paymentMethod', 'PaymentMethodController@paymentMethod')->name('paymentMethod');
             Route::match(['get', 'post'], 'add-edit-paymentMethod/{id?}', 'PaymentMethodController@addEditpaymentMethod')->name('add.edit.paymentMethod');
             Route::get('delete-paymentMethod/{id?}', 'PaymentMethodController@deletepaymentMethod')->name('delete.paymentMethod');
 
-            //kishor i am ending route here.
-            //kishor i am ending route here.
+              //routes for attendance
             Route::get('attendance', 'AttendanceController@Attendance')->name('attendance');
             Route::match(['get', 'post'], 'add-edit-attendance/{id?}', 'AttendanceController@addEditAttendance')->name('add.edit.attendance');
             Route::get('delete-attendance/{id?}', 'AttendanceController@deleteAttendance')->name('delete.attendance');
 
-            //kishor i am ending route here.
-            //kishor i am ending route here.
-
+             //routes for task
             Route::get('task', 'TaskController@Task')->name('task');
             Route::match(['get', 'post'], 'add-edit-task/{id?}', 'TaskController@addEditTask')->name('add.edit.task');
             Route::get('delete-task/{id?}', 'TaskController@deleteTask')->name('delete.task');
 
-            //kishor i am ending route here.
-            //kishor i am ending route here.
-
+             //routes for leave
             Route::get('leave', 'LeaveController@Leave')->name('leave');
             Route::match(['get', 'post'], 'add-edit-leave/{id?}', 'LeaveController@addEditLeave')->name('add.edit.leave');
             Route::get('delete-leave/{id?}', 'LeaveController@deleteLeave')->name('delete.leave');
             
-            //kishor i am ending route here.
-
+              //routes for miscellaneous
             Route::get('miscellaneous', 'MiscellaneousController@Miscellaneous')->name('miscellaneous');
             Route::match(['get', 'post'], 'add-edit-miscellaneous/{id?}', 'MiscellaneousController@addEditMiscellaneous')->name('add.edit.miscellaneous');
             Route::get('delete-miscellaneous/{id?}', 'MiscellaneousController@deleteMiscellaneous')->name('delete.miscellaneous');
 
+            //routes for tax and vat
+            Route::get('taxVat', 'TaxVatController@taxVat')->name('taxVat');
+            Route::match(['get', 'post'], 'add-edit-taxVat/{id?}', 'TaxVatController@addEditTaxVat')->name('add.edit.taxVat');
+            Route::get('delete-taxVat/{id?}', 'TaxVatController@deleteTaxVat')->name('delete.taxVat');
 
+            //routes for tax and vat
+            Route::get('bankDeposit', 'BankDepositController@bankDeposit')->name('bankDeposit');
+            Route::match(['get', 'post'], 'add-edit-bankDeposit/{id?}', 'BankDepositController@addEditBankDeposit')->name('add.edit.bankDeposit');
+            Route::get('delete-bankDeposit/{id?}', 'BankDepositController@deleteBankDeposit')->name('delete.bankDeposit');
+   
+           //routes for salary
             Route::get('view-salary','AttendanceController@viewSalary')->name('view.salary');
             Route::get('view-supplier-deu-payment','SupplierController@viewSupplierDeuPayment')->name('view.supplier.deu.payments');
             Route::get('view-customer-deu-receive','CustomerController@viewCustomerDeuReceives')->name('view.customer.deu.receives');
@@ -308,29 +293,17 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::post('delete-foodMenu-table','FoodMenuController@deletefoodMenuTable')->name('delete.foodMenu.table');
             Route::post('ajax-foodMenu-table', 'FoodMenuController@ajaxfoodMenuTable');
 
-
-                        
-            
-            // Route::get('sale-innovice/{id}', 'SaleController@saleInnovice')->name('sale.innovice');
-
-            
-
-            //kishor i am ending route here.
+               //routes for waiter
             Route::get('waiter', 'WaiterController@Waiter')->name('waiter');
             Route::match(['get', 'post'], 'add-edit-waiter/{id?}', 'WaiterController@addEditWaiter')->name('add.edit.waiter');
             Route::get('delete-waiter/{id?}', 'WaiterController@deleteWaiter')->name('delete.waiter');
 
-            //kishor i am ending route here.
+               //routes for order
             Route::get('order', 'OrderController@Order')->name('order');
             Route::match(['get', 'post'], 'add-edit-order/{id?}', 'OrderController@addEditOrder')->name('add.edit.order');
             Route::get('delete-order/{id?}', 'OrderController@deleteOrder')->name('delete.order');
 
-            //kishor i am ending route here.
-            // Route::get('user', 'UserController@User')->name('user');
-            // Route::match(['get', 'post'], 'add-edit-user/{id?}', 'UserController@addEditUser')->name('add.edit.user');
-            // Route::get('delete-user/{id?}', 'UserController@deleteUser')->name('delete.user');
-            //kishor i am ending route here.
-
+               //routes payment
             Route::get('payment', 'PaymentController@payment')->name('payment');
             Route::post('add-payment', 'PaymentController@add')->name('add.payment');
             Route::post('edit-payment/{id}', 'PaymentController@edit')->name('edit.payment');
