@@ -415,7 +415,8 @@
         </ul>
        </li>
        
-        @if(Session::get('page')=="report" || Session::get('page')=="purchase_report" || Session::get('page')=="attendance_report" )
+        @if(Session::get('page')=="daily_sale_report" || Session::get('page')=="waste_report" || Session::get('page')=="purchase_report"
+        || Session::get('page')=="attendance_report" || Session::get('page')=="sale_report" || Session::get('page')=="miscellaneous_report")
         <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
@@ -430,15 +431,21 @@
              <span class="right badge badge-danger"></span>
            </p>
          </a>
-
-         @if(Session::get('page')=="setting")
-        <?php $active = "active"; ?>
-         @else
-         <?php $active = ""; ?>
-         @endif
-     
          <ul class="nav nav-treeview">
-          @if(Session::get('page')=="report")
+          @if(Session::get('page')=="daily_sale_report")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.daily.summary.report')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Daily Summary Report</p>
+            </a>
+          </li>
+        </ul>
+         <ul class="nav nav-treeview">
+          @if(Session::get('page')=="waste_report")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
@@ -480,15 +487,28 @@
         </ul>
 
         <ul class="nav nav-treeview">
-          @if(Session::get('page')=="testimonial")
+          @if(Session::get('page')=="sale_report")
           <?php $active = "active"; ?>
           @else
           <?php $active = ""; ?>
           @endif
           <li class="nav-item">
-            <a href="{{route('admin.customer.report')}}" class="nav-link {{$active}}">
+            <a href="{{route('admin.sale.report')}}" class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
-              <p>Customer Report</p>
+              <p>Sale Report</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="miscellaneous_report")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.miscellaneous.report')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Miscellaneous Report</p>
             </a>
           </li>
         </ul>

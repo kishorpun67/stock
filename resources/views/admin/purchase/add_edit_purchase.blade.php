@@ -178,7 +178,7 @@
                     <table class="table">
                       <tr>
                         <th style="width:50%">G.Total</th>
-                        <td> <input type="text" class="total" value="{{ $total }}" readonly></td>
+                        <td> <input type="text" name="total" class="total" value="{{ $total }}" readonly></td>
                       </tr>
                       <tr>
                         <th>Paid</th>

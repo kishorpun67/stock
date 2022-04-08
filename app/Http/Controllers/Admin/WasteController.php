@@ -91,9 +91,10 @@ class WasteController extends Controller
     public function wasteReport()
     {
         $waste = Waste::get();
+        Session::flash('page', 'waste_report');
         return view('admin.waste.waste_report',compact('waste'));
     }
-
+    
 
 
     public function deleteWaste($id)

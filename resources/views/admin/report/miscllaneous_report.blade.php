@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Catelogues</h1>
+            <h1>Miscellaneous Report</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Catelogues</li>
+              <li class="breadcrumb-item active">Miscellaneous Report</li>
             </ol>
           </div>
         </div>
@@ -33,7 +33,6 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Miscellaneous</h3>
-             <a href="{{route('admin.add.edit.miscellaneous')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Miscellaneous</a>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
@@ -45,10 +44,16 @@
                   <th>Water Amount</th> 
                   <th>Water Uses</th> 
                   <th>Consumption Bill</th> 
-                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1;
+                    $electricity_uses = 0;
+                    $interuses = 0;
+                    $water_amount = 0;
+                    $water_uses = 0;
+                    $consumption_bill=0;
+                    ?>
                @forelse($miscellaneous as $data)
                   <td>{{$data->id}}</td>
                   <td>Rs.{{$data->electricity_uses}}</td>
@@ -56,17 +61,28 @@
                   <td>{{$data->water_amount}}</td>
                   <td>{{$data->water_uses}}.ltr</td>
                   <td>Rs.{{$data->consumption_bill}}</td>
-    
-                   <td>
-                    <a href="{{route('admin.add.edit.miscellaneous', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="miscellaneous"  rel="{{$data->id}}" style="display:inline;">
-                      <i class="fa fa-trash fa-" aria-hidden="true" ></i>
-                    </a>
-                   </td>
+                 
                 </tr>
+                <?php $i++;
+                        $electricity_uses = $electricity_uses + $data->electricity_uses;
+                        $interuses = $interuses + $data->interuses;
+                        $water_amount = $water_amount + $data->water_amount;
+                        $water_uses = $water_uses + $data->water_uses;
+                        $consumption_bill=$consumption_bill + $data->consumption_bill;
+
+                        ?>
                 @empty
                 <p>No Data</p>
                 @endforelse
+                <tr>
+                  <td><strong>Total</strong></td>
+                    <td><strong>{{$electricity_uses}}</strong></td>
+                    <td><strong>{{$interuses}}</strong></td>
+                    <td><strong>{{$water_amount}}</strong></td>
+                    <td><strong>{{$water_uses}}</strong></td>
+                    <td><strong>{{$consumption_bill}}</strong></td>
+
+                </tr>
                 </tbody>
               </table>
             </div>

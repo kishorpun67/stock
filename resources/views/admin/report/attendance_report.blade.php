@@ -32,42 +32,45 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Suppler Deu Payments</h3>
+                <h3 class="card-title">Attendance Report</h3>
                {{-- <a href="{{route('admin.add.edit.attendance')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Attendance</a> --}}
               </div>
               <div class="card-body">
-                <table id="categorie" class="table table-bordered table-striped  text-center">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                    <th>Paid</th>
-                    <th>Due</th>
-                    <th>Action</th>
-                
-                    {{-- <th>Deu</th>
-                    <th>Total</th> --}}
-                  </tr>
-                  </thead>
-                  <tbody>
-                 @forelse($supplier as $data)
-                    <td>{{$data->id}}</td>
-                    <td>@if (!empty($data->supplierName->name))
-                      {{$data->supplierName->name}}
+                <table id="categories" class="table table-bordered table-striped  text-center">
+                    <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Employee</th>
+                      <th>In Time</th>
+                      <th>Out Time</th>
+                      <th>In Date</th>
+                      <th>Out Date</th>
+                      <th>Total Work Hour</th>
+                     
+                    </tr>
+                    </thead>
+                    <tbody>
+                   @forelse($attendance as $data)
+                   <td>{{$data->id}}</td>
+                   <td>@if (!empty($data->admin->name))
+                    {{$data->admin->name}}
                     @endif</td>
-                    <td>{{$data->date}}</td>
-                    <td>{{$data->total}}</td>
-                    <td>{{$data->paid}}</td>
-                    <td>{{$data->due}}</td>
-                    <td> <a href="{{route('admin.add.edit.purchase', $data->id)}}">Payment </a></td>
-                  </tr>
-                  @empty
-                  <p>No Data</p>
-                  @endforelse
-                  </tbody>
-                </table>
+                   <td>{{$data->in_date}}</td>
+                    <td>{{$data->in_time}}</td>
+                     <td>{{$data->out_date}}</td>
+                      <td>{{$data->out_time}}</td>
+                      <td><?php 
+                           $intime = (int)$data->out_time -(int)$data->in_time;
+                           $string = abs($intime);
+                           echo strval($string);
+                      ?>: hour</td>
+                    
+                    </tr>
+                    @empty
+                    <p>No Data</p>
+                    @endforelse
+                    </tbody>
+                  </table>
               </div>
             </div>
           </div>
@@ -79,7 +82,7 @@
 @section('script')
 <script>
   $(function () {
-    $("#categorie").DataTable();
+    $("#categories").DataTable();
   });
 </script>
 @endsection

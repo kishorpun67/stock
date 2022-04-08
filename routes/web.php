@@ -184,7 +184,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('supplier', 'SupplierController@Supplier')->name('supplier');
             Route::match(['get', 'post'], 'add-edit-supplier/{id?}', 'SupplierController@addEditSupplier')->name('add.edit.supplier');
             Route::get('delete-supplier/{id?}', 'SupplierController@deleteSupplier')->name('delete.supplier');
-
             //kishor i am ending route here.
             Route::get('waste', 'WasteController@Waste')->name('waste');
             Route::match(['get', 'post'], 'add-edit-waste/{id?}', 'WasteController@addEditWaste')->name('add.edit.waste');
@@ -290,14 +289,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             //ROUTES FOR REPORTS 
 
             Route::get('waste-report','WasteController@wasteReport')->name('waste.report');
-            Route::get('purchase-report','PurchaseController@purchaseReport')->name('purchase.report');
-            Route::get('attendance-report','AttendanceController@attendanceReport')->name('attendance.report');
             Route::get('customer-report','CustomerController@customerReport')->name('customer.report');
 
             //Route for stock reports
             Route::get('stock-report','IngredientItemsController@stockReport')->name('stock.report');
-
-
 
             //ajax purchase routes
             Route::post('delete-purchase-table','PurchaseController@deletePurchaseCart')->name('delete.purchase.table');
@@ -307,29 +302,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             //ajax food menu routes
             Route::post('delete-foodMenu-table','FoodMenuController@deletefoodMenuTable')->name('delete.foodMenu.table');
             Route::post('ajax-foodMenu-table', 'FoodMenuController@ajaxfoodMenuTable');
-
-
-                        
-            
-            // Route::get('sale-innovice/{id}', 'SaleController@saleInnovice')->name('sale.innovice');
-
             
 
-            //kishor i am ending route here.
-            Route::get('waiter', 'WaiterController@Waiter')->name('waiter');
-            Route::match(['get', 'post'], 'add-edit-waiter/{id?}', 'WaiterController@addEditWaiter')->name('add.edit.waiter');
-            Route::get('delete-waiter/{id?}', 'WaiterController@deleteWaiter')->name('delete.waiter');
+            // route for report 
+            Route::get('admin-daily-summary-report', 'ReportController@dailySummaryReport')->name('daily.summary.report');
+            Route::get('purchase-report','ReportController@purchaseReport')->name('purchase.report');
+            Route::get('attendance-report','ReportController@attendanceReport')->name('attendance.report');
+            Route::get('sale-report','ReportController@saleReport')->name('sale.report');
+            Route::get('miscellaneous-report','ReportController@miscellaneousReport')->name('miscellaneous.report');
 
-            //kishor i am ending route here.
-            Route::get('order', 'OrderController@Order')->name('order');
-            Route::match(['get', 'post'], 'add-edit-order/{id?}', 'OrderController@addEditOrder')->name('add.edit.order');
-            Route::get('delete-order/{id?}', 'OrderController@deleteOrder')->name('delete.order');
 
-            //kishor i am ending route here.
-            // Route::get('user', 'UserController@User')->name('user');
-            // Route::match(['get', 'post'], 'add-edit-user/{id?}', 'UserController@addEditUser')->name('add.edit.user');
-            // Route::get('delete-user/{id?}', 'UserController@deleteUser')->name('delete.user');
-            //kishor i am ending route here.
 
             Route::get('payment', 'PaymentController@payment')->name('payment');
             Route::post('add-payment', 'PaymentController@add')->name('add.payment');
