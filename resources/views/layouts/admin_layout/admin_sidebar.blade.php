@@ -487,7 +487,7 @@
           <li class="nav-item">
             <a href="{{route('admin.view.supplier.deu.payments')}}" class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
-              <p>Supplier Deu Payments</p>
+              <p>Supplier Due Payments</p>
             </a>
           </li>
         </ul>
@@ -501,7 +501,7 @@
           <li class="nav-item">
             <a href="{{route('admin.view.customer.deu.receives')}}" class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
-              <p>Customer Deu Receives</p>
+              <p>Customer Due Receives</p>
             </a>
           </li>
         </ul>
@@ -548,6 +548,37 @@
             </a>
           </li>
         </ul>
+
+        
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="bank")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.bank')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Bank</p>
+            </a>
+          </li>
+        </ul>
+
+           
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="cashHand")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.cashHand')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Cash In Hand</p>
+            </a>
+          </li>
+        </ul>
+
 
        
        

@@ -260,11 +260,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get', 'post'], 'add-edit-taxVat/{id?}', 'TaxVatController@addEditTaxVat')->name('add.edit.taxVat');
             Route::get('delete-taxVat/{id?}', 'TaxVatController@deleteTaxVat')->name('delete.taxVat');
 
-            //routes for tax and vat
+            //routes for bank Deposit
             Route::get('bankDeposit', 'BankDepositController@bankDeposit')->name('bankDeposit');
             Route::match(['get', 'post'], 'add-edit-bankDeposit/{id?}', 'BankDepositController@addEditBankDeposit')->name('add.edit.bankDeposit');
             Route::get('delete-bankDeposit/{id?}', 'BankDepositController@deleteBankDeposit')->name('delete.bankDeposit');
    
+            //routes for bank 
+            Route::get('bank', 'BankController@bank')->name('bank');
+            Route::match(['get', 'post'], 'add-edit-bank/{id?}', 'BankController@addEditBank')->name('add.edit.bank');
+            Route::get('delete-bank/{id?}', 'BankController@deleteBank')->name('delete.bank');
+
+            //routes for Cash hand
+            Route::get('cashHand', 'CashHandController@cashHand')->name('cashHand');
+            Route::match(['get', 'post'], 'add-edit-cashHand/{id?}', 'CashHandController@addEditCashHand')->name('add.edit.cashHand');
+            Route::get('delete-cashHand/{id?}', 'CashHandController@deleteCashHand')->name('delete.cashHand');
+
            //routes for salary
             Route::get('view-salary','AttendanceController@viewSalary')->name('view.salary');
             Route::get('view-supplier-deu-payment','SupplierController@viewSupplierDeuPayment')->name('view.supplier.deu.payments');
