@@ -3,14 +3,12 @@
 <?php 
 use App\OrderDetail;
 use App\User;
-USE App\Admin\Post;
 if(auth('admin')->user()->parent_id > 0){
       $admin_id = auth('admin')->user()->parent_id;
   }else{
       $admin_id = auth('admin')->user()->id;
   }
 
-$posts = Post::where('admin_id', $admin_id)->count();
 // $user = User::count();
 // $total_order = OrderDetail::where('admin_id', $admin_id)->sum('quantity');
 
@@ -49,7 +47,7 @@ $posts = Post::where('admin_id', $admin_id)->count();
             <div class="small-box bg-info">
               <div class="inner">
                 <h3>Post</h3>
-                <p>{{number_format($posts)}}</p>
+                <p></p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>

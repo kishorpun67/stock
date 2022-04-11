@@ -96,13 +96,7 @@ class AttendanceController extends Controller
     }
 
     
-    public function attendanceReport()
-    {
-        $attendance = Attendance::get();
-        Session::flash('page', 'salary');
-        return view('admin.attendance.attendance_report',compact('attendance'));
-    }
-
+    
 
     public function deleteAttendance($id)
     {

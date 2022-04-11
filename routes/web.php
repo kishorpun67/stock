@@ -174,7 +174,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get', 'post'], 'add-edit-supplier/{id?}', 'SupplierController@addEditSupplier')->name('add.edit.supplier');
             Route::get('delete-supplier/{id?}', 'SupplierController@deleteSupplier')->name('delete.supplier');
 
+
                //routes for waste
+
+            //kishor i am ending route here.
+
             Route::get('waste', 'WasteController@Waste')->name('waste');
             Route::match(['get', 'post'], 'add-edit-waste/{id?}', 'WasteController@addEditWaste')->name('add.edit.waste');
             Route::get('delete-waste/{id?}', 'WasteController@deleteWaste')->name('delete.waste');
@@ -285,14 +289,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             //ROUTES FOR REPORTS 
 
             Route::get('waste-report','WasteController@wasteReport')->name('waste.report');
-            Route::get('purchase-report','PurchaseController@purchaseReport')->name('purchase.report');
-            Route::get('attendance-report','AttendanceController@attendanceReport')->name('attendance.report');
             Route::get('customer-report','CustomerController@customerReport')->name('customer.report');
 
             //Route for stock reports
             Route::get('stock-report','IngredientItemsController@stockReport')->name('stock.report');
-
-
 
             //ajax purchase routes
             Route::post('delete-purchase-table','PurchaseController@deletePurchaseCart')->name('delete.purchase.table');
@@ -302,6 +302,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             //ajax food menu routes
             Route::post('delete-foodMenu-table','FoodMenuController@deletefoodMenuTable')->name('delete.foodMenu.table');
             Route::post('ajax-foodMenu-table', 'FoodMenuController@ajaxfoodMenuTable');
+
 
                //routes for waiter
             Route::get('waiter', 'WaiterController@Waiter')->name('waiter');
@@ -314,6 +315,19 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('delete-order/{id?}', 'OrderController@deleteOrder')->name('delete.order');
 
                //routes payment
+
+            
+
+            // route for report 
+            Route::get('admin-daily-summary-report', 'ReportController@dailySummaryReport')->name('daily.summary.report');
+            Route::get('purchase-report','ReportController@purchaseReport')->name('purchase.report');
+            Route::get('attendance-report','ReportController@attendanceReport')->name('attendance.report');
+            Route::get('sale-report','ReportController@saleReport')->name('sale.report');
+            Route::get('miscellaneous-report','ReportController@miscellaneousReport')->name('miscellaneous.report');
+
+
+
+
             Route::get('payment', 'PaymentController@payment')->name('payment');
             Route::post('add-payment', 'PaymentController@add')->name('add.payment');
             Route::post('edit-payment/{id}', 'PaymentController@edit')->name('edit.payment');

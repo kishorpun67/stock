@@ -85,7 +85,11 @@ class SupplierController extends Controller
 
     public function viewSupplierDeuPayment()
     {
+<<<<<<< HEAD
         return$supplier = Purchase::get();
+=======
+        $supplier = Purchase::with('supplierName')->where('due', '!=', "")->get();
+>>>>>>> e7294005af2b8ca416d11d5a73608af2414ce708
         return view('admin.supplierDeuPayments.view_supplierDeuPayments',compact('supplier'));
     }
 
