@@ -57,7 +57,7 @@
                     <td>@if (!empty($data->supplierName->name))
                       {{$data->supplierName->name}}
                     @endif</td>
-                    <td>{{$data->date}}</td>
+                    <td>{{$data->created_at}}</td>
                     <td>{{$data->total}}</td>
                     <td>{{$data->paid}}</td>
                     <td>{{$data->due}}</td>

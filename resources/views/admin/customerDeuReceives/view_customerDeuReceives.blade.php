@@ -32,30 +32,51 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Customer Report</h3>
-               <!-- {{-- <a href="{{route('admin.add.edit.attendance')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Attendance</a> --}} -->
+                <h3 class="card-title">Customer Due Payments</h3>
               </div>
               <div class="card-body">
-                <table id="categories" class="table table-bordered table-striped  text-center">
+                <table id="test" class="table table-bordered table-striped  text-center">
                   <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Refrence No</th>
-                    <th>Customer Name</th>
-                    <th>Note</th>
-                   
+                    <th>SN</th>
+                    <th>Reference NO</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Discount</th>
+                    <th>Paid</th>
+                    <th>Due</th>
                   </tr>
                   </thead>
                   <tbody>
-                 @forelse($customer as $data)
-                    <td>{{$data->id}}</td>
-                    <td>{{$data->gst_number}}</td>
-                    <td>{{$data->customer_name}}</td>
-                    <td>{{$data->description}}</td>
-                  </tr>
-                  @empty
-                  <p>No Data</p>
-                  @endforelse
+                    <?php $i = 1;
+                    $total = 0;
+                    $discount = 0;
+                    $paid = 0;
+                    $due = 0;
+                    ?>
+                    @foreach ($customerDueOrder as $item)
+                    <tr>
+                      <td>{{$i}}</td>
+                      <td>{{$item->code}}</td>
+                      <td>
+                        @if (!empty($item->customer->customer_name))
+                        {{$item->customer->customer_name}}
+                        @else
+                        Walk-In Customer
+                        @endif
+                      </td>
+                      <td>{{$item->total}}</td>
+                      <td>{{$item->discount}}</td>
+                      <td>{{$item->paid}}</td>
+                      <td>{{$item->due}}</td>
+                    </tr>
+                        <?php $i++;
+                        $total = $total + $item->total;
+                        $discount = $discount + $item->discount;
+                        $paid = $paid + $item->paid;
+                        $due = $due + $item->due;
+                        ?>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

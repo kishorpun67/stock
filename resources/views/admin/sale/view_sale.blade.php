@@ -32,39 +32,55 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Sales</h3>
-             <a href="{{route('admin.add.edit.sale')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Sale</a>
+              <h3 class="card-title">Sale</h3>
             </div>
             <div class="card-body">
               <table id="test" class="table table-bordered table-striped  text-center">
                 <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Table No.</th>
-                  <th>Waiter</th>
+                  <th>SN</th>
+                  <th>Reference NO</th>
                   <th>Customer</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Total</th>
+                  <th>Discount</th>
+                  <th>Paid</th>
+                  <th>Due</th>
+                  <td>Action</td>
                 </tr>
                 </thead>
                 <tbody>
-               @forelse($sale as $data)
-                  <td>{{$data->id}}</td>
-                  <td>Kishor</td>
-                  <td>Kishor</td>
-                  <td>{{$data->number_of_customer}}</td>
-                  <td>{{$data->status}}</td>
-                   <td>
-                    <a href="{{route('admin.add.edit.sale', $data->id)}}"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;
-                    <a href="{{route('admin.sale.innovice', $data->id)}}"><i class="fas fa-file-invoice"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="sale"  rel="{{$data->id}}" style="display:inline;">
+                  <?php $i = 1;
+                  $total = 0;
+                  $discount = 0;
+                  $paid = 0;
+                  $due = 0;
+                  ?>
+                  @foreach ($sale as $item)
+                  <tr>
+                    <td>{{$i}}</td>
+                    <td>{{$item->code}}</td>
+                    <td>
+                      @if (!empty($item->customer->customer_name))
+                      {{$item->customer->customer_name}}
+                      @else
+                      Walk-In Customer
+                      @endif
+                    </td>
+                    <td>{{$item->total}}</td>
+                    <td>{{$item->discount}}</td>
+                    <td>{{$item->paid}}</td>
+                    <td>{{$item->due}}</td>
+                    <td><a href="javascript:" class="delete_form" record="sale"  rel="{{$item->id}}" style="display:inline;">
                       <i class="fa fa-trash fa-" aria-hidden="true" ></i>
-                    </a>
-                   </td>
-                </tr>
-                @empty
-                <p>No Data</p>
-                @endforelse
+                    </a></td>
+                  </tr>
+                      <?php $i++;
+                      $total = $total + $item->total;
+                      $discount = $discount + $item->discount;
+                      $paid = $paid + $item->paid;
+                      $due = $due + $item->due;
+                      ?>
+                  @endforeach
                 </tbody>
               </table>
             </div>

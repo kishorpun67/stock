@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Customer;
 use Session;
-
+use Carbon\Carbon;
+use App\Order;
 class CustomerController extends Controller
 {
     public function customer()
@@ -95,8 +96,8 @@ class CustomerController extends Controller
 
     public function viewCustomerDeuReceives()
     {
-        $customer = Customer::get();
-        return view('admin.customerDeuReceives.view_customerDeuReceives',compact('customer'));
+        $customerDueOrder = Order::with('customer')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->where('due', "!=", "")->get();
+        return view('admin.customerDeuReceives.view_customerDeuReceives',compact('customerDueOrder'));
     }
 
     public function customerReport()
