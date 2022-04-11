@@ -113,13 +113,8 @@
               </li>
             </ul>
           </li>
-          @if(Session::get('page')=="ingredientCategory" || Session::get('page')=="ingredientUnit" || 
-          Session::get('page')=="ingredientItem" || Session::get('page')=="foodCategory" || Session::get('page')=="foodMenu" 
-          || Session::get('page')=="purchase" || Session::get('page')=="customer" || Session::get('page')=="supplier" || Session::get('page')=="waste"
-          || Session::get('page')=="table" || Session::get('page')=="stock" || Session::get('page')=="paymentMethod" || Session::get('page')=="expense"
-          || Session::get('page')=="sale" || Session::get('page')=="stock" || Session::get('page')=="paymentMethod" || Session::get('page')=="expense"
-         
-          
+          @if(Session::get('page')=="ingredientCategory" || Session::get('page')=="ingredientUnit" || Session::get('page')=="ingredientItem" || Session::get('page')=="foodCategory" || Session::get('page')=="foodMenu" || Session::get('page')=="purchase" || Session::get('page')=="customer" || Session::get('page')=="supplier" || Session::get('page')=="waste"|| Session::get('page')=="table" || Session::get('page')=="stock" || Session::get('page')=="paymentMethod" || Session::get('page')=="expense"|| Session::get('page')=="sale" || Session::get('page')=="stock" || Session::get('page')=="paymentMethod" || Session::get('page')=="expense"
+
           )
           <?php $active = "active";
           $menuOpen="menu-open"; ?>
@@ -179,6 +174,7 @@
               </a>
             </li>
           </ul>
+          
           <ul class="nav nav-treeview">
             @if(Session::get('page')=="foodCategory")
             <?php $active = "active"; ?>
@@ -188,7 +184,7 @@
             <li class="nav-item">
               <a href="{{route('admin.foodCategory')}}" class="nav-link {{$active}}">
                 <i class="far fa-circle nav-icon"></i>
-                <p> Food Menu Category</p>
+                <p> Food Category</p>
               </a>
             </li>
           </ul>
@@ -439,11 +435,189 @@
           </li>
         </ul>
        </li>
+<<<<<<< HEAD
+
+
+       
+       @if(Session::get('page')=="supplierDeuPayment" || Session::get('page')=="customerDeuReceives" || Session::get('page')=="miscellaneous")
+        <?php $active = "active";
+ 
+        $menuOpen="menu-open"; ?>
+         @else
+         <?php $active = "";
+         $menuOpen=""; ?>
+       @endif
+       <li class="nav-item has-treeview {{$menuOpen ??''}} ">
+         <a href="#" class="nav-link {{$active}}">
+
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+           <p>
+            Accounts
+             <i class="fas fa-angle-left right"></i>
+             <span class="right badge badge-danger"></span>
+           </p>
+         </a>
+
+         @if(Session::get('page')=="setting")
+        <?php $active = "active"; ?>
+         @else
+         <?php $active = ""; ?>
+         @endif
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="supplierDeuPayment")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.view.supplier.deu.payments')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Supplier Due Payments</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="customerDeuReceives")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.view.customer.deu.receives')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Customer Due Receives</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="miscellaneous")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.miscellaneous')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Miscellaneous</p>
+            </a>
+          </li>
+        </ul>
+
+         
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="taxVat")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.taxVat')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Tax And Vat</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="bankDeposit")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.bankDeposit')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Deposit Into Bank</p>
+            </a>
+          </li>
+        </ul>
+
+        
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="bank")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.bank')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Bank</p>
+            </a>
+          </li>
+        </ul>
+
+           
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="cashHand")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.cashHand')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Cash In Hand</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="liabilities")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.liabilities')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Liabilities</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="income")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.income')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Income</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="assets")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.assets')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Assets</p>
+            </a>
+          </li>
+        </ul>
+
+
+       
+       
+        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
+=======
         @if(Session::get('page')=="pl_account" || Session::get('page')=="daily_sale_report" || Session::get('page')=="waste_report" || Session::get('page')=="purchase_report"
         || Session::get('page')=="attendance_report" || Session::get('page')=="sale_report" || Session::get('page')=="miscellaneous_report"
         || Session::get('page')=="stock_report" || Session::get('page')=="consumption_report" || Session::get('page')=="low_inventory_report"
         || Session::get('page')=="leave_report" || Session::get('page')=="salary_report" || Session::get('page')=="tax_report")
 
+>>>>>>> a5c6ca41e0e4e410f01f6291d5cd6b69c51dbec8
         <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
@@ -452,7 +626,11 @@
        @endif
        <li class="nav-item has-treeview {{$menuOpen ??''}} ">
          <a href="#" class="nav-link {{$active}}">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+           <p>
+
           <i class="fa fas-analytics"></i>          <p>
+
             Reports
              <i class="fas fa-angle-left right"></i>
              <span class="right badge badge-danger"></span>

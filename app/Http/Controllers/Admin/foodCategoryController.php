@@ -12,7 +12,7 @@ class FoodCategoryController extends Controller
     public function foodCategories()
     {
         $foodCategories = FoodCategory::get();
-        Session::flash('page', 'FoodCategory');
+        Session::flash('page', 'foodCategory');
         return view('admin.foodCategories.view_food_categories', compact('foodCategories'));
     }
 

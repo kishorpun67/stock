@@ -19,7 +19,7 @@ class FoodMenuController extends Controller
     public function foodMenus()
     {
         $foodMenus = FoodMenu::with('foodCategory','ingredientItem')->get();
-        Session::flash('page', 'FoodMenu');
+        Session::flash('page', 'foodMenu');
         return view('admin.foodMenus.view_food_menus', compact('foodMenus'));
     }
 

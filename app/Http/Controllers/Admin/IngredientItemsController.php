@@ -88,6 +88,7 @@ class IngredientItemsController extends Controller
     public function stockReport()
     {
         $ingredientItem = IngredientItem::get();
+        Session::flash('page', 'stock');
         return view('admin.stock.stock_report',compact('ingredientItem'));
     }
 
