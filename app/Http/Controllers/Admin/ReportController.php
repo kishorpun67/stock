@@ -10,7 +10,13 @@ use App\Order;
 use App\Waste;
 use App\Expense;
 use App\Attendance;
+use App\Consumption;
 use App\Miscellaneous;
+use App\OrderDetail;
+use App\IngredientItem;
+use App\Leave;
+use App\Sale;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -42,8 +48,10 @@ class ReportController extends Controller
     public function saleReport()
     {
         $sales = Order::with('customer','ordrDetails')->get();
+        $customerDueOrder = Order::with('customer')->where('due', "!=", "")->get();
+
         Session::flash('page', 'sale_report');
-        return view('admin.report.sale_report',compact('sales'));
+        return view('admin.report.sale_report',compact('sales', 'customerDueOrder'));
     }
 
     public function miscellaneousReport()
@@ -52,5 +60,53 @@ class ReportController extends Controller
         Session::flash('page', 'miscellaneous_report');
         return view('admin.report.miscllaneous_report',compact('miscellaneous'));
     }
+    public function stockReport()
+    {
+       $stocks = IngredientItem::with('ingredientCategory')->get();
+        Session::flash('page', 'stock_report');
+        return view('admin.report.stock_report', compact('stocks'));
+    }
+    public function consumptionReport()
+    {
+         $consumption = Consumption::get();
+        Session::flash('page', 'consumption_report');
+        return view('admin.report.consumption_report', compact('consumption'));
+    }
 
+    public function lowInventoryReport()
+    {
+       $stocks = IngredientItem::with('ingredientCategory')->where('alert_qty','<=',2)->get();
+        Session::flash('page', 'low_inventory_report');
+        return view('admin.report.low_inventory_report', compact('stocks'));
+        
+    }
+    public function leaveReport()
+    {
+        $leave = Leave::with('employee')->get();
+        Session::flash('page', 'leave_report');
+        return view('admin.report.leave_report', compact('leave'));
+    }
+    public function salaryReport()
+    {
+        $salary = Attendance::with('admin')->get();
+        Session::flash('page', 'salary_report');
+        return view('admin.report.salary_report',compact('salary'));
+    }
+    public function taxReport()
+    {
+        $tax = Order::get();
+        Session::flash('page', 'tax_report');
+        return view('admin.report.tax_report',compact('tax'));
+    }
+    
+    public function plAccountReport()
+    {
+        $current_day_sales = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->sum('total');
+    	$last_day_sales1 = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->subDay(1))->sum('total');
+        $current_day_purchase = Purchase::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->sum('total');
+    	$last_day_purchase1 = Purchase::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->subDay(1))->sum('total');
+        Session::flash('page', 'pl_account');
+        return view('admin.report.pl_account',compact('current_day_sales', 'last_day_sales1', 'current_day_purchase', 'last_day_purchase1'));
+    }
+    
 }

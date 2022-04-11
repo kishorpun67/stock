@@ -93,7 +93,7 @@
   </div>
   <div class="cart-overview flex-1 my-3">
   
-
+<input type="hidden" name="total"  value="{{$total_amount}}">
     <h5>Payment Method</h5>
       <label>
     <input type="radio" value="Bank transfer" name="payment" checked>
