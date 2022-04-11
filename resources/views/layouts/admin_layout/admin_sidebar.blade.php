@@ -415,7 +415,7 @@
        
        @if(Session::get('page')=="supplierDeuPayment" || Session::get('page')=="customerDeuReceives" || Session::get('page')=="miscellaneous")
         <?php $active = "active";
-
+ 
         $menuOpen="menu-open"; ?>
          @else
          <?php $active = "";
@@ -535,6 +535,48 @@
             <a href="{{route('admin.cashHand')}}" class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
               <p>Cash In Hand</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="liabilities")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.liabilities')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Liabilities</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="income")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.income')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Income</p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="assets")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.assets')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Assets</p>
             </a>
           </li>
         </ul>

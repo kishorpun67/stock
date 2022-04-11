@@ -274,10 +274,27 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get', 'post'], 'add-edit-bank/{id?}', 'BankController@addEditBank')->name('add.edit.bank');
             Route::get('delete-bank/{id?}', 'BankController@deleteBank')->name('delete.bank');
 
+
             //routes for Cash hand
             Route::get('cashHand', 'CashHandController@cashHand')->name('cashHand');
             Route::match(['get', 'post'], 'add-edit-cashHand/{id?}', 'CashHandController@addEditCashHand')->name('add.edit.cashHand');
             Route::get('delete-cashHand/{id?}', 'CashHandController@deleteCashHand')->name('delete.cashHand');
+
+            //routes for liabilities
+            Route::get('liabilities', 'LiabilitiesController@liabilities')->name('liabilities');
+            Route::match(['get', 'post'], 'add-edit-liabilities/{id?}', 'LiabilitiesController@addEditLiabilities')->name('add.edit.liabilities');
+            Route::get('delete-liabilities/{id?}', 'LiabilitiesController@deleteLiabilities')->name('delete.liabilities');
+
+            //routes for income
+            Route::get('income', 'IncomeController@income')->name('income');
+            Route::match(['get', 'post'], 'add-edit-income/{id?}', 'IncomeController@addEditIncome')->name('add.edit.income');
+            Route::get('delete-income/{id?}', 'IncomeController@deleteIncome')->name('delete.income');
+
+            //routes for assets
+            Route::get('assets', 'AssetsController@assets')->name('assets');
+            Route::match(['get', 'post'], 'add-edit-assets/{id?}', 'AssetsController@addEditAssets')->name('add.edit.assets');
+            Route::get('delete-assets/{id?}', 'AssetsController@deleteAssets')->name('delete.assets');
+
 
            //routes for salary
             Route::get('view-salary','AttendanceController@viewSalary')->name('view.salary');
