@@ -33,6 +33,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Task</h3>
+             <a href="{{route('admin.add.edit.task')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Task</a>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">

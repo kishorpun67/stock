@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Catelogues</h1>
+            <h1>Leave Report</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Catelogues</li>
+              <li class="breadcrumb-item active">Leave Report</li>
             </ol>
           </div>
         </div>
@@ -32,31 +32,32 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Task</h3>
+              <h3 class="card-title">Leave Report</h3>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Started Date</th>
-                  <th>Task</th>   
-                  <th>Status</th> 
-                  <th>Action</th>    
+                  <th>Employee</th>
+                  <th>Date</th>
+                  <th>Subject</th>
+                  <th>Days</th>
+                  <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
-               @forelse($task as $data)
+               @forelse($leave as $data)
                   <td>{{$data->id}}</td>
-                  <td>{{$data->started}}</td>
-                  <td>{{$data->project}}</td>
+                  <td>@if (!empty($data->employee->name))
+                    {{$data->employee->name}}
+                    @endif</td>
+                  <td>{{$data->date}}</td>
+                  <td>{{$data->subject}}</td>
+                  <td>{{$data->days}}</td>
+
                   <td>{{$data->status}}</td>
-                   <td>
-                    <a href="{{route('admin.add.edit.task', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="task"  rel="{{$data->id}}" style="display:inline;">
-                      <i class="fa fa-trash fa-" aria-hidden="true" ></i>
-                    </a>
-                   </td>
+                   
                 </tr>
                 @empty
                 <p>No Data</p>

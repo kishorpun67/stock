@@ -145,7 +145,7 @@ class SaleController extends Controller
         $new->customer_id = $data['customer_id'];
         $new->table_id = $data['table_id'];
         $new->payment = $data['payment'];
-
+        $new->total = $data['total'];
         $new->number_of_customer =4;
         $new->status = "New";
         $new->save();

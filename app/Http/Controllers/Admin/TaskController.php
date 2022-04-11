@@ -9,6 +9,12 @@ use Session;
 
 class TaskController extends Controller
 {
+    public function viewTask()
+    {
+        $task = Task::get();
+        Session::flash('page', 'admin_task_view');
+        return view('admin.task.admin_task_view', compact('task'));
+    }
     public function Task()
     {
         $task = Task::get();

@@ -15,4 +15,5 @@ class IngredientItem extends Model
     {
         return $this->belongsTo('App\IngredientUnit', 'ingredient_id');
     }
+   
 }

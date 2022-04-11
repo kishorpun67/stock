@@ -244,7 +244,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get', 'post'], 'add-edit-attendance/{id?}', 'AttendanceController@addEditAttendance')->name('add.edit.attendance');
             Route::get('delete-attendance/{id?}', 'AttendanceController@deleteAttendance')->name('delete.attendance');
 
+<<<<<<< HEAD
              //routes for task
+=======
+            //kishor i am ending route here.
+            //kishor i am ending route here.
+            Route::get('task-view', 'TaskController@viewTask')->name('view.task');
+>>>>>>> a5c6ca41e0e4e410f01f6291d5cd6b69c51dbec8
             Route::get('task', 'TaskController@Task')->name('task');
             Route::match(['get', 'post'], 'add-edit-task/{id?}', 'TaskController@addEditTask')->name('add.edit.task');
             Route::get('delete-task/{id?}', 'TaskController@deleteTask')->name('delete.task');
@@ -336,11 +342,25 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             
 
             // route for report 
+            Route::get('pl-account-report','ReportController@plAccountReport')->name('pl.account.report');
             Route::get('admin-daily-summary-report', 'ReportController@dailySummaryReport')->name('daily.summary.report');
             Route::get('purchase-report','ReportController@purchaseReport')->name('purchase.report');
             Route::get('attendance-report','ReportController@attendanceReport')->name('attendance.report');
             Route::get('sale-report','ReportController@saleReport')->name('sale.report');
             Route::get('miscellaneous-report','ReportController@miscellaneousReport')->name('miscellaneous.report');
+            Route::get('stock-report','ReportController@stockReport')->name('stock.report');
+            Route::get('consumption-report','ReportController@consumptionReport')->name('consumption.report');
+            Route::get('low-inventory-report','ReportController@lowInventoryReport')->name('low.inventory.report');
+            Route::get('leave-report','ReportController@leaveReport')->name('leave.report');
+            Route::get('salary-report','ReportController@salaryReport')->name('salary.report');
+            Route::get('tax-report','ReportController@taxReport')->name('tax.report');
+
+
+
+
+
+
+       
 
 
 
