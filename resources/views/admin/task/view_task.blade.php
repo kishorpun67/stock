@@ -39,23 +39,25 @@
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Started Date</th>
-                  <th>Task</th>   
-                  <th>Status</th> 
+                  <th>Task</th>
+                  <th>Start Date</th>   
+                  <th>End Date</th> 
+                  <th>Description</th>   
+                  <th>Status</th>    
                   <th>Action</th>    
+
                 </tr>
                 </thead>
                 <tbody>
                @forelse($task as $data)
                   <td>{{$data->id}}</td>
-                  <td>{{$data->started}}</td>
-                  <td>{{$data->project}}</td>
+                  <td>{{$data->task}}</td>
+                  <td>{{$data->start_date}}</td>
+                  <td>{{$data->end_date}}</td>
+                  <td>{{$data->description}}</td>
                   <td>{{$data->status}}</td>
                    <td>
-                    <a href="{{route('admin.add.edit.task', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="task"  rel="{{$data->id}}" style="display:inline;">
-                      <i class="fa fa-trash fa-" aria-hidden="true" ></i>
-                    </a>
+                    <a href="{{route('admin.update.task', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                    </td>
                 </tr>
                 @empty

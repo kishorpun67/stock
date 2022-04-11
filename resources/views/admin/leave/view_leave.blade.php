@@ -50,20 +50,56 @@
                 </thead>
                 <tbody>
                @forelse($leave as $data)
+               <tr>
                   <td>{{$data->id}}</td>
                   <td>{{$data->date}}</td>
                   <td>{{$data->subject}}</td>
                   <td>{{$data->days}}</td>
-                  <td><a href="{{asset('images/letter/'.$data->letter)}}"  download="">Download</a></td>
+                  <td><a href="{{asset('images/letter/'.$data->letter)}}"  ="">View</a></td>
 
                   <td>{{$data->status}}</td>
                    <td>
-                    <a href="{{route('admin.add.edit.leave', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:" data-toggle="modal" data-target="#myModal{{$data->id}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                     <a href="javascript:" class="delete_form" record="leave"  rel="{{$data->id}}" style="display:inline;">
                       <i class="fa fa-trash fa-" aria-hidden="true" ></i>
                     </a>
                    </td>
                 </tr>
+                
+                
+                <div class="modal fade" id="myModal{{$data->id}}">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <form  method="POST"   action="{{route('admin.update.leave',$data->id)}}"  enctype="multipart/form-data">
+                          @csrf
+                          <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="form-group">
+                                <label for="class">Status</label>
+                                <select name="status" id="" class="form-control">
+                                  <option value="New" @if (!empty($data->status) || $data->status == "New")
+                                          {{$data->status}}
+                                      @endif>New</option>
+                                  <option value="Rejected" @if (!empty($data->status) || $data->status == "Rejected")
+                                      {{$data->status}}
+                                  @endif>Rejected</option>
+                                  <option value="Approved" @if (!empty($data->status) || $data->status == "Approved")
+                                  {{$data->status}}
+                                    @endif>Approved</option>
+                                </select>
+                              </div>
+                          </div>
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                              <input type="submit" class="btn btn-success" value="Update">
+                          </div>
+                      </form>
+                    </div>
+                  </div>
+              </div>
                 @empty
                 <p>No Data</p>
                 @endforelse

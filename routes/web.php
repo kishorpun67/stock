@@ -264,6 +264,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('task-view', 'TaskController@viewTask')->name('view.task');
             Route::get('task', 'TaskController@Task')->name('task');
             Route::match(['get', 'post'], 'add-edit-task/{id?}', 'TaskController@addEditTask')->name('add.edit.task');
+            Route::match(['get', 'post'], 'update-task/{id?}', 'TaskController@updateTask')->name('update.task');
+
             Route::get('delete-task/{id?}', 'TaskController@deleteTask')->name('delete.task');
 
             //kishor i am ending route here.
@@ -271,6 +273,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
 
             Route::get('leave', 'LeaveController@Leave')->name('leave');
             Route::match(['get', 'post'], 'add-edit-leave/{id?}', 'LeaveController@addEditLeave')->name('add.edit.leave');
+            Route::match(['get', 'post'], 'update-leave/{id?}', 'LeaveController@updateLeave')->name('update.leave');
             Route::get('delete-leave/{id?}', 'LeaveController@deleteLeave')->name('delete.leave');
             
             //kishor i am ending route here.

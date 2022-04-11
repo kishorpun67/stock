@@ -76,8 +76,18 @@ class LeaveController extends Controller
             Session::flash('success_message', $message);
             return redirect('admin/leave');
         }
-        Session::flash('page', 'leave');
+        Session::flash('page', 'add_leave');
         return view('admin.leave.add_edit_leave', compact('title','button','leavedata'));
+    }   
+
+    public function updateLeave($id=null)
+    {
+        $leave = Leave::find($id);
+        $leave->status = request('status');
+        $leave->save();
+        Session::flash('success_message', 'Leave status has been update successfully');
+        return redirect()->back();
+
     }
 
     public function deleteLeave($id)

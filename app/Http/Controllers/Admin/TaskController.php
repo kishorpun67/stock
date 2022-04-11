@@ -41,17 +41,21 @@ class TaskController extends Controller
         if($request->isMethod('post')) {
             $data = $request->all();
         //dd($data);
-            if(empty($data['started'])){
+            if(empty($data['task'])){
                 return redirect()->back()->with('error_message', 'Started task is required !');
             }
             
-            if(empty($data['radio']))
+            if(empty($data['start_date']))
             {
-                $data['radio'] = "";
+                $data['start_date'] = "";
             }
-            if(empty($data['status']))
+            if(empty($data['end_date']))
             {
-                $data['status'] = "";
+                $data['end_date'] = "";
+            }
+            if(empty($data['description']))
+            {
+                $data['description'] = "";
             }
 
 
@@ -64,15 +68,42 @@ class TaskController extends Controller
             //     $data['parent_id'] = "";
             // }
             $task->admin_id = auth('admin')->user()->id;
-            $task->started = $data['started'];
-            $task->project = $data['project'];
+            $task->task = $data['task'];
+            $task->start_date = $data['start_date'];
+            $task->end_date = $data['end_date'];
+            $task->description = $data['description'];
+            $task->status = "New";
+            $task->save();
+            Session::flash('success_message', $message);
+            return redirect()->route('admin.view.task');
+        }
+        Session::flash('page', 'admin_task_view');
+        return view('admin.task.add_edit_task ', compact('title','button','taskdata'));
+    }
+    public function updateTask(Request $request, $id=null)
+    {
+       
+        $title = "Edit Task";
+        $button ="Update";
+        $taskdata = Task::where('admin_id',auth('admin')->user()->id)->where('id',$id)->first();
+        $taskdata= json_decode(json_encode($taskdata),true);
+        $task = Task::find($id);
+        $message = "Task has been updated sucessfully";
+        if($request->isMethod('post')) {
+            $data = $request->all();
+        //dd($data);
+         
+            if(empty($data['status']))
+            {
+                $data['status'] = "";
+            }
             $task->status = $data['status'];
             $task->save();
             Session::flash('success_message', $message);
             return redirect('admin/task');
         }
         Session::flash('page', 'task');
-        return view('admin.task.add_edit_task', compact('title','button','taskdata'));
+        return view('admin.task.update_task ', compact('title','button','taskdata'));
     }
 
     public function deleteTask($id)

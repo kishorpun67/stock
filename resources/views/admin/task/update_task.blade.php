@@ -54,7 +54,7 @@
           </div>
         </div>
         <form
-        @if(!empty($taskdata['id'])) action="{{route('admin.add.edit.task',$taskdata['id'])}}" @else action="{{route('admin.add.edit.task')}}" @endif
+        @if(!empty($taskdata['id'])) action="{{route('admin.update.task',$taskdata['id'])}}" @else action="{{route('admin.update.task')}}" @endif
         method="post" enctype="multipart/form-data">
         @csrf
           <div class="card-body">
@@ -62,7 +62,7 @@
               <div class="col-md-6">
                 <div class="fomr-group">
                   <label for="">Task</label><br>
-                  <input type="text" name="task" id="" class="form-control" 
+                  <input type="text" name="task" id="" readonly class="form-control" 
                   @if(!empty($taskdata['task']))
                   value= "{{$taskdata['task']}}"
                   @else value="{{old('task')}}"
@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group">
                   <label for="started">Start Date</label>
-                  <input type="date" class="form-control" name="start_date" id="start_date" placeholder="Enter table name"
+                  <input type="date" class="form-control" readonly name="start_date" id="start_date" placeholder="Enter table name"
                   @if(!empty($taskdata['start_date']))
                   value= "{{$taskdata['start_date']}}"
                   @else value="{{old('start_date')}}"
@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group">
                   <label for="started">End Date</label>
-                  <input type="date" class="form-control" name="end_date" id="end_date" placeholder="Enter table name"
+                  <input type="date" class="form-control" readonly name="end_date" id="end_date" placeholder="Enter table name"
                   @if(!empty($taskdata['end_date']))
                   value= "{{$taskdata['end_date']}}"
                   @else value="{{old('end_date')}}"
@@ -86,13 +86,30 @@
                 </div>
                 <div class="form-group">
                   <label for="">Description</label>
-                  <textarea name="description" id="" cols="30" rows="10" class="form-control">
+                  <p>
                     @if (!empty($taskdata['description']))
                         {{$taskdata['description']}}
                     @endif
 
-                  </textarea>
+                  </p>
 
+              </div>
+              <div class="form-group">
+                <select name="status" id="" class="form-control">
+                  <option value="New" @if (!empty($taskdata['status']) || $taskdata['status'] == "New")
+                      {{$taskdata['status']}}
+                  @endif>New</option>
+                  <option value="Ongoing"@if (!empty($taskdata['status']) || $taskdata['status'] == "Ongoing")
+                  {{$taskdata['status']}}
+              @endif>Ongoing</option>
+                  <option value="Partially"@if (!empty($taskdata['status']) || $taskdata['status'] == "Partially")
+                  {{$taskdata['status']}}
+              @endif>Partially</option>
+                  <option value="Completed"@if (!empty($taskdata['status']) || $taskdata['status'] == "Completed")
+                  {{$taskdata['status']}}
+              @endif>Completed</option>
+
+                </select>
               </div>
             </div>
           </div>

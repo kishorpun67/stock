@@ -343,7 +343,7 @@
             </ul>
         </li>
         @if(Session::get('page')=="admin_task_view" || Session::get('page')=="attendance" || Session::get('page')=="task" || Session::get('page')=="leave" 
-        || Session::get('page')=="salary" || Session::get('page')=="admin_task_view")
+        || Session::get('page')=="salary" || Session::get('page')=="add_leave")
         <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
@@ -398,7 +398,19 @@
             </a>
           </li>
         </ul>
-
+        <ul class="nav nav-treeview">
+          @if(Session::get('page')=="add_leave")
+          <?php $active = "active"; ?>
+          @else
+          <?php $active = ""; ?>
+          @endif
+          <li class="nav-item">
+            <a href="{{route('admin.add.edit.leave')}}" class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Add leave</p>
+            </a>
+          </li>
+        </ul>
         <ul class="nav nav-treeview">
           @if(Session::get('page')=="leave")
           <?php $active = "active"; ?>
