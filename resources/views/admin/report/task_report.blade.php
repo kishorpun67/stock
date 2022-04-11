@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Catelogues</h1>
+            <h1>Task Report</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Catelogues</li>
+              <li class="breadcrumb-item active">Task Report</li>
             </ol>
           </div>
         </div>
@@ -32,41 +32,29 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Purchase</h3>
-             <a href="{{route('admin.add.edit.purchase')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Purchse</a>
+              <h3 class="card-title">Task Report</h3>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Supplier Name</th>
-                  <th>Date</th>
-                  <th>Total Payable</th> 
-                  <th>Paid</th> 
-                  <th>Due</th> 
-                  <th>Action</th>
+                  <th>Task</th>
+                  <th>Start Date</th>   
+                  <th>End Date</th> 
+                  <th>Description</th>   
+                  <th>Status</th>    
+
                 </tr>
                 </thead>
                 <tbody>
-               @forelse($purchase as $data)
+               @forelse($task as $data)
                   <td>{{$data->id}}</td>
-                  <td>
-                    @if (!empty($data->supplierName->name))
-                    {{$data->supplierName->name}}                        
-                    @endif
-                  </td>
-                  <td>{{$data->date}}</td>
-                  <td>{{$data->total}}</td>
-                  <td>{{$data->paid}}</td>
-                  <td>{{$data->due}}</td>
-
-                   <td>
-                    <a href="{{route('admin.add.edit.purchase', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record="purchase"  rel="{{$data->id}}" style="display:inline;">
-                      <i class="fa fa-trash fa-" aria-hidden="true" ></i>
-                    </a>
-                   </td>
+                  <td>{{$data->task}}</td>
+                  <td>{{$data->start_date}}</td>
+                  <td>{{$data->end_date}}</td>
+                  <td>{{$data->description}}</td>
+                  <td>{{$data->status}}</td>
                 </tr>
                 @empty
                 <p>No Data</p>

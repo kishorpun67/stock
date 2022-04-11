@@ -435,9 +435,6 @@
           </li>
         </ul>
        </li>
-<<<<<<< HEAD
-
-
        
        @if(Session::get('page')=="supplierDeuPayment" || Session::get('page')=="customerDeuReceives" || Session::get('page')=="miscellaneous")
         <?php $active = "active";
@@ -610,14 +607,11 @@
 
        
        
-        @if(Session::get('page')=="setting" || Session::get('page')=="updateAdminDetail" || Session::get('page')=="admin_roles" )
-=======
         @if(Session::get('page')=="pl_account" || Session::get('page')=="daily_sale_report" || Session::get('page')=="waste_report" || Session::get('page')=="purchase_report"
         || Session::get('page')=="attendance_report" || Session::get('page')=="sale_report" || Session::get('page')=="miscellaneous_report"
         || Session::get('page')=="stock_report" || Session::get('page')=="consumption_report" || Session::get('page')=="low_inventory_report"
-        || Session::get('page')=="leave_report" || Session::get('page')=="salary_report" || Session::get('page')=="tax_report")
+        || Session::get('page')=="leave_report" || Session::get('page')=="salary_report" || Session::get('page')=="tax_report" || Session::get('page')=="task_report")
 
->>>>>>> a5c6ca41e0e4e410f01f6291d5cd6b69c51dbec8
         <?php $active = "active";
         $menuOpen="menu-open"; ?>
          @else
@@ -809,6 +803,19 @@
               </a>
             </li>
           </ul>
+          <ul class="nav nav-treeview">
+            @if(Session::get('page')=="task_report")
+            <?php $active = "active"; ?>
+            @else
+            <?php $active = ""; ?>
+            @endif
+            <li class="nav-item">
+              <a href="{{route('admin.task.report')}}" class="nav-link {{$active}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Task Report</p>
+              </a>
+            </li>
+          </ul
           
        </li>
        @if(Session::get('page')=="payments" || Session::get('page')=="receives" || Session::get('page')=="miscellaneous" )

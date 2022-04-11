@@ -17,17 +17,27 @@ use App\IngredientItem;
 use App\Leave;
 use App\Sale;
 use Carbon\Carbon;
+use App\Task;
 
 class ReportController extends Controller
 {
+    public function plAccountReport()
+    {
+        $current_day_sales = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->sum('total');
+    	$last_day_sales1 = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->subDay(1))->sum('total');
+        $current_day_purchase = Purchase::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->sum('total');
+    	$last_day_purchase1 = Purchase::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->subDay(1))->sum('total');
+        Session::flash('page', 'pl_account');
+        return view('admin.report.pl_account',compact('current_day_sales', 'last_day_sales1', 'current_day_purchase', 'last_day_purchase1'));
+    }
     public function dailySummaryReport()
     {
-        $purchase = Purchase::with('supplierName')->get();
-        $supplierDuePurchase = Purchase::with('supplierName')->where('due', "!=", "")->get();
-        $sales = Order::with('customer')->get();
-        $customerDueOrder = Order::with('customer')->where('due', "!=", "")->get();
-        $expense = Expense::with('ingredientCategory', 'waste')->get();
-        $waste = Waste::get();
+        $purchase = Purchase::with('supplierName')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->get();
+        $supplierDuePurchase = Purchase::with('supplierName')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->where('due', "!=", "")->get();
+        $sales = Order::with('customer')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->get();
+        $customerDueOrder = Order::with('customer')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->where('due', "!=", "")->get();
+        $expense = Expense::with('ingredientCategory', 'waste')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->get();
+        $waste = Waste::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->get();
         Session::flash('page', 'daily_sale_report');
         return view('admin.report.daily_summary_report', compact('purchase', 'supplierDuePurchase', 'sales', 'customerDueOrder', 'expense', 'waste'));
     }
@@ -99,14 +109,13 @@ class ReportController extends Controller
         return view('admin.report.tax_report',compact('tax'));
     }
     
-    public function plAccountReport()
+    
+    
+    public function taskReport()
     {
-        $current_day_sales = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->sum('total');
-    	$last_day_sales1 = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->subDay(1))->sum('total');
-        $current_day_purchase = Purchase::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->day)->sum('total');
-    	$last_day_purchase1 = Purchase::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->whereDay('created_at', Carbon::now()->subDay(1))->sum('total');
-        Session::flash('page', 'pl_account');
-        return view('admin.report.pl_account',compact('current_day_sales', 'last_day_sales1', 'current_day_purchase', 'last_day_purchase1'));
+        $task = Task::get();
+        Session::flash('page', 'task_report');
+        return view('admin.report.task_report',compact('task'));
     }
     
 }
