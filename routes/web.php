@@ -244,13 +244,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get', 'post'], 'add-edit-attendance/{id?}', 'AttendanceController@addEditAttendance')->name('add.edit.attendance');
             Route::get('delete-attendance/{id?}', 'AttendanceController@deleteAttendance')->name('delete.attendance');
 
-<<<<<<< HEAD
              //routes for task
-=======
             //kishor i am ending route here.
             //kishor i am ending route here.
             Route::get('task-view', 'TaskController@viewTask')->name('view.task');
->>>>>>> a5c6ca41e0e4e410f01f6291d5cd6b69c51dbec8
             Route::get('task', 'TaskController@Task')->name('task');
             Route::match(['get', 'post'], 'add-edit-task/{id?}', 'TaskController@addEditTask')->name('add.edit.task');
             Route::get('delete-task/{id?}', 'TaskController@deleteTask')->name('delete.task');
@@ -260,10 +257,20 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get', 'post'], 'add-edit-leave/{id?}', 'LeaveController@addEditLeave')->name('add.edit.leave');
             Route::get('delete-leave/{id?}', 'LeaveController@deleteLeave')->name('delete.leave');
             
-              //routes for miscellaneous
-            Route::get('miscellaneous', 'MiscellaneousController@Miscellaneous')->name('miscellaneous');
-            Route::match(['get', 'post'], 'add-edit-miscellaneous/{id?}', 'MiscellaneousController@addEditMiscellaneous')->name('add.edit.miscellaneous');
-            Route::get('delete-miscellaneous/{id?}', 'MiscellaneousController@deleteMiscellaneous')->name('delete.miscellaneous');
+              //routes for electricity consumption
+            Route::get('electricity', 'ElectricityController@electricity')->name('electricity');
+            Route::match(['get', 'post'], 'add-edit-electricity/{id?}', 'ElectricityController@addEditElectricity')->name('add.edit.electricity');
+            Route::get('delete-electricity/{id?}', 'ElectricityController@deleteElectricity')->name('delete.electricity');
+
+            //routes for  internet consumption
+            Route::get('internet', 'InternetController@internet')->name('internet');
+            Route::match(['get', 'post'], 'add-edit-internet/{id?}', 'InternetController@addEditInternet')->name('add.edit.internet');
+            Route::get('delete-internet/{id?}', 'InternetController@deleteInternet')->name('delete.internet');
+
+            //routes for  water consumption
+            Route::get('water', 'WaterController@water')->name('water');
+            Route::match(['get', 'post'], 'add-edit-water/{id?}', 'WaterController@addEditWater')->name('add.edit.water');
+            Route::get('delete-water/{id?}', 'WaterController@deleteWater')->name('delete.water');
 
             //routes for tax and vat
             Route::get('taxVat', 'TaxVatController@taxVat')->name('taxVat');
@@ -307,7 +314,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('view-supplier-deu-payment','SupplierController@viewSupplierDeuPayment')->name('view.supplier.deu.payments');
             Route::get('view-customer-deu-receive','CustomerController@viewCustomerDeuReceives')->name('view.customer.deu.receives');
 
-            //kishor i am ending route here.
+            //routes for report of electricity
+            Route::get('electricity-report','ElectricityController@electricityReport')->name('electricity.report');
+            
+            //routes for report of internet
+            Route::get('internet-report','InternetController@internetReport')->name('internet.report');
+
+            
+            //routes for report of electricity
+            Route::get('water-report','WaterController@waterReport')->name('water.report');
 
             //ROUTES FOR REPORTS 
 

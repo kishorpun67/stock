@@ -106,7 +106,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 
-
+<!-- toaster for alert mesage of validation-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Custome Admin js -->
 <script src="{{asset('js/admin_js/admin_script.js')}}"></script>
 <script src="{{asset('js/admin_js/admin_validate.js')}}"></script>
