@@ -21,7 +21,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $(".categories").click(function() {
+    $(".categories").on('click', function() {
         var category_id = $(this).attr("category_id");
         console.log(category_id)
             // alert(category_id)
@@ -43,40 +43,156 @@ $(document).ready(function() {
 
 });
 
+function addFood(item_id, price, name, is_bar, is_caffe, is_kitchen) {
+    // console.log(item_id, price, name, is_bar, is_caffe, is_kitchen)
+    $.ajax({
+        type: 'post',
+        url: '/admin/ajax-food-table',
+        data: {
+            item_id: item_id,
+            price: price,
+            name: name,
+            is_bar: is_bar,
+            is_caffe: is_caffe,
+            is_kitchen: is_kitchen,
+
+        },
+        success: function(response) {
+            console.log(response)
+            $("#add_item_table").html(response);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+// delet food cart item 
+function deleteCartItem(cart_id) {
+    $.ajax({
+        type: 'post',
+        url: '/admin/delete-cart-item',
+        data: {
+            cart_id: cart_id,
+        },
+        success: function(response) {
+            // alert(response)
+            $('#add_item_table').html(response.view);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+function qtyMinus(cart_id) {
+    var qty = "qtyMinus"
+    console.log(cart_id)
+        // alert(qty)
+    $.ajax({
+        type: 'post',
+        url: '/admin/update-cart-item-quantity',
+        data: {
+            cart_id: cart_id,
+            qty: qty,
+        },
+        success: function(response) {
+            // alert(response)
+            $('#add_item_table').html(response.view);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+function qtyPlus(cart_id) {
+    var qty = "qtyPlus"
+    console.log(cart_id)
+    $.ajax({
+        type: 'post',
+        url: '/admin/update-cart-item-quantity',
+        data: {
+            cart_id: cart_id,
+            qty: qty,
+        },
+        success: function(response) {
+            // alert(response)
+            $('#add_item_table').html(response.view);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+
+
+
+// delet food cart item 
+function deleteCartItem(cart_id) {
+    $.ajax({
+        type: 'post',
+        url: '/admin/delete-cart-item',
+        data: {
+            cart_id: cart_id,
+        },
+        success: function(response) {
+            // alert(response)
+            $('#add_item_table').html(response.view);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+function quantityMinus(cart_id) {
+    var qty = "qtyMinus"
+    console.log(cart_id)
+        // alert(qty)
+    $.ajax({
+        type: 'post',
+        url: '/admin/update-cart-item-quantity',
+        data: {
+            cart_id: cart_id,
+            qty: qty,
+        },
+        success: function(response) {
+            // alert(response)
+            $('#add_item_table').html(response.view);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+function quantityPlus(cart_id) {
+    var qty = "qtyPlus"
+    console.log(cart_id)
+    $.ajax({
+        type: 'post',
+        url: '/admin/update-cart-item-quantity',
+        data: {
+            cart_id: cart_id,
+            qty: qty,
+        },
+        success: function(response) {
+            // alert(response)
+            $('#add_item_table').html(response.view);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+
+
 
 //kishor i did this
 $(document).ready(function() {
-    $(".add_item").click(function() {
-        // $("#add_item").empty()
-        var item_id = $(this).attr("item_id");
-        // alert('test')
-        var price = $(this).attr("price");
-        var name = $(this).attr("names");
-        // var table = $(this).attr("table");
-        var is_bar = $(this).attr("is_bar");
-        var is_caffe = $(this).attr("is_caffe");
-        var is_kitchen = $(this).attr("is_kitchen");
-        $.ajax({
-            type: 'post',
-            url: '/admin/ajax-food-table',
-            data: {
-                item_id: item_id,
-                price: price,
-                name: name,
-                is_bar: is_bar,
-                is_caffe: is_caffe,
-                is_kitchen: is_kitchen,
 
-            },
-            success: function(response) {
-                console.log(response)
-                $("#add_item_table").html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
-    });
     $("#search-field").keyup(function() {
         var searchItem = $(this).val();
         $.ajax({
@@ -96,75 +212,17 @@ $(document).ready(function() {
         });
 
     })
-    $('.qtyMinus').click(function() {
-        if ($(this).hasClass('qtyMinus')) {
-            var cart_id = $(this).attr('attr');
-            var qty = "qtyMinus"
-            console.log(cart_id)
-                // alert(qty)
-            $.ajax({
-                type: 'post',
-                url: '/admin/update-cart-item-quantity',
-                data: {
-                    cart_id: cart_id,
-                    qty: qty,
-                },
-                success: function(response) {
-                    // alert(response)
-                    $('#add_item_table').html(response.view);
-                },
-                error: function() {
-                    alert("Error");
-                }
-            });
-        }
-    })
-    $('.qtyPlus').click(function() {
-        if ($(this).hasClass('qtyPlus')) {
-            var cart_id = $(this).attr('attr');
-            var qty = "qtyPlus"
-            console.log(cart_id)
-            $.ajax({
-                type: 'post',
-                url: '/admin/update-cart-item-quantity',
-                data: {
-                    cart_id: cart_id,
-                    qty: qty,
-                },
-                success: function(response) {
-                    // alert(response)
-                    $('#add_item_table').html(response.view);
-                },
-                error: function() {
-                    alert("Error");
-                }
-            });
-        }
-    })
 
-    $(".delet_cart_item").click(function() {
-        var cart_id = $(this).attr('cart_id');
-        $.ajax({
-            type: 'post',
-            url: '/admin/delete-cart-item',
-            data: {
-                cart_id: cart_id,
-            },
-            success: function(response) {
-                // alert(response)
-                $('#add_item_table').html(response.view);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
-        // console.log(cart_id)
-    })
+
     $(".order_item").click(function() {
         var order_id = $(this).attr('order_id')
         $("#order_id").val(order_id);
         $("#orders_id").val(order_id);
 
+    })
+    $(".modify_order").click(function() {
+        var order_id = $("#order_id").val()
+        console.log(order_id)
         $.ajax({
             type: 'get',
             url: '/admin/ajax-get-modify-order',
@@ -174,13 +232,12 @@ $(document).ready(function() {
             success: function(response) {
                 console.log(response)
                     // alert(response)
-                    // $('#ajaxModifyOrder').html(response);
+                $('#ajaxModifyOrder').html(response);
             },
             error: function() {
                 alert("Error");
             }
         });
-
     })
     $(".test_order_details").click(function() {
         var order_id = $("#order_id").val()
@@ -333,7 +390,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log(response)
                 $("#ajaxPurchase").html(response);
-               
+
             },
             error: function() {
                 alert("Error");
@@ -342,76 +399,71 @@ $(document).ready(function() {
     });
 
 });
+//Delete purchase cart
+function deletePurchaseCart(ingredient_id) {
+    // alert(ingredient_id)
+    $.ajax({
+        type: 'post',
+        url: '/admin/delete-purchase-table',
+        data: {
+            ingredient_id: ingredient_id
+        },
+        success: function(response) {
+            console.log(response)
+            $("#ajaxPurchase").html(response);
 
-//Delete Cart Table through ajax
-$(document).ready(function() {
-    $(".delete_cart_table").click(function() {
-        var ingredient_id=$(this).attr("ingredient_id");
-   // alert(ingredient_id)
-        $.ajax({
-            type: 'post',
-            url: '/admin/delete-purchase-table',
-            data: {
-                ingredient_id: ingredient_id
-            },
-            success: function(response) {
-                console.log(response)
-                $("#ajaxPurchase").html(response);
-               
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+        },
+        error: function() {
+            alert("Error");
+        }
     });
-
-});
+}
 
 
 
 //ajx check current amount in ajx purchase table  
-$(document).ready(function(){
+$(document).ready(function() {
     //check current amount
-    $(".ingredientCart_id").change(function(){
+    $(".ingredientCart_id").change(function() {
         var ingredientCart_id = $(this).attr('ingredientCart_id');
         var quantity = $(this).val();
-    // alert(ingredientCart_id);
-    //console.log(chkCurrentAmount);
+        // alert(ingredientCart_id);
+        //console.log(chkCurrentAmount);
 
         $.ajax({
             type: 'post',
             url: '/admin/check-current-amount',
             data: {
                 ingredientCart_id: ingredientCart_id,
-                quantity:quantity
+                quantity: quantity
             },
             success: function(response) {
                 console.log(response)
                 $("#ajaxPurchase").html(response);
-            
+
             },
             error: function() {
                 alert("Error");
             }
         });
     });
-    $(".ingredientCart_id").keyup(function(){
+    $(".ingredientCart_id").keyup(function() {
         var ingredientCart_id = $(this).attr('ingredientCart_id');
         var quantity = $(this).val();
-    // alert(ingredientCart_id);
-    //console.log(chkCurrentAmount);
+        // alert(ingredientCart_id);
+        //console.log(chkCurrentAmount);
 
         $.ajax({
             type: 'post',
             url: '/admin/check-current-amount',
             data: {
                 ingredientCart_id: ingredientCart_id,
-                quantity:quantity
+                quantity: quantity
             },
             success: function(response) {
                 console.log(response)
                 $("#ajaxPurchase").html(response);
-            
+
             },
             error: function() {
                 alert("Error");
@@ -419,16 +471,16 @@ $(document).ready(function(){
         });
     });
 
-  //ajax for paid amount
-    $(".paid").keyup(function(){
+    //ajax for paid amount
+    $(".paid").keyup(function() {
         var paid = $(".paid").val();
         var total = $(".total").val();
-     //alert(total);
-       //console.log(paid,total);
-       var paidamount = total-paid;
-       console.log(paidamount)
+        //alert(total);
+        //console.log(paid,total);
+        var paidamount = total - paid;
+        console.log(paidamount)
         $("#deu_amount").val(paidamount)
-      // console.log(paidamount);
+            // console.log(paidamount);
     });
 });
 
@@ -439,7 +491,7 @@ $(document).ready(function() {
     $("#foodTable_id").change(function() {
         var foodTable_id = $("#foodTable_id").val();
         //_var consumption= $(this).attr("consumption");
-       // alert(foodTable_id)
+        // alert(foodTable_id)
         $.ajax({
             type: 'post',
             url: '/admin/ajax-foodMenu-table',
@@ -449,8 +501,12 @@ $(document).ready(function() {
             },
             success: function(response) {
                 console.log(response)
-                $("#ajaxFoodTable").html(response);
-               
+                if (response.message == "exsist") {
+                    alert('Item already exsist!')
+                } else {
+                    $("#ajaxFoodTable").html(response);
+                }
+
             },
             error: function() {
                 alert("Error");
@@ -460,26 +516,22 @@ $(document).ready(function() {
 
 });
 
-//ajax delete food
-$(document).ready(function() {
-    $(".delete_foodMenu_table").click(function() {
-        var ingredient_id=$(this).attr("ingredient_id");
-   // alert(ingredient_id)
-        $.ajax({
-            type: 'post',
-            url: '/admin/delete-foodMenu-table',
-            data: {
-                ingredient_id: ingredient_id
-            },
-            success: function(response) {
-                console.log(response)
-                $("#ajaxFoodTable").html(response);
-               
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
-    });
+//ajax delete foodmenutable
+function deleteFoodMenTable(ingredient_id) {
+    // alert(ingredient_id)
+    $.ajax({
+        type: 'post',
+        url: '/admin/delete-foodMenu-table',
+        data: {
+            ingredient_id: ingredient_id
+        },
+        success: function(response) {
+            console.log(response)
+            $("#ajaxFoodTable").html(response);
 
-});
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}

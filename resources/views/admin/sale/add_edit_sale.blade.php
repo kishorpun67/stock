@@ -71,7 +71,7 @@
         <h4> Running Orders</h4>
         <ul>
           @foreach ($order as $item)
-            <li class="" ><a href="javascript:"  order_id="{{$item->id}}" class="order_item"> <span>Cust:{{$item->name}}<br>
+            <li class="active" ><a href="javascript:"  order_id="{{$item->id}}" class="order_item"> <span>Cust:{{$item->name}}<br>
             Table: @if (!empty($item->table_id))
                 {{$item->table_id}}
             @else
@@ -81,7 +81,7 @@
           
           
         </ul>
-        <button type="button" class="btn  modify_btn operation_button" data-toggle="modal" data-target="#modify_order"> <i class="fas fa-edit"></i>Modify Order</button>
+        <button type="button" class="btn  modify_btn operation_button modify_order" data-toggle="modal" data-target="#modify_order"> <i class="fas fa-edit"></i>Modify Order</button>
         <button type="button" class="btn order_btn operation_button test_order_details" data-toggle="modal" data-target="#exampleModal2"> <i class="fas fa-info-circle"></i>Order Details</button>
         <!-- Modal -->
         
@@ -95,37 +95,49 @@
         </div>
         <form action="{{route('admin.cancel.order')}}" method="POST">
           <input type="hidden" name="order_id" id="order_id" value=""  >
-
           @csrf
         <input type="submit" value="Cancel Order" class="btn order_btn operation_button">
         </form>
         <button type="button" class="btn order_btn operation_button kitchen_status" data-toggle="modal" data-target="#exampleModal8"> <i class="fas fa-spinner"></i> Kitchen Status</button>
         <div class="modal fade" id="modify_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <span id="ajaxModifyOrder">
-            @include('admin.sale.ajaxOderModify')
-
-          </span>
-        </div>
-        
-        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4>Order Details </h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                </div>
-                <span id="ajaxOrderDetail">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4>Order Details </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+                
+              <div class="modal-body">
+                <span id="ajaxModifyOrder">
                   @include('admin.sale.ajax_order_details')
                 </span>
-
+              </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
-           </div>
+            </div>
           </div>
-
         </div>
+        
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4>Order Details </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+                
+              <div class="modal-body">
+                <span id="ajaxOrderDetail">
+                  @include('admin.sale.ajax_order_details')
+                </span>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+              </div>
+            </div>
+          </div>
         </div>
         
         

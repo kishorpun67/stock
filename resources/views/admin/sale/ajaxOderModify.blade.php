@@ -1,31 +1,25 @@
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4>Order Details </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-      </div>
+
       <div class="modal-body">
         <form role="form">
           <div class="cart-wrapper checkout_wrapper">
             <div class="cart-top">
-              <table class="cart_table">
+              <table>
                 <thead>
-                  <tr>
-                    <th>SN</th>
-                    <th>Item</th>
-                    <th>Price</th>
+              <tr>
+                <th>ID</th>
+                <th>Item</th>
                     <th>Quantity</th>
                     <th>Discount</th>
                     <th>Total</th>
+                    <th>delete</th>
                   </tr>
                 </thead>
                 <tbody>
                     <?php $total_amount = 0;
                     $total_item = 0;
                     ?>
-              
-                    @if (!empty($orderDetails->ordrDetails))
-                        @forelse ($orderDetails->ordrDetails as $item)
+              @if (!empty($orderDetails->ordrDetails))
+              @forelse ($orderDetails->ordrDetails as $item)
                         <tr>
                             <td class="serial">{{$item->id}}</td>
                             <td class="product_title">{{$item->item}}</td>
@@ -33,19 +27,18 @@
                             <td class="quantity">
                   
                               <div class="quantity-bar"> <span class="input-group-btn">
-                                <button type="button" class="btn-number btn-minus qtyMinus"  data-type="minus"  attr="{{$item->id}}"  cart-value="{{$item->quantity}}"> <i class="fas fa-minus"></i> </button>
+                                <button type="button" class="btn-number btn-minus " onclick="quantityMinus(this.getAttribute('attr'))"  data-type="minus"  cart_id="{{$item->id}}"  cart-value="{{$item->quantity}}"> <i class="fas fa-minus"></i> </button>
                                 </span>
                                 <input type="text" name="quantity"id="quant-{{$item->id}}" class="form-control input-number" value="{{$item->quantity}}" min="1" max="100" placeholder="1">
                                 <span class="input-group-btn">
                                 <button type="button" class="btn-number btn-plus qtyPlus" data-type="plus" attr="{{$item->id}}"  cart-value="{{$item->quantity}}" data-field="quant-{{$item->id}}"> <i class="fas fa-plus"></i> </button>
                                 </span> </div></td>
                             <td class="total-price">Rs.{{$item->price * $item->quantity}}</td>
-                            <td class="discount"><a href="javascript:" class="delet_cart_item" cart_id="{{$item->id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td class="discount"><a href="javascript:" onclick="quantityPlus(this.getAttribute('attr'))" cart_id="{{$item->id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                   
                           </tr>
                           <?php $total_amount= $total_amount + ($item->price* $item->quantity);
                           $total_item = $total_item + $item->quantity;
-                                                      
                           ?>
                         @empty
                         @endforelse
@@ -89,9 +82,5 @@
             </div>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+        </div>
+    

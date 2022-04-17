@@ -20,6 +20,18 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
+        // dd(auth('admin')->user()->can('Manager'));
+        // if (auth('admin')->user()->can('create-tasks')) {
+        //     return "inn";
+        //     //Code goes here
+        // }
+        // return "out";
+        // $adata = AdminPermission::where('admin_id',auth('admin')->user()->id)->select('permission_id')->get();
+        // foreach($adata as $data){
+        //     $test[] = $data->permission_id;
+        // }
+        // return $test;
+        // return auth('admin')->user()->hasPermission(3);
         $admin = Auth('admin')->user();
         $permission = Permission::get();
         // return$admin->hasPermission($permission);

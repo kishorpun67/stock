@@ -85,22 +85,23 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
         Route::post('check-current-password', 'AdminController@checkCurrentPassword');
         Route::post('update-current-password', 'AdminController@updateCurrentPassword')->name('update.current.password');
         Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails')->name('update.admin.details');
-
-        Route::get('order', 'OrderController@orderView')->name('order');
-        Route::get('kitchen-update/{id}', 'OrderController@kitchenUpdate')->name('kitchen.update');
-        Route::get('kitchen-innovice/{id}', 'OrderController@kitchenInnovice')->name('kitchen.innovice');
-        Route::post('update-kitchen-status', 'OrderController@updateKitchenStatus');
-        Route::get('bar', 'OrderController@bar')->name('bar');
-        Route::get('bar-update/{id}', 'OrderController@barUpdate')->name('bar.update');
-        Route::get('bar-innovice/{id}', 'OrderController@barInnovice')->name('bar.innovice');
-        Route::get('bar-detail/{id}', 'OrderController@orderDetails')->name('order.detail');
-        Route::post('update-cancel-status', 'OrderController@updateOrderCancel');
-        Route::post('update-order-status/{id?}', 'OrderController@updateOrderStatus')->name('update.order.status');
-        Route::get('order-innovice/{id}', 'OrderController@orderInnovice')->name('order.innovice');
-        Route::get('delete-order/{id}', 'OrderController@delete');
-        Route::post('update-order', 'OrderController@updateOrder')->name('update.order');
-        Route::get('view-cancel-order', 'OrderController@viewCancelOrder')->name('cancel.order');
-
+        
+        Route::group(['middleware'=>['ChekcRole:Manager']], function(){
+         Route::get('order', 'OrderController@orderView')->name('order');
+         Route::get('kitchen-update/{id}', 'OrderController@kitchenUpdate')->name('kitchen.update');
+         Route::get('kitchen-innovice/{id}', 'OrderController@kitchenInnovice')->name('kitchen.innovice');
+         Route::post('update-kitchen-status', 'OrderController@updateKitchenStatus');
+         Route::get('bar', 'OrderController@bar')->name('bar');
+         Route::get('bar-update/{id}', 'OrderController@barUpdate')->name('bar.update');
+         Route::get('bar-innovice/{id}', 'OrderController@barInnovice')->name('bar.innovice');
+         Route::get('bar-detail/{id}', 'OrderController@orderDetails')->name('order.detail');
+         Route::post('update-cancel-status', 'OrderController@updateOrderCancel');
+         Route::post('update-order-status/{id?}', 'OrderController@updateOrderStatus')->name('update.order.status');
+         Route::get('order-innovice/{id}', 'OrderController@orderInnovice')->name('order.innovice');
+         Route::get('delete-order/{id}', 'OrderController@delete');
+         Route::post('update-order', 'OrderController@updateOrder')->name('update.order');
+         Route::get('view-cancel-order', 'OrderController@viewCancelOrder')->name('cancel.order');
+         });
             // user route 
         // Route::group(['middleware'=>['ChekcRole:Admin', 'ChekcRole:add']], function(){
             Route::get('user', 'AdminController@viewUser')->name('user');

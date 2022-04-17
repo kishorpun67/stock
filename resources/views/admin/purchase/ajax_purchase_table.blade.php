@@ -24,13 +24,13 @@
         <td>{{ $data->ingredient_id }}</td>
         <td>{{ $data->name}}</td>
         <td>{{ $data->price}}</td>
-        <td><input class="ingredientCart_id" type="number" name="quantity[]" value="{{ $data->quantity}}" ingredientCart_id="{{ $data->id }}">
+        <td><input class="" onkeyup="alert(this.val())" type="number" name="quantity[]" value="{{ $data->quantity}}" ingredientCart_id="{{ $data->id }}">
         </td>
         <td>{{ $data->quantity * $data->price}}</td>
        
         <td>
           {{-- <a href="{{route('admin.add.edit', $data->id)}}"><i class="fa fa-edit">Edit</i></a>&nbsp;&nbsp; --}}
-          <a href="javascript:" class="delete_cart_table" ingredient_id="{{$data->id}}" style="display:inline;">
+          <a href="javascript:" onclick="deletePurchaseCart(this.getAttribute('ingredient_id'))" class="" ingredient_id="{{$data->id}}" style="display:inline;">
             <i class="fa fa-trash fa-" aria-hidden="true" ></i>
           </a></td>
         </tr>

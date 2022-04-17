@@ -26,7 +26,7 @@ class SaleController extends Controller
 {
     public function Sale()
     {
-        $sale = Order::get();
+        $sale = Order::orderBy('id', 'DESC')->get();
         Session::flash('page', 'sale');
         return view('admin.sale.view_sale', compact('sale'));
     }
@@ -35,7 +35,7 @@ class SaleController extends Controller
     {
         // return $id;
         $foodCategories = FoodCategory::get();
-        $carts = Cart::where('admin_id',auth('admin')->user()->id)->get();
+        $carts = Cart::orderBy('id', 'DESC')->where('admin_id',auth('admin')->user()->id)->get();
         $foodMenus = FoodMenu::get();
         $waiter = Admin::where('role_id',6)->get();
         $customer = Customer::get();
@@ -90,7 +90,7 @@ class SaleController extends Controller
         {
             $cart =  Cart::where(['admin_id'=>auth('admin')->user()->id, 'id'=>$data['cart_id']])->increment('quantity',1);
         }
-        $carts = Cart::where(['admin_id' => auth('admin')->user()->id])->get();
+        $carts = Cart::orderBy('id', 'DESC')->where(['admin_id' => auth('admin')->user()->id])->get();
         $waiter = Admin::where('role_id',6)->get();
         $customer = Customer::get();
         return response()->json(['view'=>(String)View::make('admin.sale.ajax_food_table')->with(compact('carts', 'waiter', 'customer'))]);
@@ -101,7 +101,7 @@ class SaleController extends Controller
     public function deleteCart()
     {
       Cart::where('id', request('cart_id'))->delete();
-      $carts = Cart::where(['admin_id' => auth('admin')->user()->id])->get();
+      $carts = Cart::orderBy('id', 'DESC')->where(['admin_id' => auth('admin')->user()->id])->get();
       $waiter = Admin::where('role_id',6)->get();
       $customer = Customer::get();
       return response()->json(['view'=>(String)View::make('admin.sale.ajax_food_table')->with(compact('carts', 'waiter', 'customer'))]);
@@ -123,7 +123,7 @@ class SaleController extends Controller
         $table = Table::where('id',$table)->first();
         // return $table;
         $foodCategories = FoodCategory::get();
-        $carts = Cart::get();
+        $carts = Cart::orderBy('id', 'DESC')->get();
         $foodMenus = FoodMenu::with('foodCategory')->get();
         $waiter = Admin::where('role_id',6)->get();
         $customer = Customer::get();

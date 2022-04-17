@@ -17,7 +17,6 @@
                       <?php $total_amount = 0;
                       $total_item = 0;
                       ?>
-              
                     @if (!empty($orderDetails->ordrDetails))
                         @forelse ($orderDetails->ordrDetails as $item)
                         <tr>
@@ -25,14 +24,11 @@
                             <td class="product_title">{{$item->item}}</td>
                             <td class="product_price">Rs.{{$item->price}}</td>
                             <td class="quantity">
-                  
                               <div class="quantity-bar"> {{$item->quantity}}</td>
                             <td class="total-price">Rs.{{$item->price * $item->quantity}}</td>
-                  
                           </tr>
                           <?php $total_amount= $total_amount + ($item->price* $item->quantity);
                           $total_item = $total_item + $item->quantity;
-                                                      
                           ?>
                         @empty
                         @endforelse

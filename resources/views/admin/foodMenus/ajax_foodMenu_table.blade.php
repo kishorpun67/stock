@@ -17,11 +17,14 @@
         <td>{{ $data->ingredient_id }}</td>
         <td>{{ $data->ingredient}}</td>
         <td><input type="number"  name="consumption_quantity[]" value="{{ $data->cunsumption}}">
+          @if (!empty($data->ingredientUnit->unit_name))
+          {{$data->ingredientUnit->unit_name}}
+          @endif
         </td>
      
         <td>
           {{-- <a href="{{route('admin.add.edit', $data->id)}}"><i class="fa fa-edit">Edit</i></a>&nbsp;&nbsp; --}}
-          <a href="javascript:" class="delete_foodMenu_table" ingredient_id="{{$data->id}}" style="display:inline;">
+          <a href="javascript:" onclick="deleteFoodMenTable(this.getAttribute('ingredient_id'))" ingredient_id="{{$data->id}}" style="display:inline;">
             <i class="fa fa-trash fa-" aria-hidden="true" ></i>
           </a></td>
         </tr>

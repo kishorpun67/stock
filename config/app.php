@@ -168,7 +168,7 @@ return [
          */
         // SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         LaravelQRCode\Providers\QRCodeServiceProvider::class,     
-
+        App\Providers\PermissionServiceProvider::class,
 
 
 

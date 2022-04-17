@@ -18,7 +18,7 @@ class FoodMenuController extends Controller
 {
     public function foodMenus()
     {
-        $foodMenus = FoodMenu::with('foodCategory','ingredientItem')->get();
+        $foodMenus = FoodMenu::orderBy('id', 'DESC')->with('foodCategory','ingredientItem')->get();
         Session::flash('page', 'foodMenu');
         return view('admin.foodMenus.view_food_menus', compact('foodMenus'));
     }
@@ -143,7 +143,7 @@ class FoodMenuController extends Controller
         $foodCategory = FoodCategory::get();
         $ingredientItem = IngredientItem::get();
         // $ingredientUnit = IngredientUnit::get();
-        $foodTable = foodTable::get();
+        $foodTable = foodTable::with('ingredientUnit')->where('admin_id', auth('admin')->user()->id)->get();
         Session::flash('page', 'foodMenu');
         return view('admin.foodMenus.add_edit_food_menus', compact('title','button','foodMenusData','foodCategory','ingredientItem','foodTable'));
     }
@@ -153,15 +153,22 @@ class FoodMenuController extends Controller
     public function ajaxfoodMenuTable(Request $request)
     {
         $data = $request->all();
-        $ingredientItem = IngredientItem::where('id', $data['foodTable_id'])->first();
-        $foodTable = new foodTable;
-        // $foodTable->item_id = $data['item_id'];
-        $foodTable->admin_id = auth('admin')->user()->id;
-        $foodTable->ingredient_id =  $ingredientItem->id;
-        $foodTable->ingredient =  $ingredientItem->name;
-        $foodTable->save();
-        $foodTable  = foodTable::get();
-        return view('admin.foodMenus.ajax_foodMenu_table',compact('foodTable'));
+        $ingredientItemCount = foodTable::where(['ingredient_id'=>$data['foodTable_id'],'admin_id'=>auth('admin')->user()->id])->count();
+        if($ingredientItemCount==0){
+            $ingredientItem = IngredientItem::where('id', $data['foodTable_id'])->first();
+            $foodTable = new foodTable;
+            // $foodTable->item_id = $data['item_id'];
+            $foodTable->admin_id = auth('admin')->user()->id;
+            $foodTable->ingredient_id =  $ingredientItem->id;
+            $foodTable->ingredientUnit_id =  $ingredientItem->ingredient_id;
+            $foodTable->ingredient =  $ingredientItem->name;
+            $foodTable->save();
+            $foodTable  = foodTable::with('ingredientUnit')->where('admin_id', auth('admin')->user()->id)->get();
+            return view('admin.foodMenus.ajax_foodMenu_table',compact('foodTable'));
+        }else{
+            return response()->json(['message'=>'exsist'], 200);
+        }
+
     }
 
     //ajax food menu delete
@@ -170,7 +177,7 @@ class FoodMenuController extends Controller
         
       $data = $request->all();
       foodTable::where('id', $data['ingredient_id'])->delete();
-      $foodTable  = foodTable::get();
+      $foodTable  = foodTable::with('ingredientUnit')->get();
       return view('admin.foodMenus.ajax_foodMenu_table',compact('foodTable'));
     }
     public function deleteFoodMenu($id)

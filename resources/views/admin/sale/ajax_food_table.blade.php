@@ -62,14 +62,14 @@
           <td class="quantity">
 
             <div class="quantity-bar"> <span class="input-group-btn">
-              <button type="button" class="btn-number btn-minus qtyMinus"  data-type="minus"  attr="{{$item->id}}"  cart-value="{{$item->quantity}}"> <i class="fas fa-minus"></i> </button>
+              <button type="button" class="btn-number btn-minus qtyMinus" onclick="qtyMinus(this.getAttribute('attr'))"  data-type="minus"  attr="{{$item->id}}"  cart-value="{{$item->quantity}}"> <i class="fas fa-minus"></i> </button>
               </span>
               <input type="text" name="quantity"id="quant-{{$item->id}}" class="form-control input-number" value="{{$item->quantity}}" min="1" max="100" placeholder="1">
               <span class="input-group-btn">
-              <button type="button" class="btn-number btn-plus qtyPlus" data-type="plus" attr="{{$item->id}}"  cart-value="{{$item->quantity}}" data-field="quant-{{$item->id}}"> <i class="fas fa-plus"></i> </button>
+              <button type="button" class="btn-number btn-plus qtyPlus" onclick="qtyPlus(this.getAttribute('attr'))" data-type="plus" attr="{{$item->id}}"  cart-value="{{$item->quantity}}" data-field="quant-{{$item->id}}"> <i class="fas fa-plus"></i> </button>
               </span> </div></td>
           <td class="total-price">Rs.{{$item->price * $item->quantity}}</td>
-          <td class="discount"><a href="javascript:" class="delet_cart_item" cart_id="{{$item->id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+          <td class="discount"><a href="#" onclick="deleteCartItem(this.getAttribute('cart_id'))" class="" cart_id="{{$item->id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
 
         </tr>
         <?php $total_amount= $total_amount + ($item->price* $item->quantity);
