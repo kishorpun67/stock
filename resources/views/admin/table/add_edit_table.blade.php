@@ -69,6 +69,14 @@
                   @endif>
                 </div>
                 <div class="form-group">
+                  <label for="table_name">Table No</label>
+                  <input type="text" class="form-control" name="table_no" id="table_no" placeholder="Enter table name"
+                  @if(!empty($tabledata['table_no']))
+                  value= "{{$tabledata['table_no']}}"
+                  @else value="{{old('table_no')}}"
+                  @endif>
+                </div>
+                <div class="form-group">
                     <label for="seat_capacity">Seat Capacity</label>
                       <input type="text" class="form-control" name="seat_capacity" id="seat_capacity" placeholder="Enter seat capacity"
                       @if(!empty($tabledata['seat_capacity']))

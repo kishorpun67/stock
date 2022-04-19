@@ -43,6 +43,10 @@ class TableController extends Controller
             {
                 $data['seat_capacity'] = "";
             }
+            if(empty($data['table_no']))
+            {
+                $data['table_no'] = "";
+            }
 
             // if(empty($data['user_id']))
             // {
@@ -55,6 +59,7 @@ class TableController extends Controller
             $table->admin_id = auth('admin')->user()->id;
             $table->table_name = $data['table_name'];
             $table->seat_capacity = $data['seat_capacity'];
+            $table->table_no = $data['table_no'];
             $table->save();
             Session::flash('success_message', $message);
             return redirect('admin/table');

@@ -68,9 +68,11 @@
                     <td><small><strong>SN-Ingredient-qty/unitprice-total</strong></small><br>
                         <small>
                             @if (!empty($item->purchase_item))
+                            <?php $i=1; ?>
                                 @foreach ($item->purchase_item as $ingredient)
-                                    {{$ingredient->id}}-{{$ingredient->ingredient}}-{{$ingredient->quantity}}-{{$ingredient->price}}-{{$ingredient->price*$ingredient->quantity}} <br>
-                                @endforeach
+                                    {{$i}}-{{$ingredient->ingredient}}-{{$ingredient->quantity}}-{{$ingredient->price}}-{{$ingredient->price*$ingredient->quantity}} <br>
+                                  <?php $i++ ?>
+                                    @endforeach
                                 
                             @endif
 
@@ -133,9 +135,12 @@
                       <td><small><strong>SN-Ingredient-qty/unitprice-total</strong></small><br>
                           <small>
                               @if (!empty($item->purchase_item))
+                              <?php $i=1; ?>
+
                                   @foreach ($item->purchase_item as $ingredient)
-                                      {{$ingredient->id}}-{{$ingredient->ingredient}}-{{$ingredient->quantity}}-{{$ingredient->price}}-{{$ingredient->price*$ingredient->quantity}} <br>
-                                  @endforeach
+                                      {{$i}}-{{$ingredient->ingredient}}-{{$ingredient->quantity}}-{{$ingredient->price}}-{{$ingredient->price*$ingredient->quantity}} <br>
+                                      <?php $i++ ?>
+                                      @endforeach
                                   
                               @endif
   

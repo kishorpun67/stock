@@ -33,30 +33,27 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Miscellaneous</h3>
-             <a href="{{route('admin.add.edit.miscellaneous')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Miscellaneous</a>
+             <a href="{{route('admin.add.edit.miscellaneous')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Electricity Miscellaneous</a>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
                 <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Electricity Uses</th>
-                  <th>Interuses</th> 
-                  <th>Water Amount</th> 
-                  <th>Water Uses</th> 
-                  <th>Consumption Bill</th> 
+                  <th>Electricity Consumption</th>
+                  <th>Electricity Unit</th> 
+                  <th>Months</th> 
+                  <th>Electricity Total</th> 
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                @forelse($miscellaneous as $data)
                   <td>{{$data->id}}</td>
-                  <td>Rs.{{$data->electricity_uses}}</td>
-                  <td>{{$data->interuses}}</td>
-                  <td>{{$data->water_amount}}</td>
-                  <td>{{$data->water_uses}}.ltr</td>
-                  <td>Rs.{{$data->consumption_bill}}</td>
-    
+                  <td>{{$data->electricity_uses}}</td>
+                  <td>{{$data->electricity_unit}}</td>
+                  <td>{{$data->electricity_month}}</td>
+                  <td>{{$data->electricity_total}}</td>
                    <td>
                     <a href="{{route('admin.add.edit.miscellaneous', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                     <a href="javascript:" class="delete_form" record="miscellaneous"  rel="{{$data->id}}" style="display:inline;">
@@ -69,6 +66,94 @@
                 @endforelse
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Miscellaneous</h3>
+             <a href="{{route('admin.add.edit.miscellaneous')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Internet Miscellaneous</a>
+            </div>
+            <div class="card-body">
+              <table id="categories" class="table table-bordered table-striped  text-center">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Internet Consumption</th>
+                  <th>Internet Mbps</th> 
+                  <th>Months</th> 
+                  <th>Internet Total</th> 
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+               @forelse($miscellaneous as $data)
+                  <td>{{$data->id}}</td>
+                  <td>{{$data->internet_uses}}</td>
+                  <td>{{$data->internet_mbps}}</td>
+                  <td>{{$data->internet_month}}</td>
+                  <td>{{$data->internet_total}}</td>
+                   <td>
+                    <a href="{{route('admin.add.edit.miscellaneous', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:" class="delete_form" record="miscellaneous"  rel="{{$data->id}}" style="display:inline;">
+                      <i class="fa fa-trash fa-" aria-hidden="true" ></i>
+                    </a>
+                   </td>
+                </tr>
+                @empty
+                <p>No Data</p>
+                @endforelse
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Miscellaneous</h3>
+               <a href="{{route('admin.add.edit.miscellaneous')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Water Miscellaneous</a>
+              </div>
+              <div class="card-body">
+                <table id="categories" class="table table-bordered table-striped  text-center">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Water Consumption</th>
+                    <th>Water Unit</th> 
+                    <th>Months</th> 
+                    <th>Water Total</th> 
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                 @forelse($miscellaneous as $data)
+                    <td>{{$data->id}}</td>
+                    <td>{{$data->water_uses}}</td>
+                    <td>{{$data->water_unit}}</td>
+                    <td>{{$data->water_month}}</td>
+                    <td>{{$data->water_total}}</td>
+      
+                     <td>
+                      <a href="{{route('admin.add.edit.miscellaneous', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                      <a href="javascript:" class="delete_form" record="miscellaneous"  rel="{{$data->id}}" style="display:inline;">
+                        <i class="fa fa-trash fa-" aria-hidden="true" ></i>
+                      </a>
+                     </td>
+                  </tr>
+                  @empty
+                  <p>No Data</p>
+                  @endforelse
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

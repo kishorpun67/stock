@@ -56,9 +56,11 @@
                     {{$data->ingredientCategory->category}}
                     @endif
                       </td>
-                  <td>{{$data->alert_qty}}</td>
+                  <td><span style="color: red">{{$data->quantity}}   @if (!empty($data->ingredientUnit->unit_name))
+                    {{$data->ingredientUnit->unit_name}} @endif</span></td>
                   <td>Rs.{{$data->purchase_price* $data->alert_qty}}</td>
-                  <td>{{$data->alert_qty}}</td>
+                  <td>{{$data->alert_qty}}   @if (!empty($data->ingredientUnit->unit_name))
+                    {{$data->ingredientUnit->unit_name}} @endif</td>
                 </tr>
             
                 @empty

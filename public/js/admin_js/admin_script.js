@@ -58,7 +58,7 @@ function addFood(item_id, price, name, is_bar, is_caffe, is_kitchen) {
 
         },
         success: function(response) {
-            console.log(response)
+            // console.log(response)
             $("#add_item_table").html(response);
         },
         error: function() {
@@ -146,20 +146,29 @@ function deleteCartItem(cart_id) {
     });
 }
 
+function discountFunction(e) {
+    var total = $("#sub_total").val();
+    var discount = e.value;
+    var grand_total = (total - discount)
+    $("#grand_total").val(grand_total)
+    $("#total_amount").text(grand_total)
+}
+
 function quantityMinus(cart_id) {
     var qty = "qtyMinus"
-    console.log(cart_id)
-        // alert(qty)
+    var order_id = $("#order_id").val()
     $.ajax({
         type: 'post',
-        url: '/admin/update-cart-item-quantity',
+        url: '/admin/update-order-item-quantity',
         data: {
             cart_id: cart_id,
+            order_id: order_id,
             qty: qty,
+
         },
         success: function(response) {
             // alert(response)
-            $('#add_item_table').html(response.view);
+            $('#ajaxModifyOrder').html(response);
         },
         error: function() {
             alert("Error");
@@ -169,17 +178,20 @@ function quantityMinus(cart_id) {
 
 function quantityPlus(cart_id) {
     var qty = "qtyPlus"
-    console.log(cart_id)
+    var order_id = $("#order_id").val()
     $.ajax({
         type: 'post',
-        url: '/admin/update-cart-item-quantity',
+        url: '/admin/update-order-item-quantity',
         data: {
             cart_id: cart_id,
+            order_id: order_id,
             qty: qty,
+
+
         },
         success: function(response) {
             // alert(response)
-            $('#add_item_table').html(response.view);
+            $('#ajaxModifyOrder').html(response);
         },
         error: function() {
             alert("Error");
@@ -187,8 +199,82 @@ function quantityPlus(cart_id) {
     });
 }
 
+function deleteOrderDetail(cart_id) {
+    var order_id = $("#order_id").val()
+    $.ajax({
+        type: 'post',
+        url: '/admin/delete-order-item-quantity',
+        data: {
+            cart_id: cart_id,
+            order_id: order_id,
+        },
+        success: function(response) {
+            // alert(response)
+            $('#ajaxModifyOrder').html(response);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+``
 
+function addCustomer(table_id) {
+    var no_customer = $(`#no_of_customer-${table_id}`).val()
+        // console.log(table_id, no_customer)
+    $.ajax({
+        type: 'post',
+        url: '/admin/ajax-add-customer',
+        data: {
+            table_id: table_id,
+            no_customer: no_customer,
+        },
+        success: function(response) {
+            $(`#data-${response.table_ids}`).empty();
+            response.data.forEach(element => {
+                $(`#data-${response.table_ids}`).append(
+                    `<tr> <td>${element.no_customer}</td>
+                    <td><a href="javascript:" onclick="deleteCustomerTable(${element.id}, ${response.table_ids})"  ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                    </tr>`
 
+                )
+            });
+            $(`#available_seat-${response.table_ids}`).text(`Avaliable : ${response.available_seat}`)
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+    // console.log(cart_id, no_customer)
+}
+
+// delete customer table 
+function deleteCustomerTable(customer_id, table_id) {
+    // alert(id)
+    $.ajax({
+        type: 'post',
+        url: '/admin/ajax-delete-customer-table',
+        data: {
+            customer_id: customer_id,
+            table_id: table_id,
+        },
+        success: function(response) {
+            $(`#data-${response.table_ids}`).empty();
+            response.data.forEach(element => {
+                $(`#data-${response.table_ids}`).append(
+                    `<tr> <td>${element.no_customer}</td>
+                    <td><a href="javascript:" onclick="deleteCustomerTable(${element.id}, ${response.table_ids})"  ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                    </tr>`
+
+                )
+            });
+            $(`#available_seat-${response.table_ids}`).text(`Avaliable : ${response.available_seat}`)
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
 
 //kishor i did this
 $(document).ready(function() {
@@ -223,131 +309,165 @@ $(document).ready(function() {
     $(".modify_order").click(function() {
         var order_id = $("#order_id").val()
         console.log(order_id)
-        $.ajax({
-            type: 'get',
-            url: '/admin/ajax-get-modify-order',
-            data: {
-                order_id: order_id,
-            },
-            success: function(response) {
-                console.log(response)
+        if (order_id != "") {
+            $.ajax({
+                type: 'get',
+                url: '/admin/ajax-get-modify-order',
+                data: {
+                    order_id: order_id,
+                },
+                success: function(response) {
+                    // console.log(response)
                     // alert(response)
-                $('#ajaxModifyOrder').html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+                    $('#ajaxModifyOrder').html(response);
+                },
+                error: function() {
+                    alert("Error");
+                }
+            });
+        } else {
+            alert('Please Select Order');
+        }
     })
     $(".test_order_details").click(function() {
         var order_id = $("#order_id").val()
-        $.ajax({
-            type: 'get',
-            url: '/admin/ajax-order-details',
-            data: {
-                order_id: order_id,
-            },
-            success: function(response) {
-                console.log(response)
-                    // alert(response)
-                $('#ajaxOrderDetail').html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+        if (order_id != "") {
+
+            $.ajax({
+                type: 'get',
+                url: '/admin/ajax-order-details',
+                data: {
+                    order_id: order_id,
+                },
+                success: function(response) {
+                    console.log(response)
+                        // alert(response)
+                    $('#ajaxOrderDetail').html(response);
+                },
+                error: function() {
+                    alert("Error");
+                }
+            });
+        } else {
+            alert('Please Select Order');
+        }
     })
     $(".kot_order_details").click(function() {
         var order_id = $("#order_id").val()
             // alert(order_id)
-        $.ajax({
-            type: 'get',
-            url: '/admin/ajax-kit-order-details',
-            data: {
-                order_id: order_id,
-            },
-            success: function(response) {
-                console.log(response)
-                    // alert(response)
-                $('#ajaxKotOrderDetail').html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+        if (order_id != "") {
+
+            $.ajax({
+                type: 'get',
+                url: '/admin/ajax-kit-order-details',
+                data: {
+                    order_id: order_id,
+                },
+                success: function(response) {
+                    console.log(response)
+                        // alert(response)
+                    $('#ajaxKotOrderDetail').html(response);
+                },
+                error: function() {
+                    alert("Error");
+                }
+            });
+        } else {
+            alert('Please Select Order');
+        }
     })
     $(".bot_order_details").click(function() {
         var order_id = $("#order_id").val()
+        if (order_id != "") {
+
             // alert(order_id)
-        $.ajax({
-            type: 'get',
-            url: '/admin/ajax-bot-order-details',
-            data: {
-                order_id: order_id,
-            },
-            success: function(response) {
-                console.log(response)
-                    // alert(response)
-                $('#ajaxBotOrderDetail').html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+            $.ajax({
+                type: 'get',
+                url: '/admin/ajax-bot-order-details',
+                data: {
+                    order_id: order_id,
+                },
+                success: function(response) {
+                    console.log(response)
+                        // alert(response)
+                    $('#ajaxBotOrderDetail').html(response);
+                },
+                error: function() {
+                    alert("Error");
+                }
+            });
+        } else {
+            alert('Please Select Order');
+        }
     })
     $(".order_innovice").click(function() {
         var order_id = $("#order_id").val()
-        $.ajax({
-            type: 'get',
-            url: '/admin/oder-innovice',
-            data: {
-                order_id: order_id,
-            },
-            success: function(response) {
-                console.log(response)
-                    // alert(response)
-                $('#checkout').html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+        if (order_id != "") {
+
+            $.ajax({
+                type: 'get',
+                url: '/admin/oder-innovice',
+                data: {
+                    order_id: order_id,
+                },
+                success: function(response) {
+                    console.log(response)
+                        // alert(response)
+                    $('#checkout').html(response);
+                },
+                error: function() {
+                    alert("Error");
+                }
+            });
+        } else {
+            alert('Please Select Order');
+        }
     })
     $(".order_bill").click(function() {
         var order_id = $("#order_id").val()
         console.log(order_id)
-        $.ajax({
-            type: 'get',
-            url: '/admin/oder-bill',
-            data: {
-                order_id: order_id,
-            },
-            success: function(response) {
-                console.log(response)
-                $('#oder-bill').html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+        if (order_id != "") {
+
+            $.ajax({
+                type: 'get',
+                url: '/admin/oder-bill',
+                data: {
+                    order_id: order_id,
+                },
+                success: function(response) {
+                    console.log(response)
+                    $('#oder-bill').html(response);
+                },
+                error: function() {
+                    alert("Error");
+                }
+            });
+        } else {
+            alert('Please Select Order');
+        }
     })
     $(".kitchen_status").click(function() {
         var order_id = $("#order_id").val()
-        $.ajax({
-            type: 'get',
-            url: '/admin/kitchen-status',
-            data: {
-                order_id: order_id,
-            },
-            success: function(response) {
-                console.log(response)
-                    // alert(response)
-                $('#ajaxKitchenStatus').html(response);
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+        if (order_id != "") {
+
+            $.ajax({
+                type: 'get',
+                url: '/admin/kitchen-status',
+                data: {
+                    order_id: order_id,
+                },
+                success: function(response) {
+                    console.log(response)
+                        // alert(response)
+                    $('#ajaxKitchenStatus').html(response);
+                },
+                error: function() {
+                    alert("Error");
+                }
+            });
+        } else {
+            alert('Please Select Order');
+        }
     })
     $(".update-oder").click(function() {
         alert('tets')
@@ -389,8 +509,12 @@ $(document).ready(function() {
             },
             success: function(response) {
                 console.log(response)
-                $("#ajaxPurchase").html(response);
+                if (response.message == "exsist") {
+                    alert('Item already exsist!')
+                } else {
+                    $("#ajaxPurchase").html(response);
 
+                }
             },
             error: function() {
                 alert("Error");
@@ -419,8 +543,44 @@ function deletePurchaseCart(ingredient_id) {
     });
 }
 
+function purchaseCalculate(e, ingredientCart_id) {
+    var quantity = e.value;
+    // alert(ingredientCart_id);
+    console.log(ingredientCart_id);
 
+    $.ajax({
+        type: 'post',
+        url: '/admin/check-current-amount',
+        data: {
+            ingredientCart_id: ingredientCart_id,
+            quantity: quantity
+        },
+        success: function(response) {
+            console.log(response)
+            if (response.message == "exsist") {
+                alert('Item already exsist!')
+            } else {
+                $("#ajaxPurchase").html(response);
 
+            }
+
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+function purchasePaid(e) {
+    var paid = e.value;
+    var total = $(".total").val();
+    //alert(total);
+    //console.log(paid,total);
+    var paidamount = total - paid;
+    console.log(paidamount)
+    $("#deu_amount").val(paidamount)
+        // console.log(paidamount);
+}
 //ajx check current amount in ajx purchase table  
 $(document).ready(function() {
     //check current amount
@@ -447,41 +607,9 @@ $(document).ready(function() {
             }
         });
     });
-    $(".ingredientCart_id").keyup(function() {
-        var ingredientCart_id = $(this).attr('ingredientCart_id');
-        var quantity = $(this).val();
-        // alert(ingredientCart_id);
-        //console.log(chkCurrentAmount);
-
-        $.ajax({
-            type: 'post',
-            url: '/admin/check-current-amount',
-            data: {
-                ingredientCart_id: ingredientCart_id,
-                quantity: quantity
-            },
-            success: function(response) {
-                console.log(response)
-                $("#ajaxPurchase").html(response);
-
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
-    });
 
     //ajax for paid amount
-    $(".paid").keyup(function() {
-        var paid = $(".paid").val();
-        var total = $(".total").val();
-        //alert(total);
-        //console.log(paid,total);
-        var paidamount = total - paid;
-        console.log(paidamount)
-        $("#deu_amount").val(paidamount)
-            // console.log(paidamount);
-    });
+
 });
 
 

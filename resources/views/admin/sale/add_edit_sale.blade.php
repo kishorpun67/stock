@@ -61,8 +61,8 @@
     <figure class="logo_holder"><a href="index.html"> <img src="images/istockphoto-1156053620-612x612.jpg" alt="This is web logo"> </a> </figure>
     <div class="title_bar mt-3 mb-4">
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Management</a></li>
+        <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('admin.add.edit.sale')}}">Home</a></li>
         <li><a href="#">Services</a></li>
       </ul>
     </div>

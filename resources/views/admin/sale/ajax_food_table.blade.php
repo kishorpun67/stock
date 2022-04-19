@@ -1,12 +1,6 @@
 
 
 <div class="cart-top">
-  <div class="d-flex justify-content-between flex-wrap align-items-center no-need-for-waiter mb-3">
-    <button type="button" class="btn operation_button operation_button_50 active" data-toggle="modal" data-target="#exampleModal11"> <i class="fas fa-table"></i> Dine In </button>
-    <button type="button" class="btn operation_button operation_button_50" data-toggle="modal" data-target="#exampleModal12"> <i class="fas fa-shopping-bag"></i> Take Away</button>
-    <button type="button" class="btn operation_button operation_button_50" data-toggle="modal" data-target="#exampleModal13"> <i class="fas fas fa-truck"></i> Delivery </button>
-    <button type="button" class="btn operation_button operation_button_50" data-toggle="modal" data-target="#exampleModal14"> <i class="fas fa-table"></i> Table</button>
-  </div>
   <div class="d-flex justify-content-between flex-wrap align-items-center mb-3 waiter_customer">
     <div class="select_dropdown w-50">
         <select class="form-control" name="waiter_id">
@@ -85,15 +79,20 @@
     <h5>Cart Total</h5>
     <ul class="cart_listing">
       <li><span>Total item:</span> <strong> {{$total_item}} </strong></li>
-      <li><span>Discount:</span> <strong>0 </strong></li>
-      <li><span>Tax:</span> <strong>0 </strong></li>
       <li> <span>Subtotal</span> <strong>{{$total_amount}}</strong> </li>
-      <li> <span>Total Payable</span> <strong>{{$total_amount}}</strong> </li>
+      <?php
+        $tax = 10;
+        $total_amount = $total_amount+($total_amount*10/100);
+      ?>
+      <li><span>Discount:</span> <input type="text" name="discount" class="" autocomplete="off" onkeyup="discountFunction(this)"> <strong> </strong></li>
+      <li><span>Tax:</span> <strong>10%  <input type="hidden" name="tax" id="tax" value="10%" autocomplete="off"></strong></li>
+      <li> <span>Total Payable</span> <strong id="total_amount">{{$total_amount}}</strong> </li>
     </ul>
   </div>
   <div class="cart-overview flex-1 my-3">
+<input type="hidden" name="subtotal" id="sub_total"  value="{{$total_amount}}">
   
-<input type="hidden" name="total"  value="{{$total_amount}}">
+<input type="hidden" name="total" id="grand_total"   value="{{$total_amount}}">
     <h5>Payment Method</h5>
       <label>
     <input type="radio" value="Bank transfer" name="payment" checked>
@@ -117,7 +116,6 @@
 </div>
 <input type="submit" value="Place Oder" class="btn btn-primary">
  {{-- <button type="button" class="btn btn-primary order_btn operation_button operation_button_50" > <i class="fas fa-utensils"></i>Place Order</button> --}}
-  <button type="button" class="btn btn-primary order_btn operation_button operation_button_50" data-toggle="modal" data-target="#exampleModal10"> <i class="fas fa-print"></i>Print</button>
   
   <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

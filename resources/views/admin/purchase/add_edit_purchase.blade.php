@@ -178,15 +178,11 @@
                     <table class="table">
                       <tr>
                         <th style="width:50%">G.Total</th>
-<<<<<<< HEAD
-                        <td> <input type="text" class="total" value="{{ $total }}" readonly></td>
-=======
                         <td> <input type="text" name="total" class="total" value="{{ $total }}" readonly></td>
->>>>>>> e7294005af2b8ca416d11d5a73608af2414ce708
                       </tr>
                       <tr>
                         <th>Paid</th>
-                        <td><input class="paid" type="number" name="paid" value="{{$purchasedata['paid']}}" ingredientCart_id="" ></td>
+                        <td><input class="paid" type="number" onkeyup="purchasePaid(this)" name="paid" value="{{$purchasedata['paid']}}" ingredientCart_id="" ></td>
                       </tr>
                       <tr>
                         <th>Due:</th>

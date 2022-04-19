@@ -36,15 +36,10 @@ class IngredientItemsController extends Controller
             $message = "Ingredient Items has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-            $data = $request->all();
+           $data = $request->all();
             // dd($data);
             if(empty($data['name'])){
                 return redirect()->back()->with('error_message', 'Unit name is required !');
-            }
-            
-            if(empty($data['price']))
-            {
-                $data['price'] = "";
             }
             if(empty($data['purchase_price']))
             {
@@ -52,15 +47,15 @@ class IngredientItemsController extends Controller
             }
             if(empty($data['category_id']))
             {
-                $data['category_id'] = "";
+                return redirect()->back()->with('error_message', 'Category name is required !');
             }
             if(empty($data['alert_qty']))
             {
                 $data['alert_qty'] = "";
             }
-            if(empty($data['ingredient_id']))
+            if(empty($data['unit_id']))
             {
-                $data['ingredient_id'] = "";
+                return redirect()->back()->with('error_message', 'Unit is required !');
             }
             if(empty($data['code']))
             {
@@ -72,7 +67,7 @@ class IngredientItemsController extends Controller
             $ingredientItem->purchase_price = $data['purchase_price'];
             $ingredientItem->category_id = $data['category_id'];
             $ingredientItem->alert_qty = $data['alert_qty'];
-            $ingredientItem->ingredient_id = $data['ingredient_id'];
+            $ingredientItem->ingredient_id = $data['unit_id'];
             $ingredientItem->code = $data['code'];
             $ingredientItem->save();
             Session::flash('success_message', $message);

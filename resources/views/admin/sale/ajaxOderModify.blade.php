@@ -27,14 +27,14 @@
                             <td class="quantity">
                   
                               <div class="quantity-bar"> <span class="input-group-btn">
-                                <button type="button" class="btn-number btn-minus " onclick="quantityMinus(this.getAttribute('attr'))"  data-type="minus"  cart_id="{{$item->id}}"  cart-value="{{$item->quantity}}"> <i class="fas fa-minus"></i> </button>
+                                <button type="button" class="btn-number btn-minus " onclick="quantityMinus(this.getAttribute('cart_id'))"  data-type="minus"  cart_id="{{$item->id}}"  cart-value="{{$item->quantity}}"> <i class="fas fa-minus"></i> </button>
                                 </span>
                                 <input type="text" name="quantity"id="quant-{{$item->id}}" class="form-control input-number" value="{{$item->quantity}}" min="1" max="100" placeholder="1">
                                 <span class="input-group-btn">
-                                <button type="button" class="btn-number btn-plus qtyPlus" data-type="plus" attr="{{$item->id}}"  cart-value="{{$item->quantity}}" data-field="quant-{{$item->id}}"> <i class="fas fa-plus"></i> </button>
+                                <button type="button" class="btn-number btn-plus " onclick="quantityPlus(this.getAttribute('cart_id'))"  data-type="plus" cart_id="{{$item->id}}"  cart-value="{{$item->quantity}}" data-field="quant-{{$item->id}}"> <i class="fas fa-plus"></i> </button>
                                 </span> </div></td>
                             <td class="total-price">Rs.{{$item->price * $item->quantity}}</td>
-                            <td class="discount"><a href="javascript:" onclick="quantityPlus(this.getAttribute('attr'))" cart_id="{{$item->id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td class="discount"><a href="javascript:" onclick="deleteOrderDetail(this.getAttribute('cart_id'))" cart_id="{{$item->id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                   
                           </tr>
                           <?php $total_amount= $total_amount + ($item->price* $item->quantity);
@@ -50,11 +50,20 @@
               <div class="cart-overview flex-1">
                 <h3>Cart Total</h3>
                 <ul class="cart_listing">
-                  <li><span>Total item:</span> <strong> {{$total_item}} </strong></li>
-                  <li><span>Discount:</span> <strong>0 </strong></li>
-                  <li><span>Tax:</span> <strong>0 </strong></li>
-                  <li> <span>Subtotal</span> <strong>{{$total_amount}}</strong> </li>
-                  <li> <span>Total Payable</span> <strong>{{$total_amount}}</strong> </li>
+                  <p>Total item: {{$total_item}}</p>
+                  <p>SubTotal: {{$total_amount}}</p> 
+                  <p>Discount:  
+                    {{$orderDetails->discount}}
+                  </p>
+                  <p>Tax:
+                    {{$orderDetails->tax}}%
+                 </p> 
+                  
+                  <?php 
+                  $tax = $total_amount*10/100; 
+                  $grand_total = $total_amount +$tax -$orderDetails->discount; ?>
+                
+                  <p>Total Payable: {{$grand_total}}</p> 
                 </ul>
               </div>
               
@@ -62,22 +71,10 @@
               
               <label>
               <h3 class="topborder"><span>Payment Method</span></h3>
-              <input type="radio" value="Bank transfer" name="payment" checked>
-              <p>Direct Bank Transfer</p>
-              </label>
-              <label>
-              <input type="radio" value="Cash Payment" name="payment">
-              <p>Cash Payment</p>
-              </label>
-              <label>
-              <input type="radio" value="paypal" name="payment">
-              <p>Paypal</p>
-              <fieldset class="paymenttypes">
-                <a href="#"><img src="images/esewa.jpg" alt="" class=""></a>
-              </fieldset>
-              </label>
-              <button type="button"  class="btn btn-checkout">Place Order</button>
-              <button type="button"  class="btn btn-print">Print</button>
+              <p> @if (!empty($orderDetails->payment))
+                {{$orderDetails->payment}}
+              @endif Direct Bank Transfer</p>
+             
             </div>
             </div>
           </div>

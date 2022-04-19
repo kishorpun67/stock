@@ -1,6 +1,5 @@
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -26,14 +25,14 @@
         </button>
       </div>
     @endif
-    {{-- @if(Session::has('error_message'))
+    @if(Session::has('error_message'))
       <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
         {{ Session::get('error_message') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    @endif --}}
+    @endif
     @error('url')
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{$message}}
@@ -41,7 +40,7 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-      @enderror 
+      @enderror
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -68,8 +67,36 @@
                   @else value="{{old('name')}}"
                   @endif>
                 </div>
-               
-                  
+                <div class="form-group">
+                  <label for="category_id">Ingredient Category</label>
+                  <select name="category_id" id="category_id" class="form-control form-control-sm " >
+                      <option value="" >Select</option>
+                      @forelse($ingredientCategory as $data)
+                              <option value="{{$data->id}}"
+                                @if (!empty($ingredientItemsData['category_id']) && $ingredientItemsData['category_id'] == $data->id)
+                                    selected=""
+                                @endif
+                                  >&nbsp;&raquo;&nbsp; {{$data->category}}
+                              </option>
+                      @empty
+                      @endforelse
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="category_id">Ingredient Unit</label>
+                  <select name="unit_id" id="unit_id" class="form-control form-control-sm " >
+                      <option value="" >Select</option>
+                      @forelse($ingredientUnit as $data)
+                              <option value="{{$data->id}}"
+                                @if (!empty($ingredientItemsData['ingredient_id']) && $ingredientItemsData['ingredient_id'] == $data->id)
+                                    selected=""
+                                @endif
+                                  >&nbsp;&raquo;&nbsp; {{$data->unit_name}}
+                              </option>
+                      @empty
+                      @endforelse
+                  </select>
+                </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
@@ -80,23 +107,23 @@
                 @else value="{{old('purchase_price')}}"
                 @endif>
               </div>
-           
               <div class="form-group">
-                <label for="category_id">Ingredient Category</label>
-                <select name="category_id" id="category_id" class="form-control form-control-sm " >
-                    <option value="" >Select</option>
-                    @forelse($ingredientCategory as $data)
-                            <option value="{{$data->id}}"
-                              @if (!empty($ingredientItemsData['category_id']) && $ingredientItemsData['category_id'] == $data->id)
-                                  selected=""
-                              @endif
-                                >&nbsp;&raquo;&nbsp; {{$data->category}}
-                            </option>
-                            
-                    @empty
-                    @endforelse
-                </select>
+                <label for="purchase_price">Alert Qty</label>
+                <input type="text" class="form-control" name="alert_qty" id="alert_qty" placeholder="Enter purchase price"
+                @if(!empty($ingredientItemsData['alert_qty']))
+                value= "{{$ingredientItemsData['alert_qty']}}"
+                @else value="{{old('alert_qty')}}"
+                @endif>
               </div>
+              <div class="form-group">
+                <label for="purchase_price">Code</label>
+                <input type="text" class="form-control" name="code" id="code" value="00222" placeholder="Enter purchase price"
+                @if(!empty($ingredientItemsData['code']))
+                value= "{{$ingredientItemsData['code']}}"
+                @else value="{{old('code')}}"
+                @endif>
+              </div>
+              
             </div>
           </div>
           </div>
@@ -109,4 +136,3 @@
   </section>
 </div>
 @endsection
-

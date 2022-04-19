@@ -39,12 +39,10 @@
                 <thead>
                 <tr>
                   <th>SN</th>
-                  <th>Reference NO</th>
+                  <th>Date</th>
                   <th>Customer</th>
                   <th>Total</th>
                   <th>Discount</th>
-                  <th>Paid</th>
-                  <th>Due</th>
                   <td>Action</td>
                 </tr>
                 </thead>
@@ -57,8 +55,9 @@
                   ?>
                   @foreach ($sale as $item)
                   <tr>
-                    <td>{{$i}}</td>
-                    <td>{{$item->code}}</td>
+                    <td>{{$item->id}}</td>
+                    <td>{{$item->created_at}}</td>
+
                     <td>
                       @if (!empty($item->customer->customer_name))
                       {{$item->customer->customer_name}}
@@ -68,8 +67,6 @@
                     </td>
                     <td>{{$item->total}}</td>
                     <td>{{$item->discount}}</td>
-                    <td>{{$item->paid}}</td>
-                    <td>{{$item->due}}</td>
                     <td><a href="javascript:" class="delete_form" record="sale"  rel="{{$item->id}}" style="display:inline;">
                       <i class="fa fa-trash fa-" aria-hidden="true" ></i>
                     </a></td>
@@ -77,8 +74,6 @@
                       <?php $i++;
                       $total = $total + $item->total;
                       $discount = $discount + $item->discount;
-                      $paid = $paid + $item->paid;
-                      $due = $due + $item->due;
                       ?>
                   @endforeach
                 </tbody>

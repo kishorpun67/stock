@@ -18,7 +18,7 @@ use App\Leave;
 use App\Sale;
 use Carbon\Carbon;
 use App\Task;
-
+use App\PurchaseItem;
 class ReportController extends Controller
 {
     public function plAccountReport()
@@ -72,20 +72,20 @@ class ReportController extends Controller
     }
     public function stockReport()
     {
-       $stocks = IngredientItem::with('ingredientCategory')->get();
+       $stocks = IngredientItem::with('ingredientCategory', 'ingredientUnit')->get();
         Session::flash('page', 'stock_report');
         return view('admin.report.stock_report', compact('stocks'));
     }
     public function consumptionReport()
     {
-         $consumption = Consumption::get();
+         $consumption = Consumption::with('ingredientUnit')->get();
         Session::flash('page', 'consumption_report');
         return view('admin.report.consumption_report', compact('consumption'));
     }
 
     public function lowInventoryReport()
     {
-       $stocks = IngredientItem::with('ingredientCategory')->where('alert_qty','<=',2)->get();
+       $stocks = IngredientItem::with('ingredientCategory','ingredientUnit')->where('quantity','<=',5)->get();
         Session::flash('page', 'low_inventory_report');
         return view('admin.report.low_inventory_report', compact('stocks'));
         
@@ -104,12 +104,10 @@ class ReportController extends Controller
     }
     public function taxReport()
     {
-        $tax = Order::get();
+        $tax = Order::where('tax' ,'!=', "")->get();
         Session::flash('page', 'tax_report');
         return view('admin.report.tax_report',compact('tax'));
     }
-    
-    
     
     public function taskReport()
     {
@@ -117,5 +115,6 @@ class ReportController extends Controller
         Session::flash('page', 'task_report');
         return view('admin.report.task_report',compact('task'));
     }
+
     
 }

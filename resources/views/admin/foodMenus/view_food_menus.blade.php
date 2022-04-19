@@ -43,7 +43,6 @@
                   <th>Name</th>
                   <th>Sale Price</th>
                   <th>Ingredient Food Category</th>
-                  <th>Ingredient Item</th>
                   <th>Description</th>
                   <th>Image</th>
                   {{-- <th>Ingredient Food</th> --}}
@@ -57,10 +56,9 @@
                   <td>{{$data->name}}</td>
                   <td>{{$data->sale_price}}</td>
                   <td>@if(!empty($data->foodCategory->category_name)){{$data->foodCategory->category_name}} @endif</td>
-                  <td>@if(!empty($data->ingredientItem->name)){{$data->ingredientItem->name}}@endif</td>
                   <td>{{$data->description}}</td>
                   <td><img src="{{asset($data->image)}}" alt="" width="100" height="100" srcset=""></td>
-                  {{-- <td>@if(!empty($data->ingredientUnit->unit_name)){{$data->ingredientUnit->unit_name}}@endif</td> --}}
+                  {{-- <td>@if(!empty($data->ingr edientUnit->unit_name)){{$data->ingredientUnit->unit_name}}@endif</td> --}}
                   <td>{{$data->code}}</td>
                    <td>
                     <a href="{{route('admin.add.edit.food.menu', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;

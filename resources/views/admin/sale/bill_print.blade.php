@@ -132,15 +132,18 @@
                             </tr>
                             <tr>
                                 <th>Tax (0%)</th>
-                                <td>00.00</td>
+                                <td> {{$orderbill->tax}}%</td>
                             </tr>
                             <tr>
                                 <th>Discount:</th>
-                                <td>00.00</td>
+                                <td>Rs.{{$orderbill->discount}}.00</td>
                             </tr>
                             <tr>
+                                <?php $tax = $total*10/100; 
+									$grand_total = $total + $tax- $orderbill->discount;
+									?>
                                 <th>Total:</th>
-                                <td>{{$total}}</td>
+                                <td>{{$grand_total}}</td>
                             </tr>
                         </table>
                     </div>

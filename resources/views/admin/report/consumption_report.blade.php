@@ -49,10 +49,11 @@
                @forelse($consumption as $data)
                   <td>{{$data->id}}</td>
                   <td>{{$data->ingredient_name}}</td>
-                  <td>{{$data->consumption_quantity}}</td>
-                  <td>Rs.</td>
+                  <td>{{$data->consumption_quantity}}  @if (!empty($data->ingredientUnit->unit_name))
+                    {{$data->ingredientUnit->unit_name}}
+                    @endif</td>
+                  <td>Rs.{{$data->consumption_quantity * $data->price}}</td>
                 </tr>
-            
                 @empty
                 <p>No Data</p>
                 @endforelse

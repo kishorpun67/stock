@@ -100,9 +100,8 @@ class FoodMenuController extends Controller
             $foodMenu->name = $data['name'];
             $foodMenu->sale_price = $data['sale_price'];
             $foodMenu->category_id = $data['category_id'];
-            $foodMenu->item_id = $data['item_id'];
             $foodMenu->description = $data['description'];
-            // $foodMenu->ingredient_id = $data['ingredient_id'];
+            $foodMenu->ingredient_id = $data['item_id'];
             $foodMenu->code = $data['code'];
             $foodMenu->is_kitchen = $data['is_kitchen'];
             $foodMenu->is_bar = $data['is_bar'];
@@ -115,6 +114,8 @@ class FoodMenuController extends Controller
                 {
                     $newConsumption = new Consumption;
                     $newConsumption->ingredient_id = $data['ingredient_id'][$key];
+                    $newConsumption->ingredientUnit_id = $data['ingredientUnit_id'][$key];
+                    $newConsumption->price = $data['price'][$key];
                     $newConsumption->foodMenu_id = $id;
                     $newConsumption->ingredient_name = $data['ingredient_name'][$key];
                     $newConsumption->consumption_quantity = $data['consumption_quantity'][$key];
@@ -126,9 +127,6 @@ class FoodMenuController extends Controller
                 foreach($data['id'] as $key=> $val)
                 {
                     $newConsumption =  Consumption::find($val);
-                    $newConsumption->ingredient_id = $data['ingredient_id'][$key];
-                    $newConsumption->foodMenu_id = $id;
-                    $newConsumption->ingredient_name = $data['ingredient_name'][$key];
                     $newConsumption->consumption_quantity = $data['consumption_quantity'][$key];
                     $newConsumption->save();
                 }
@@ -162,6 +160,7 @@ class FoodMenuController extends Controller
             $foodTable->ingredient_id =  $ingredientItem->id;
             $foodTable->ingredientUnit_id =  $ingredientItem->ingredient_id;
             $foodTable->ingredient =  $ingredientItem->name;
+            $foodTable->price =  $ingredientItem->purchase_price;
             $foodTable->save();
             $foodTable  = foodTable::with('ingredientUnit')->where('admin_id', auth('admin')->user()->id)->get();
             return view('admin.foodMenus.ajax_foodMenu_table',compact('foodTable'));

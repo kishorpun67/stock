@@ -41,7 +41,7 @@ class PurchaseController extends Controller
             $message = "purchase has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-            $data = $request->all();
+           $data = $request->all();
         //dd($data);
             if(empty($data['supplier_id'])){
                 return redirect()->back()->with('error_message', 'Supplier id is required !');
@@ -89,8 +89,10 @@ class PurchaseController extends Controller
                     $newPurchaseItem->ingredient= $data['ingredient'][$key];
                     $newPurchaseItem->quantity = $data['quantity'][$key];
                     $newPurchaseItem->price = $data['price'][$key];
+                    $newPurchaseItem->ingredientUnit_id =  $data['ingredientUnit_id'][$key];
                     $newPurchaseItem->total = $data['price'][$key] *$data['quantity'][$key];
                     $newPurchaseItem->save();
+                    IngredientItem::where('id',$data['ingredient_id'][$key])->increment('quantity',$data['quantity'][$key]);
                     IngredientCart::where('id', $val)->delete();
                 }
                 
@@ -98,11 +100,7 @@ class PurchaseController extends Controller
                 foreach($data['id'] as $key=> $val)
                 {
                     $newPurchaseItem =  PurchaseItem::find($val);
-                    $newPurchaseItem->ingredient_id = $data['ingredient_id'][$key];
-                    $newPurchaseItem->purchase_id = $id;
-                    $newPurchaseItem->ingredient= $data['ingredient'][$key];
                     $newPurchaseItem->quantity = $data['quantity'][$key];
-                    $newPurchaseItem->price = $data['price'][$key];
                     $newPurchaseItem->total = $data['price'][$key] *$data['quantity'][$key];
                     $newPurchaseItem->save();
                 }
@@ -123,17 +121,26 @@ class PurchaseController extends Controller
     public function ajaxPurchaseTable(Request $request)
     {
         $data = $request->all();
-        $ingredientItem = IngredientItem::where('id', $data['purchase_id'])->first();
-        $ingredientcart = new IngredientCart;
-        // $ingredientcart->item_id = $data['item_id'];
-        $ingredientcart->admin_id = auth('admin')->user()->id;
-        $ingredientcart->ingredient_id =  $ingredientItem->id;
-        $ingredientcart->name =  $ingredientItem->name;
-        $ingredientcart->price =$ingredientItem->purchase_price;
-        $ingredientcart->quantity =$ingredientItem->alert_qty;
-        $ingredientcart->save();
-        $ingredientcart  = IngredientCart::get();
-       return view('admin.purchase.ajax_purchase_table',compact('ingredientcart'));
+        $ingredientCount = IngredientCart::where('ingredient_id', $data['purchase_id'])->count();
+        if ($ingredientCount ==0) {
+            $ingredientItem = IngredientItem::where('id', $data['purchase_id'])->first();
+            $ingredientcart = new IngredientCart;
+            // $ingredientcart->item_id = $data['item_id'];
+            $ingredientcart->admin_id = auth('admin')->user()->id;
+            $ingredientcart->ingredient_id =  $ingredientItem->id;
+            $ingredientcart->ingredientUnit_id =  $ingredientItem->ingredient_id;
+            $ingredientcart->name =  $ingredientItem->name;
+            $ingredientcart->price =$ingredientItem->purchase_price;
+            $ingredientcart->quantity =$ingredientItem->alert_qty;
+            $ingredientcart->save();
+            $ingredientcart  = IngredientCart::get();
+            return view('admin.purchase.ajax_purchase_table',compact('ingredientcart'));
+        } else {
+            return response()->json(['message'=>"exsist"],200);
+            
+        }
+        
+        
     }
 
     public function deletePurchaseCart(Request $request)

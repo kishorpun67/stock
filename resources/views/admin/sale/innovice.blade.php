@@ -10,7 +10,12 @@
     			<div class="col-md-6">
     				<address>
     				<strong>Billed To:</strong><br>
-                        {{$orderDetails->customer->customer_name}} <br>
+					@if (!empty($orderDetails->customer->customer_name))
+					{{$orderDetails->customer->customer_name}} <br>
+					@else
+						Walk-in Customer
+					@endif
+                        
     				</address>
     			</div>
     			
@@ -65,9 +70,20 @@
     								<td class="thick-line text-right"  colspan="3"><strong>Subtotal</strong></td>
     								<td class="thick-line text-right">Rs.{{$subtotal}}.00</td>
     							</tr>
+								<tr>
+    								<td class="thick-line text-right"  colspan="3"><strong>Discount</strong></td>
+    								<td class="thick-line text-right">Rs.{{$orderDetails->discount}}.00</td>
+    							</tr>
+								<tr>
+    								<td class="thick-line text-right"  colspan="3"><strong>Tax</strong></td>
+    								<td class="thick-line text-right">{{$orderDetails->tax}}%</td>
+    							</tr>
     							<tr>  
+									<?php $tax = $subtotal*10/100; 
+									$grand_total = $subtotal + $tax- $orderDetails->discount;
+									?>
     								<td class=" text-right" colspan="3"><strong>Total</strong></td>
-    								<td class=" text-right">Rs.{{$subtotal}}.00</td>
+    								<td class=" text-right">Rs.{{$grand_total}}.00</td>
     							</tr>
     						</tbody>
     					</table>

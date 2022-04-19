@@ -10,10 +10,15 @@
     <tbody>
       <tr>
         @forelse($foodTable as $data)
+        @if (!empty($data->ingredientUnit->id))
+          
+        <input type="hidden" name="ingredientUnit_id[]" value="{{$data->ingredientUnit->id}}">
+
+          @endif
         <input type="hidden" name="id[]" value="{{ $data->id }}">
         <input type="hidden" name="ingredient_id[]" value="{{ $data->ingredient_id }}">
         <input type="hidden" name="ingredient_name[]" value="{{ $data->ingredient }}">
-
+        <input type="hidden" name="price[]" value="{{ $data->price }}">
         <td>{{ $data->ingredient_id }}</td>
         <td>{{ $data->ingredient}}</td>
         <td><input type="number"  name="consumption_quantity[]" value="{{ $data->cunsumption}}">

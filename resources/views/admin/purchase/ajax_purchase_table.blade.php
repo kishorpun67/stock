@@ -15,16 +15,25 @@
         ?>
       
         @forelse($ingredientcart  as $data)
+        @if (!empty($data->ingredientUnit->id))
+        <input type="hidden" name="ingredientUnit_id[]" value="{{$data->ingredientUnit->id}}">
+        @endif
         <input type="hidden" name="id[]" value="{{ $data->id }}">
         <input type="hidden" name="ingredient_id[]" value="{{ $data->ingredient_id }}">
         <input type="hidden" name="ingredient[]" value="{{ $data->name }}">
         <input type="hidden" name="price[]" value="{{ $data->price }}">
+      
+       
+
 
 
         <td>{{ $data->ingredient_id }}</td>
         <td>{{ $data->name}}</td>
         <td>{{ $data->price}}</td>
-        <td><input class="" onkeyup="alert(this.val())" type="number" name="quantity[]" value="{{ $data->quantity}}" ingredientCart_id="{{ $data->id }}">
+        <td><input class="" onkeyup="purchaseCalculate(this, this.getAttribute('ingredientCart_id'))" type="text" name="quantity[]" value="{{ $data->quantity}}" ingredientCart_id="{{ $data->id }}" 
+          >@if (!empty($data->ingredientUnit->unit_name))
+          {{$data->ingredientUnit->unit_name}}
+          @endif
         </td>
         <td>{{ $data->quantity * $data->price}}</td>
        
@@ -57,7 +66,7 @@
       </tr>
       <tr>
         <th>Paid</th>
-        <td><input class="paid" type="number" name="paid" value="" ingredientCart_id="" ></td>
+        <td><input class="paid" type="number" onkeyup="purchasePaid(this)" name="paid" value="" ingredientCart_id="" ></td>
       </tr>
       <tr>
         <th>Due:</th>

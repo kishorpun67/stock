@@ -1,5 +1,8 @@
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
+<?php 
+  use App\PurchaseItem;
+?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -56,9 +59,23 @@
                     {{$data->ingredientCategory->category}}
                     @endif
                       </td>
-                  <td>{{$data->alert_qty}}</td>
-                  <td>Rs.{{$data->purchase_price* $data->alert_qty}}</td>
-                  <td>{{$data->alert_qty}}</td>
+                  <td> @if ($data->quantity<= $data->alert_qty)
+                    <span style="color: red">{{$data->quantity}} @if (!empty($data->ingredientUnit->unit_name))
+                      {{$data->ingredientUnit->unit_name}}
+                      @endif </span>
+                      
+                  @else
+                  {{$data->quantity}} @if (!empty($data->ingredientUnit->unit_name))
+                  {{$data->ingredientUnit->unit_name}}
+                  @endif
+                  @endif</td>
+                  <?php 
+                  // $total  = PurchaseItem::where('ingredient_id', $item->id)->sum('')
+                  ?>
+                  <td>Rs.{{$data->purchase_price* $data->quantity}}</td>
+                  <td>{{$data->alert_qty}}    @if (!empty($data->ingredientUnit->unit_name))
+                    {{$data->ingredientUnit->unit_name}}
+                    @endif</td>
                 </tr>
             
                 @empty

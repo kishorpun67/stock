@@ -41,6 +41,8 @@
                 <tr>
                   <th>ID</th>
                   <th>Table Name</th>
+                  <th>Table No</th>
+
                   <th>Seat Capacity</th>
                   <th>Action</th>
             
@@ -50,6 +52,7 @@
                @forelse($table as $data)
                   <td>{{$data->id}}</td>
                   <td>{{$data->table_name}}</td>
+                  <td>{{$data->table_no}}</td>
                   <td>{{$data->seat_capacity}}</td>
                    <td>
                     <a href="{{route('admin.add.edit.table', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
