@@ -56,22 +56,7 @@ class AttendanceController extends Controller
             {
                 $data['out_time'] = "";
             }
-            // if(empty($data['work_hour']))
-            // {
-            //     $data['work_hour'] = "";
-            // }
-            // if(empty($data['salary']))
-            // {
-            //     $data['salary'] = "";
-            // }
-            // if(empty($data['user_id']))
-            // {
-            //     $data['user_id'] = "";
-            // }
-            // if(empty($data['parent_id']))
-            // {
-            //     $data['parent_id'] = "";
-            // }
+           
             $attendance->admin_id = auth('admin')->user()->id;
             $attendance->in_date = $data['in_date'];
             $attendance->in_time = $data['in_time'];

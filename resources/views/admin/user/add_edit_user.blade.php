@@ -3,7 +3,6 @@
 <?php
 use App\Admin\Permission;
 use App\Admin\AdminPermission;
-  $permissions = Permission::get();
   $permissinsCount = Permission::count();
 
 ?>
@@ -134,28 +133,30 @@ use App\Admin\AdminPermission;
                         <label for="confirm_password">Confirm Password</label>
                         <input type="password" name="confirm_password " placeholder="Confirm Password" id="" class="form-control">
                     </div>
+              </div>
+
+              <div class="clo-md-6">
+                <div class="form-group">
+                    <input type="checkbox"  class="checkAll" /> <label>Select All</label><br/>
+                    <?php 
+                    if(!empty($adminData['id'])){
+                        $checkPermession = AdminPermission::where('admin_id', $adminData['id'])->get();
+                        foreach ($checkPermession as $permission) {
+                        $permission_ids[] = $permission->permission_id;
+                    }
+                    }else{
+                        $permission_ids = array();
+                    }
+                    ?>
+                    @foreach ($permissions as $item)
+                    <input type="checkbox" name="checkbox[]"  id="" value="{{$item->id}}" @if (in_array($item->id, $permission_ids ?? []))
+                    checked
+                    @endif
+                    >&nbsp;<label for="" > {{$item->permission}} </label><br>
+                    @endforeach
                 </div>
-                <div class="clo-md-6">
-                    <div class="form-group">
-                        <input type="checkbox"  class="checkAll" /> <label>Select All</label><br/>
-                        <?php 
-                        if(!empty($adminData['id'])){
-                            $checkPermession = AdminPermission::where('admin_id', $adminData['id'])->get();
-                            foreach ($checkPermession as $permission) {
-                            $permission_ids[] = $permission->permission_id;
-                        }
-                        }else{
-                            $permission_ids = array();
-                        }
-                        ?>
-                        @foreach ($permissions as $item)
-                        <input type="checkbox" name="checkbox[]"  id="" value="{{$item->id}}" @if (in_array($item->id, $permission_ids ?? []))
-                        checked
-                        @endif
-                        >&nbsp;<label for="" > {{$item->permission}} </label><br>
-                        @endforeach
-                    </div>
-                </div>
+            </div>
+
             </div>
           </div>
           </div>

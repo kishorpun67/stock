@@ -16,22 +16,16 @@ use App\User;
 use App\Admin\Role;
 use App\Admin\Permission;
 use App\Admin\AdminPermission;
+use App\IngredientItem;
+use App\Order;
+use App\Waste;
+use Carbon\Carbon;
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        // dd(auth('admin')->user()->can('Manager'));
-        // if (auth('admin')->user()->can('create-tasks')) {
-        //     return "inn";
-        //     //Code goes here
-        // }
-        // return "out";
-        // $adata = AdminPermission::where('admin_id',auth('admin')->user()->id)->select('permission_id')->get();
-        // foreach($adata as $data){
-        //     $test[] = $data->permission_id;
-        // }
-        // return $test;
-        // return auth('admin')->user()->hasPermission(3);
+        // return auth('admin')->user()->hasPermission(26);
+        // if(auth('admin')->user()->hasPermission($roles[$permission]))
         $admin = Auth('admin')->user();
         $permission = Permission::get();
         // return$admin->hasPermission($permission);
@@ -227,15 +221,21 @@ class AdminController extends Controller
 
     public function viewUser()
     {
-            $admins = Admin::with('subAdminRole')->where('parent_id', auth('admin')->user()->id)->get();
-            $admin_roles = Role::where('id', ">",2)->get();
-            Session::flash('page', 'admin_roles');
-            return view('admin.user.view_user', compact('admins', 'admin_roles'));
-        
+        if(auth('admin')->user()->type != "Admin"){
+            return redirect()->route('admin.dashboard');
+        }
+        $admins = Admin::with('subAdminRole')->where('parent_id', auth('admin')->user()->id)->get();
+        $admin_roles = Role::where('id', ">",2)->get();
+        Session::flash('page', 'admin_roles');
+        return view('admin.user.view_user', compact('admins', 'admin_roles'));
+    
     }
 
     public function addEditUser($id=null)
     {
+        if(auth('admin')->user()->type != "Admin"){
+            return redirect()->route('admin.dashboard');
+        }
         if($id=="") {
             $title = "Add User";
             $button ="Submit";
@@ -251,7 +251,7 @@ class AdminController extends Controller
             $message = "Ingredient Items has been updated sucessfully";
         }
         if(request()->isMethod('POST')){
-        $data = request()->all();
+            $data = request()->all();
 
             $rules = [
                 'name'=>'required',
@@ -321,35 +321,18 @@ class AdminController extends Controller
         }
         Session::flash('page', 'admin_roles');
         $roles = Role::where('id','>',2)->get();
-        return view('admin.user.add_edit_user', compact('adminData', 'roles','button', 'title'));
+        $permissions = Permission::get();
+
+        return view('admin.user.add_edit_user', compact('adminData', 'roles','button', 'title', 'permissions'));
         
     }
     public function deleteUser($id)
     {
+        if(auth('admin')->user()->type != "Admin"){
+            return redirect()->route('admin.dashboard');
+        }
         Admin::where('id', $id)->delete();
         return redirect()->back()->with('success_message','Admin has been deleted sucessfully successfully!');            
 
     }
-    // public function access($id=null)
-    // {   
-    //     // $rules = [
-    //     //     'access'=>'required',
-    //     // ];
-    //     // $customMessages = [
-    //     //     'access.required'=>'Please! Select  access type',
-    //     // ];
-    //     // $this->validate(request(), $rules, $customMessages);
-        
-    //     $data =  request()->all();
-    //     $count = AdminPermission::where('admin_id', $data['admin_id'])->count();
-    //     foreach($data['checkbox'] as $datas){
-    //         $newPermission = new AdminPermission();
-    //         $newPermission->admin_id = $data['admin_id'];
-    //         $newPermission->permission_id =  $datas;
-    //         $newPermission->save();
-    //     }
-    //     return redirect()->back()->with('success_message','Access has been added successfully!');            
-
-       
-    // }
 }

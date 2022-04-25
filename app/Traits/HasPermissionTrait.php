@@ -68,9 +68,9 @@ trait HasPermissionTrait{
         return $this->belongsToMany(Permission::class,'admin_permissions');
     
       }
-      protected function hasPermission($permission) {
-    
-        return (bool) $this->permissions->where('permission', $permission)->count();
+      public function hasPermission($permission) {
+              
+        return (bool) AdminPermission::where(['admin_id' =>auth('admin')->user()->id, 'permission_id'=>$permission])->count();
       }
     
       protected function getAllPermissions(array $permissions) {

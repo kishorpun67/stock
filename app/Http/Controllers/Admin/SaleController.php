@@ -128,30 +128,33 @@ class SaleController extends Controller
 
         // get avilable seat 
         $seat_capacity = Table::where('id', request('table_id'))->first();
-        $no_customer = CustomerTable::where(['admin_id'=>auth('admin')->user()->id, 'table_id'=>request('table_id')])->sum('no_customer');
+        $no_customer = CustomerTable::where([ 'table_id'=>request('table_id')])->sum('no_customer');
         $available_seat = $seat_capacity->seat_capacity - $no_customer;
-        $data = CustomerTable::where(['admin_id'=>auth('admin')->user()->id, 'table_id'=>request('table_id')])->get();
+        $data = CustomerTable::where(['table_id'=>request('table_id')])->get();
         return response()->json(['data'=>$data, 'table_ids'=>request('table_id'), 'available_seat'=>$available_seat], 200);
     }
     public function deleteCusomter()
     {
         CustomerTable::where('id',request('customer_id'))->delete();
-        $data = CustomerTable::where(['admin_id'=>auth('admin')->user()->id, 'table_id'=>request('table_id')])->get();
+        $data = CustomerTable::where([ 'table_id'=>request('table_id')])->get();
         // get avilable seat 
         $seat_capacity = Table::where('id', request('table_id'))->first();
-        $no_customer = CustomerTable::where(['admin_id'=>auth('admin')->user()->id, 'table_id'=>request('table_id')])->sum('no_customer');
+        $no_customer = CustomerTable::where(['table_id'=>request('table_id')])->sum('no_customer');
         $available_seat = $seat_capacity->seat_capacity - $no_customer;
         return response()->json(['data'=>$data, 'table_ids'=>request('table_id'), 'available_seat'=>$available_seat], 200); 
     }
-    public function addTable($table=null)
+    public function addTable()
     {
-        $table = Table::where('id',$table)->first();
+        if(empty(request('table_id'))){
+            return redirect()->back();
+        }
+        $table = Table::where('id',request('table_id'))->first();
         $foodCategories = FoodCategory::get();
         $carts = Cart::orderBy('id', 'DESC')->get();
         $foodMenus = FoodMenu::with('foodCategory')->get();
         $waiter = Admin::where('role_id',6)->get();
         $customer = Customer::get();
-        $order = Order::orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
+        $order = Order::with('table', 'customer')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
         Session::flash('page', 'sale');
         return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer', 'table'));
     }

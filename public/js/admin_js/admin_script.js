@@ -230,7 +230,12 @@ function addCustomer(table_id) {
             no_customer: no_customer,
         },
         success: function(response) {
+            console.log(response)
+
             $(`#data-${response.table_ids}`).empty();
+            $(`#table_id`).val(response.table_ids);
+
+
             response.data.forEach(element => {
                 $(`#data-${response.table_ids}`).append(
                     `<tr> <td>${element.no_customer}</td>
@@ -260,12 +265,13 @@ function deleteCustomerTable(customer_id, table_id) {
         },
         success: function(response) {
             $(`#data-${response.table_ids}`).empty();
+            $(`#table_id`).val(response.table_ids);
+
             response.data.forEach(element => {
                 $(`#data-${response.table_ids}`).append(
                     `<tr> <td>${element.no_customer}</td>
                     <td><a href="javascript:" onclick="deleteCustomerTable(${element.id}, ${response.table_ids})"  ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                     </tr>`
-
                 )
             });
             $(`#available_seat-${response.table_ids}`).text(`Avaliable : ${response.available_seat}`)

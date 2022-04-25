@@ -71,11 +71,17 @@
         <h4> Running Orders</h4>
         <ul>
           @foreach ($order as $item)
-            <li class="active" ><a href="javascript:"  order_id="{{$item->id}}" class="order_item"> <span>Cust:{{$item->name}}<br>
-            Table: @if (!empty($item->table_id))
-                {{$item->table_id}}
+            <li class="active" ><a href="javascript:"  order_id="{{$item->id}}" class="order_item"> 
+              <span>Cust:@if (!empty($item->customer->customer_name))
+                  {{$item->customer->customer_name}}
+              @else
+                Walk-in Customer
+              @endif
+          <br>
+            Table: @if (!empty($item->table->table_no))
+                {{$item->table->table_no}}
             @else
-                None
+              None
             @endif</span> <i class="fa-solid fa-chevron-right"></i></a></li>
           @endforeach
           
