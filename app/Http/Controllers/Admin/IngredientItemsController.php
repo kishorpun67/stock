@@ -67,7 +67,7 @@ class IngredientItemsController extends Controller
             $ingredientItem->purchase_price = $data['purchase_price'];
             $ingredientItem->category_id = $data['category_id'];
             $ingredientItem->alert_qty = $data['alert_qty'];
-            $ingredientItem->ingredient_id = $data['unit_id'];
+            $ingredientItem->ingredientUnit_id = $data['unit_id'];
             $ingredientItem->code = $data['code'];
             $ingredientItem->save();
             Session::flash('success_message', $message);

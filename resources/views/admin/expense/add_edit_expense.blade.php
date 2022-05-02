@@ -71,11 +71,11 @@
                 
                 <div class="form-group">
                     <label for="waste_id">Responsible Person</label>
-                    <select name="waste_id" id="waste_id" class="form-control form-control-sm " >
+                    <select name="user_id" id="user_id" class="form-control form-control-sm " >
                         <option value="" >Select</option>
                         @forelse($waste as $data)
                                 <option value="{{$data->id}}"
-                                  @if (!empty($expensedata['waste_id']) && $expensedata['waste_id'] == $data->id)
+                                  @if (!empty($expensedata['user_id']) && $expensedata['user_id'] == $data->id)
                                       selected=""
                                   @endif
                                     >&nbsp;&raquo;&nbsp; {{$data->responsible_person}}

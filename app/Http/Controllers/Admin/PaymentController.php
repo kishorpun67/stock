@@ -24,7 +24,9 @@ class PaymentController extends Controller
             return redirect()->back()->with('error_message', 'Staff field is required');
         }
         $payment = new payment;
-        $payment->payment_method= $data['payment'];
+        $payment->admin_id = auth()->user()->id;
+        $payment->name = $data['name'];
+        $payment->description = $data['description'];
         $payment->save();
         return redirect()->back()->with('success_message', 'Staff has added successfully!');
     }
@@ -33,7 +35,9 @@ class PaymentController extends Controller
     {
         $data = $request->all();
         $payment = Payment::find($id);
-        $payment->payment_method= $data['payment'];
+        $payment->admin_id = auth()->user()->id;
+        $payment->name = $data['name'];
+        $payment->description = $data['description'];
         $payment->save();
         return redirect()->back()->with('success_message', 'Staff has updated successfully!');
     }

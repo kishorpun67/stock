@@ -13,7 +13,7 @@ class IngredientItem extends Model
 
     public function ingredientUnit()
     {
-        return $this->belongsTo('App\IngredientUnit', 'ingredient_id');
+        return $this->belongsTo('App\IngredientUnit', 'ingredientUnit_id');
     }
    
 }

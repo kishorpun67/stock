@@ -17,7 +17,7 @@ class PurchaseController extends Controller
 {
     public function purchase()
     {
-        $purchase = Purchase::with('ingredientCategory','ingredientItem','ingredientUnit','supplierName')->get();
+        $purchase = Purchase::with('purchase_item','supplierName')->get();
         Session::flash('page', 'purchase');
         return view('admin.purchase.view_purchase', compact('purchase'));
     }
@@ -41,7 +41,7 @@ class PurchaseController extends Controller
             $message = "purchase has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-           $data = $request->all();
+           return$data = $request->all();
         //dd($data);
             if(empty($data['supplier_id'])){
                 return redirect()->back()->with('error_message', 'Supplier id is required !');
@@ -128,7 +128,7 @@ class PurchaseController extends Controller
             // $ingredientcart->item_id = $data['item_id'];
             $ingredientcart->admin_id = auth('admin')->user()->id;
             $ingredientcart->ingredient_id =  $ingredientItem->id;
-            $ingredientcart->ingredientUnit_id =  $ingredientItem->ingredient_id;
+            $ingredientcart->ingredientUnit_id =  $ingredientItem->ingredientUnit_id;
             $ingredientcart->name =  $ingredientItem->name;
             $ingredientcart->price =$ingredientItem->purchase_price;
             $ingredientcart->quantity =$ingredientItem->alert_qty;

@@ -20,10 +20,12 @@ use App\IngredientItem;
 use App\Order;
 use App\Waste;
 use Carbon\Carbon;
+use App\PaymentMethod;
 class AdminController extends Controller
 {
     public function dashboard()
     {
+
         // return auth('admin')->user()->hasPermission(26);
         // if(auth('admin')->user()->hasPermission($roles[$permission]))
         $admin = Auth('admin')->user();

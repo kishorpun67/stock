@@ -33,7 +33,7 @@ class SupplierController extends Controller
             $message = "supplier has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-           $data = $request->all();
+           return$data = $request->all();
         //dd($data);
             if(empty($data['name'])){
                 return redirect()->back()->with('error_message', 'supplier name is required !');

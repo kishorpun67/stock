@@ -46,8 +46,6 @@ class IngredintItemController extends Controller
             {
                 $data['code'] = "";
             }
-
-       
             $ingredientItem = new IngredientItem;
             $ingredientItem->name = $data['name'];
             $ingredientItem->purchase_price = $data['purchase_price'];
@@ -56,8 +54,6 @@ class IngredintItemController extends Controller
             $ingredientItem->ingredient_id = $data['ingredient_id'];
             $ingredientItem->code = $data['code'];
             $ingredientItem->save();
-
-
             return  response('sucess',200);
             // Session::flash('success_message', $message);
         }
@@ -114,6 +110,5 @@ class IngredintItemController extends Controller
       $id =IngredientItem::find($id);
       $id->delete();
       return redirect()->back()->with('success_message', 'Ingredient Item has been deleted successfully!');
-
     }
 }

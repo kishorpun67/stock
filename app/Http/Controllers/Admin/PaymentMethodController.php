@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use App\paymentMethod;
+use App\PaymentMethod;
 
 class PaymentMethodController extends Controller
 {
     public function paymentMethod()
     {
-        $paymentMethod = paymentMethod::get();
+        $paymentMethod = PaymentMethod::get();
         Session::flash('page', 'paymentMethod');
         return view('admin.paymentMethod.view_paymentMethod', compact('paymentMethod'));
     }
@@ -21,13 +21,13 @@ class PaymentMethodController extends Controller
         if($id=="") {
             $title = "Add paymentMethod";
             $button ="Submit";
-            $paymentMethod = new paymentMethod;
+            $paymentMethod = new PaymentMethod;
             $paymentMethoddata = array();
             $message = "paymentMethod has been added sucessfully";
         }else{
             $title = "Edit paymentMethod";
             $button ="Update";
-            $paymentMethoddata = paymentMethod::where('admin_id',auth('admin')->user()->id)->where('id',$id)->first();
+            $paymentMethoddata = PaymentMethod::where('admin_id',auth('admin')->user()->id)->where('id',$id)->first();
             $paymentMethoddata= json_decode(json_encode($paymentMethoddata),true);
             $paymentMethod = paymentMethod::find($id);
             $message = "paymentMethod has been updated sucessfully";
@@ -65,7 +65,7 @@ class PaymentMethodController extends Controller
 
     public function deletepaymentMethod($id)
     {
-      $id =paymentMethod::find($id);
+      $id =PaymentMethod::find($id);
       $id->delete();
       return redirect()->back()->with('success_message', 'paymentMethod has been deleted successfully!');
     }

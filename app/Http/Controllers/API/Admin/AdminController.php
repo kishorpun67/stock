@@ -26,4 +26,11 @@ class AdminController extends Controller
             ];
             return response()->json($response, 200);
     }
+
+    public function staff()
+    {
+        $saff = Admin::where('role_id','>',2)->get();
+        return response()->json($saff, 200);
+    
+    }
 }

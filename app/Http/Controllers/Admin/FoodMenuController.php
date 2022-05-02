@@ -158,7 +158,7 @@ class FoodMenuController extends Controller
             // $foodTable->item_id = $data['item_id'];
             $foodTable->admin_id = auth('admin')->user()->id;
             $foodTable->ingredient_id =  $ingredientItem->id;
-            $foodTable->ingredientUnit_id =  $ingredientItem->ingredient_id;
+            $foodTable->ingredientUnit_id =  $ingredientItem->ingredientUnit_id;
             $foodTable->ingredient =  $ingredientItem->name;
             $foodTable->price =  $ingredientItem->purchase_price;
             $foodTable->save();
