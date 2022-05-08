@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Task;
 use Session;
-
+use App\Admin\Admin;
 class TaskController extends Controller
 {
     public function viewTask()
@@ -15,13 +15,7 @@ class TaskController extends Controller
         Session::flash('page', 'admin_task_view');
         return view('admin.task.admin_task_view', compact('task'));
     }
-    public function Task()
-    {
-        $task = Task::get();
-        Session::flash('page', 'task');
-        return view('admin.task.view_task', compact('task'));
-    }
-
+    
     public function addEditTask(Request $request, $id=null)
     {
         if($id=="") {
@@ -77,8 +71,9 @@ class TaskController extends Controller
             Session::flash('success_message', $message);
             return redirect()->route('admin.view.task');
         }
+        $staff = Admin::where('role_id','>',2)->get();
         Session::flash('page', 'admin_task_view');
-        return view('admin.task.add_edit_task ', compact('title','button','taskdata'));
+        return view('admin.task.add_edit_task ', compact('title','button','taskdata','staff'));
     }
     public function updateTask(Request $request, $id=null)
     {
@@ -91,8 +86,6 @@ class TaskController extends Controller
         $message = "Task has been updated sucessfully";
         if($request->isMethod('post')) {
             $data = $request->all();
-        //dd($data);
-         
             if(empty($data['status']))
             {
                 $data['status'] = "";

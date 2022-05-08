@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Leave;
 use Session;
 use Image;
+use Mail;
+use App\Admin\Admin;
+use Carbon\Carbon;
 
 class LeaveController extends Controller
 {
@@ -35,6 +38,16 @@ class LeaveController extends Controller
         }
         if($request->isMethod('post')) {
            $data = $request->all();
+            if($id==null){
+                // send Leave email o admin
+                $email = "admin@admin.com";
+                // return $email;
+                $messageData = ['email'=>auth('admin')->user()->email, 'name'=>auth('admin')->user()->email, 'code'=>base64_encode(auth('admin')->user()->email)];
+                Mail::send('email.leave_letter', $messageData,function($message) use($email){
+                    $message->to($email)->subject('Leave Application');
+
+                });
+            }
         //dd($data);
             // if(empty($data['letter'])){
             //     return redirect()->back()->with('error_message', 'Leave letter is required !');
@@ -85,6 +98,14 @@ class LeaveController extends Controller
         $leave = Leave::find($id);
         $leave->status = request('status');
         $leave->save();
+        $user = Admin::where('id', $leave->admin_id)->first();
+        $email = $user->email;
+        // return $email;
+        $messageData = ['email'=>$user->email, 'name'=>$user->name, 'status'=> request('status')];
+        $job = Mail::send('email.leave_letter_status', $messageData,function($message) use($email){
+            $message->to($email)->subject('Leave Application');
+
+        });
         Session::flash('success_message', 'Leave status has been update successfully');
         return redirect()->back();
 

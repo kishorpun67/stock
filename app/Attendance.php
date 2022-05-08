@@ -10,4 +10,8 @@ class Attendance extends Model
     {
         return $this->belongsTo('App\Admin\Admin', 'admin_id');
     }
+    public function staff()
+    {
+        return $this->belongsTo('App\Admin\Admin', 'staff_id')->select('id','name');
+    }
 }

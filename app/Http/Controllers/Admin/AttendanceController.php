@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Attendance;
 use Session;
-
+use App\Admin\Admin;
+use Mail;
 class AttendanceController extends Controller
 {
     public function attendance()
@@ -24,6 +25,8 @@ class AttendanceController extends Controller
             $attendance = new Attendance;
             $attendanceData = array();
             $message = "Attendance has been added sucessfully";
+            
+               
         }else{
             $title = "Edit Attendance";
             $button ="Update";
@@ -33,6 +36,8 @@ class AttendanceController extends Controller
             $message = "Attendance has been updated sucessfully";
         }
         if($request->isMethod('post')) {
+            
+           
             $data = $request->all();
         //dd($data);
             // if(empty($data['admin_id'])){

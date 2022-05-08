@@ -33,7 +33,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Bank</h3>
-             <a href="{{route('admin.add.edit.bank')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Bank</a>
+             <a href="{{route('admin.add.edit.bankDeposit')}}" style="max-width: 150px; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Bank</a>
             </div>
             <div class="card-body">
               <table id="categories" class="table table-bordered table-striped  text-center">
@@ -42,21 +42,19 @@
                   <th>ID</th>
                   <th>Bank Name</th>
                   <th>Cheque Number</th> 
-                  <th>Purpose</th>  
                   <th>Amount</th>  
                   <th>Action</th>    
                 </tr>
                 </thead>
                 <tbody>
-               @forelse($bank as $data)
+               @forelse($bankDeposit as $data)
                   <td>{{$data->id}}</td>
                   <td>{{$data->bank_name}}</td>
                   <td>{{$data->cheque_number}}</td>
-                  <td>{{$data->purpose}}</td>
-                  <td>{{$data->Amount}}</td>
+                  <td>{{$data->amount}}</td>
                  
                    <td>
-                    <a href="{{route('admin.add.edit.bank', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="{{route('admin.add.edit.bankDeposit', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                     <a href="javascript:" class="delete_form" record="bank"  rel="{{$data->id}}" style="display:inline;">
                       <i class="fa fa-trash fa-" aria-hidden="true" ></i>
                     </a>

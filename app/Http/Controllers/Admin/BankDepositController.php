@@ -11,7 +11,7 @@ class BankDepositController extends Controller
 {
     public function bankDeposit()
     {
-        $bankDeposit = BankDeposit::get();
+       $bankDeposit = BankDeposit::get();
         Session::flash('page', 'bankDeposit');
         return view('admin.bankDeposit.view_bankDeposit', compact('bankDeposit'));
     }

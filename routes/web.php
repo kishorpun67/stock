@@ -359,9 +359,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
          Route::get('waste-report','WasteController@wasteReport')->name('waste.report');
          Route::get('customer-report','CustomerController@customerReport')->name('customer.report');
 
-              
-       
-
       });
       Route::group(['middleware'=>['ChekcRole:Miscellaneous']], function(){
            //routes for electricity consumption
@@ -388,19 +385,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
          //routes for report of electricity
          Route::get('water-report','WaterController@waterReport')->name('water.report');
       });
-        // routes for checkin and checkout kitchen
-        Route::get('checkin-room', 'RoomController@checkinView')->name('checkin.room');
-        Route::post('add-checkin-room', 'RoomController@addCheckin')->name('add.checkin.room');
-        Route::post('edit-checkin-room/{id}', 'RoomController@editCheckin')->name('edit.checkin.room');
-        Route::get('checkout-room', 'RoomController@checkoutView')->name('checkout.room');
-        Route::get('room-detail/{id}', 'RoomController@roomDetail')->name('room.detail');
-        Route::post('checkout-user-bill/{id}', 'RoomController@checkoutUserBill')->name('checkout.user.bill');
-
-
-        
-        
-        Route::get('checkout-room', 'RoomController@checkoutView')->name('checkout.room');
-        Route::get('checkout-bill/{id}', 'RoomController@bill')->name('bill.print.checkout');
+      // routes for checkin and checkout kitchen
+      Route::get('checkin-room', 'RoomController@checkinView')->name('checkin.room');
+      Route::post('add-checkin-room', 'RoomController@addCheckin')->name('add.checkin.room');
+      Route::post('edit-checkin-room{id}', 'RoomController@editCheckin')->name('edit.checkin.room');
+      Route::get('checkout-room', 'RoomController@checkoutView')->name('checkout.room');
+      Route::get('room-detail/{id}', 'RoomController@roomDetail')->name('room.detail');
+      Route::post('checkout-user-bill/{id}', 'RoomController@checkoutUserBill')->name('checkout.user.bill');
+      
+      Route::get('checkout-room', 'RoomController@checkoutView')->name('checkout.room');
+      Route::get('checkout-bill/{id}', 'RoomContro/ller@bill')->name('bill.print.checkout');
 
         
         Route::get('read-all-notification', function(){
@@ -413,22 +407,18 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
 });
 
 Route::get('/', function(){
+   if(!auth('admin')->check()){
+      return redirect('/admin');
+   }
     return redirect()->route('admin.dashboard');
 })->name('home');
 
 
 Route::get('qr-code-g', function () {
-  
     $qr_code = rand(111,99999);
     $file = "image/$qr_code.png";
-
     $link = "https://qrmenu.summitp.com.np/menu/$qr_code";
-      \QRCode::text($link)->setErrorCorrectionLevel("H")->setOutfile($file)->png();
-
-
-
-
-//   return view('qrCode');
+   \QRCode::text($link)->setErrorCorrectionLevel("H")->setOutfile($file)->png();
 });
 
 

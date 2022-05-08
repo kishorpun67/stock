@@ -33,7 +33,7 @@ class BankController extends Controller
             $message = "Bank has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-            $data = $request->all();
+           return $data = $request->all();
         //dd($data);
             if(empty($data['bank_name'])){
                 return redirect()->back()->with('error_message', 'Bank Name is required !');

@@ -62,7 +62,66 @@ use App\CustomerTable;
                 </tbody>
               </table>
        
-             
+                <div class="modal fade" id="exampleModal-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-aligin-center " id="exampleModalLongTitle" style="text-align: center;
+                        ">Table</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <?php
+                        $customer_table = CustomerTable::where('table_id',$item->id)->get();
+                        $total_customer = CustomerTable::where('table_id',$item->id)->sum('no_customer');
+
+                      ?>
+                      <div class="modal-body">
+                        <div class="cart-wrapper checkout_wrapper">
+                          <div class="cart-top">
+                            <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
+                            <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
+                            <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
+                            <table class="cart_table">
+                              <thead>
+                                <tr>
+                                  <th>Person</th>
+                                  <th>Del</th>
+                                </tr>
+                              </thead>
+                              <tbody id="data-{{$item->id}}">
+                                
+                                   <div >
+                                   @foreach ($customer_table as $data)
+                                   <tr>
+                                    <td>{{$data->no_customer}}</td>
+                                    <td><a href="javascript:" onclick="deleteCustomerTable(this.getAttribute('customer_id'), this.getAttribute('table_id'))" table_id={{$item->id}}  customer_id ={{$data->id}} ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                  </tr>
+                                   @endforeach
+                                  </div>
+                                
+                                <div class="row">
+                                  <div class="col-md-12">
+                                      <input type="text" id="no_of_customer-{{$item->id}}" value="1" class="form-control">
+                                      <button onclick="addCustomer(this.getAttribute('table_id'))" table_id={{$item->id}} class="btn btn-primary">Add</button>
+                                  </div>
+                                </div>
+                              </tbody>
+                              
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{route('admin.add.table', $item->id)}}"  style=":hover{
+                              background-color: #6c757d;
+                              border-color: #6c757d;"  class="btn btn-primary">Proceed With Table</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 @endforeach
 
                 

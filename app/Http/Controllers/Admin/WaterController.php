@@ -27,14 +27,13 @@ class WaterController extends Controller
         }else{
             $title = "Edit Water";
             $button ="Update";
-            $waterdata = Water::where('admin_id',auth('admin')->user()->id)->where('id',$id)->first();
+            $waterdata = Water::where('id',$id)->first();
             $waterdata= json_decode(json_encode($waterdata),true);
             $water = Water::find($id);
             $message = "Water has been updated sucessfully";
         }
         if($request->isMethod('post')) {
             $data = $request->all();
-        //dd($data);
             if(empty($data['water_uses'])){
                 return redirect()->back()->with('error_message', 'water Name is required !');
             }
@@ -51,10 +50,7 @@ class WaterController extends Controller
             {
                 $data['water_total'] = "";
             }
-            // if(empty($data['parent_id']))
-            // {
-            //     $data['parent_id'] = "";
-            // }
+           
             $water->admin_id = auth('admin')->user()->id;
             $water->water_uses = $data['water_uses'];
             $water->water_unit = $data['water_unit'];
@@ -74,8 +70,6 @@ class WaterController extends Controller
         Session::flash('page', 'water');
         return view('admin.report.water_report',compact('water'));
     }
-
-
     public function deleteWater($id)
     {
       $id =Water::find($id);

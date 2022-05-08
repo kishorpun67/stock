@@ -54,7 +54,7 @@ class PaymentMethodController extends Controller
             $data = $request->all();
             // dd($data);
             if(empty($data['name'])){
-                return response()->json('Category name is required !', 200);
+                return response()->json('Payment name is required !', 200);
             }
             
             if(empty($data['description']))

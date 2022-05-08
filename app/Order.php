@@ -13,7 +13,7 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->belongsTo('App\Customer', 'customer_id');
+        return $this->belongsTo('App\Customer', 'customer_id')->select('id','customer_name');
     }
     public function Table()
     {

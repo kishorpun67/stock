@@ -253,7 +253,7 @@ class AdminController extends Controller
             $message = "Ingredient Items has been updated sucessfully";
         }
         if(request()->isMethod('POST')){
-            $data = request()->all();
+            return $data = request()->all();
 
             $rules = [
                 'name'=>'required',

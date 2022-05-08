@@ -33,7 +33,7 @@ class ElectricityController extends Controller
             $message = "Electricity has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-            $data = $request->all();
+           $data = $request->all();
         //dd($data);
             if(empty($data['electricity_uses'])){
                 return redirect()->back()->with('error_message', 'Electricity Name is required !');
